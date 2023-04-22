@@ -99,7 +99,7 @@
                     android:textSize="18dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/name_tv" />
+                    app:layout_constraintTop_toBottomOf="@+id/id_tv" />
 
                 <TextView
                     android:id="@+id/price_tv"
@@ -114,7 +114,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/address_tv" />
 
                 <TextView
-                    android:id="@+id/datedelivery_tv"
+                    android:id="@+id/date_delivery_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -135,10 +135,10 @@
                     android:textSize="18dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/datedelivery_tv" />
+                    app:layout_constraintTop_toBottomOf="@+id/date_delivery_tv" />
 
                 <TextView
-                    android:id="@+id/payment_tv"
+                    android:id="@+id/payment_method_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -159,7 +159,7 @@
                     android:textSize="18dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/payment_tv" />
+                    app:layout_constraintTop_toBottomOf="@+id/payment_method_tv" />
 
                 <TextView
                     android:id="@+id/phone_tv"
@@ -181,12 +181,12 @@
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:text="123456"
-                    app:layout_constraintBottom_toBottomOf="@+id/name_tv"
-                    app:layout_constraintStart_toEndOf="@+id/name_tv"
-                    app:layout_constraintTop_toTopOf="@+id/name_tv" />
+                    app:layout_constraintBottom_toBottomOf="@+id/id_tv"
+                    app:layout_constraintStart_toEndOf="@+id/id_tv"
+                    app:layout_constraintTop_toTopOf="@+id/id_tv" />
 
                 <TextView
-                    android:id="@+id/name_tv"
+                    android:id="@+id/id_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -220,15 +220,15 @@
                     app:layout_constraintTop_toTopOf="@+id/price_tv" />
 
                 <EditText
-                    android:id="@+id/typepet_edt"
+                    android:id="@+id/date_delivery_edt"
                     android:layout_width="220dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="date"
                     android:text="23/04/2023"
-                    app:layout_constraintBottom_toBottomOf="@+id/datedelivery_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/date_delivery_tv"
                     app:layout_constraintStart_toStartOf="@+id/price_edt"
-                    app:layout_constraintTop_toTopOf="@+id/datedelivery_tv" />
+                    app:layout_constraintTop_toTopOf="@+id/date_delivery_tv" />
 
                 <EditText
                     android:id="@+id/is_delivered_edt"
@@ -238,20 +238,20 @@
                     android:inputType="textFilter|textPersonName"
                     android:text="Delivered"
                     app:layout_constraintBottom_toBottomOf="@+id/is_delivered_tv"
-                    app:layout_constraintStart_toStartOf="@+id/typepet_edt"
+                    app:layout_constraintStart_toStartOf="@+id/date_delivery_edt"
                     app:layout_constraintTop_toTopOf="@+id/is_delivered_tv" />
 
                 <EditText
-                    android:id="@+id/payment_edt"
+                    android:id="@+id/payment_method_edt"
                     android:layout_width="220dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:gravity="start|top"
                     android:inputType="textPersonName"
                     android:text="Cash"
-                    app:layout_constraintBottom_toBottomOf="@+id/payment_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/payment_method_tv"
                     app:layout_constraintStart_toStartOf="@+id/is_delivered_edt"
-                    app:layout_constraintTop_toTopOf="@+id/payment_tv" />
+                    app:layout_constraintTop_toTopOf="@+id/payment_method_tv" />
 
                 <EditText
                     android:id="@+id/customer_name_edt"

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_light"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".views.fragments.PetDetailsFragment">
 
@@ -44,182 +45,300 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/cat_blue_golden"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailTitleBar" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailTitleBar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
-    <TextView
-        android:id="@+id/address_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Name"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_tv" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
 
-    <TextView
-        android:id="@+id/price_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Price"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/address_tv" />
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/cat_blue_golden"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/datedelivery_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="TypePet"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price_tv" />
+                <TextView
+                    android:id="@+id/name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Name"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/id_tv" />
 
-    <TextView
-        android:id="@+id/is_delivered_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Stock"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/datedelivery_tv" />
+                <TextView
+                    android:id="@+id/price_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Price"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name_tv" />
 
-    <TextView
-        android:id="@+id/payment_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Details"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/is_delivered_tv" />
+                <TextView
+                    android:id="@+id/type_pet_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="TypePet"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/price_tv" />
 
-    <EditText
-        android:id="@+id/id_edt"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="123456"
-        app:layout_constraintBottom_toBottomOf="@+id/name_tv"
-        app:layout_constraintStart_toEndOf="@+id/name_tv"
-        app:layout_constraintTop_toTopOf="@+id/name_tv" />
+                <TextView
+                    android:id="@+id/vaccine_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Vaccine"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/type_pet_tv" />
 
-    <TextView
-        android:id="@+id/name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:text="ID"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                <TextView
+                    android:id="@+id/variety_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Variety"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vaccine_tv" />
 
-    <EditText
-        android:id="@+id/address_edt"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Bed"
-        app:layout_constraintBottom_toBottomOf="@+id/address_tv"
-        app:layout_constraintStart_toStartOf="@+id/id_edt"
-        app:layout_constraintTop_toTopOf="@+id/address_tv" />
+                <TextView
+                    android:id="@+id/gender_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Gender"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/variety_tv" />
 
-    <EditText
-        android:id="@+id/price_edt"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="345.000đ"
-        app:layout_constraintBottom_toBottomOf="@+id/price_tv"
-        app:layout_constraintStart_toStartOf="@+id/address_edt"
-        app:layout_constraintTop_toTopOf="@+id/price_tv" />
+                <TextView
+                    android:id="@+id/weight_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Weight"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gender_tv" />
 
-    <EditText
-        android:id="@+id/typepet_edt"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Cat"
-        app:layout_constraintBottom_toBottomOf="@+id/datedelivery_tv"
-        app:layout_constraintStart_toStartOf="@+id/price_edt"
-        app:layout_constraintTop_toTopOf="@+id/datedelivery_tv" />
+                <TextView
+                    android:id="@+id/age_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Age"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weight_tv" />
 
-    <EditText
-        android:id="@+id/is_delivered_edt"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:text="5"
-        app:layout_constraintBottom_toBottomOf="@+id/is_delivered_tv"
-        app:layout_constraintStart_toStartOf="@+id/typepet_edt"
-        app:layout_constraintTop_toTopOf="@+id/is_delivered_tv" />
+                <TextView
+                    android:id="@+id/color_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Color"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/age_tv" />
 
-    <EditText
-        android:id="@+id/payment_edt"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-        android:text="32*28*63cm"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="@+id/payment_tv"
-        app:layout_constraintStart_toStartOf="@+id/is_delivered_edt"
-        app:layout_constraintTop_toTopOf="@+id/payment_tv" />
+                <EditText
+                    android:id="@+id/id_edt"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="123456"
+                    app:layout_constraintBottom_toBottomOf="@+id/id_tv"
+                    app:layout_constraintStart_toEndOf="@+id/id_tv"
+                    app:layout_constraintTop_toTopOf="@+id/id_tv" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnUpdate"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/id_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="ID"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-        android:layout_marginTop="20dp"
-        android:background="@drawable/primary_button_background"
-        android:text="UPDATE"
+                <EditText
+                    android:id="@+id/name_edt"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="British Golden Cat"
+                    app:layout_constraintBottom_toBottomOf="@+id/name_tv"
+                    app:layout_constraintStart_toStartOf="@+id/id_edt"
+                    app:layout_constraintTop_toTopOf="@+id/name_tv" />
 
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/payment_edt" />
+                <EditText
+                    android:id="@+id/price_edt"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="15.000.000đ"
+                    app:layout_constraintBottom_toBottomOf="@+id/price_tv"
+                    app:layout_constraintStart_toStartOf="@+id/name_edt"
+                    app:layout_constraintTop_toTopOf="@+id/price_tv" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnDelete"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/third_button_background"
-        android:text="DELETE"
-        android:textColor="@color/main_dark"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnUpdate" />
+                <EditText
+                    android:id="@+id/type_pet_edt"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Cat"
+                    app:layout_constraintBottom_toBottomOf="@+id/type_pet_tv"
+                    app:layout_constraintStart_toStartOf="@+id/price_edt"
+                    app:layout_constraintTop_toTopOf="@+id/type_pet_tv" />
+
+                <EditText
+                    android:id="@+id/vaccine_edt"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:text="1"
+                    app:layout_constraintBottom_toBottomOf="@+id/vaccine_tv"
+                    app:layout_constraintStart_toStartOf="@+id/type_pet_edt"
+                    app:layout_constraintTop_toTopOf="@+id/vaccine_tv" />
+
+                <EditText
+                    android:id="@+id/variety_edt"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:text="British Golden"
+                    app:layout_constraintBottom_toBottomOf="@+id/variety_tv"
+                    app:layout_constraintStart_toStartOf="@+id/vaccine_edt"
+                    app:layout_constraintTop_toTopOf="@+id/variety_tv" />
+
+                <EditText
+                    android:id="@+id/gender_edt"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:text="Female"
+                    app:layout_constraintBottom_toBottomOf="@+id/gender_tv"
+                    app:layout_constraintStart_toStartOf="@+id/variety_edt"
+                    app:layout_constraintTop_toTopOf="@+id/gender_tv" />
+
+                <EditText
+                    android:id="@+id/weight_edt"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:text="1.5kg"
+                    app:layout_constraintBottom_toBottomOf="@+id/weight_tv"
+                    app:layout_constraintStart_toStartOf="@+id/gender_edt"
+                    app:layout_constraintTop_toTopOf="@+id/weight_tv" />
+
+                <EditText
+                    android:id="@+id/age_edt"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="number"
+                    android:text="1"
+                    app:layout_constraintBottom_toBottomOf="@+id/age_tv"
+                    app:layout_constraintStart_toStartOf="@+id/weight_edt"
+                    app:layout_constraintTop_toTopOf="@+id/age_tv" />
+
+                <EditText
+                    android:id="@+id/color_edt"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textPersonName"
+                    android:text="Brown"
+                    app:layout_constraintBottom_toBottomOf="@+id/color_tv"
+                    app:layout_constraintStart_toStartOf="@+id/age_edt"
+                    app:layout_constraintTop_toTopOf="@+id/color_tv" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/primary_button_background"
+
+                    android:text="UPDATE"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/color_edt" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnDelete"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/third_button_background"
+                    android:text="DELETE"
+                    android:textColor="@color/main_dark"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnUpdate" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
