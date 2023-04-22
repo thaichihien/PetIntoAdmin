@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".views.fragments.BookingDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/detailTitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_dark"
+        android:paddingHorizontal="9dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="9dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBackDetail"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@android:color/transparent"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booking Details"
+            android:textColor="@color/main_dark"
+            android:textSize="@dimen/header_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailTitleBar">
+
+        <Spinner
+            android:id="@+id/trackOrderSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="46dp"
+            android:layout_marginBottom="46dp"
+            android:background="@color/white"
+            android:elevation="5dp" />
+    </RelativeLayout>
+
+<!--    <TextView-->
+<!--        android:id="@+id/address_tv"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="Name"-->
+<!--        android:textSize="18dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/name_tv" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/price_tv"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="Price"-->
+<!--        android:textSize="18dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/address_tv" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/datedelivery_tv"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="TypePet"-->
+<!--        android:textSize="18dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/price_tv" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/is_delivered_tv"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="Stock"-->
+<!--        android:textSize="18dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/datedelivery_tv" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/payment_tv"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="Details"-->
+<!--        android:textSize="18dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/is_delivered_tv" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/id_edt"-->
+<!--        android:layout_width="260dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="60dp"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:text="123456"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/name_tv"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/name_tv"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/name_tv" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/name_tv"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:text="ID"-->
+<!--        android:textSize="18dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/address_edt"-->
+<!--        android:layout_width="260dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:text="Bed"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/address_tv"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/id_edt"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/address_tv" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/price_edt"-->
+<!--        android:layout_width="260dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:text="345.000đ"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/price_tv"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/address_edt"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/price_tv" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/typepet_edt"-->
+<!--        android:layout_width="260dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:text="Cat"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/datedelivery_tv"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/price_edt"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/datedelivery_tv" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/is_delivered_edt"-->
+<!--        android:layout_width="260dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="number"-->
+<!--        android:text="5"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/is_delivered_tv"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/typepet_edt"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/is_delivered_tv" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/payment_edt"-->
+<!--        android:layout_width="260dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:gravity="start|top"-->
+<!--        android:text="32*28*63cm"-->
+<!--        android:inputType="textMultiLine"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/payment_tv"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/is_delivered_edt"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/payment_tv" />-->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUpdate"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/primary_button_background"
+        android:text="UPDATE"
+
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDelete"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/third_button_background"
+        android:text="DELETE"
+        android:textColor="@color/main_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
