@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/booking_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textColor="@color/main_dark"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pet_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Pet Information: "
+        app:layout_constraintStart_toStartOf="@+id/customer_info_title"
+        app:layout_constraintTop_toBottomOf="@+id/customer_info_title" />
+
+    <TextView
+        android:id="@+id/pet_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/pet_info_title"
+        app:layout_constraintStart_toEndOf="@+id/pet_info_title"
+        app:layout_constraintTop_toTopOf="@+id/pet_info_title" />
+
+    <TextView
+        android:id="@+id/pet_type_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Type: "
+        app:layout_constraintStart_toStartOf="@+id/pet_info_title"
+        app:layout_constraintTop_toBottomOf="@+id/pet_info_title" />
+
+    <TextView
+        android:id="@+id/pet_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/pet_type_title"
+        app:layout_constraintStart_toEndOf="@+id/pet_type_title"
+        app:layout_constraintTop_toTopOf="@+id/pet_type_title" />
+
+    <TextView
+        android:id="@+id/booking_date_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Date: "
+        app:layout_constraintStart_toStartOf="@+id/booking_service_title"
+        app:layout_constraintTop_toBottomOf="@+id/booking_service_title" />
+
+    <TextView
+        android:id="@+id/booking_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/booking_date_title"
+        app:layout_constraintStart_toEndOf="@+id/booking_date_title"
+        app:layout_constraintTop_toTopOf="@+id/booking_date_title" />
+
+    <TextView
+        android:id="@+id/booking_service_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Service:"
+        app:layout_constraintStart_toStartOf="@+id/booking_type"
+        app:layout_constraintTop_toBottomOf="@+id/booking_type" />
+
+    <TextView
+        android:id="@+id/booking_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/booking_service_title"
+        app:layout_constraintStart_toEndOf="@+id/booking_service_title"
+        app:layout_constraintTop_toTopOf="@+id/booking_service_title" />
+
+    <TextView
+        android:id="@+id/customer_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Customer Information: "
+        app:layout_constraintStart_toStartOf="@+id/booking_date_title"
+        app:layout_constraintTop_toBottomOf="@+id/booking_date_title" />
+
+    <TextView
+        android:id="@+id/customer_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/customer_info_title"
+        app:layout_constraintStart_toEndOf="@+id/customer_info_title"
+        app:layout_constraintTop_toTopOf="@+id/customer_info_title" />
+
+    <TextView
+        android:id="@+id/booking_variety_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="Variety: "
+        app:layout_constraintBottom_toBottomOf="@+id/pet_type_title"
+        app:layout_constraintStart_toEndOf="@+id/pet_type"
+        app:layout_constraintTop_toTopOf="@+id/pet_type_title" />
+
+    <TextView
+        android:id="@+id/booking_variety"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/booking_variety_title"
+        app:layout_constraintStart_toEndOf="@+id/booking_variety_title"
+        app:layout_constraintTop_toTopOf="@+id/booking_variety_title" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
