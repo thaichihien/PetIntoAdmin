@@ -45,221 +45,367 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailTitleBar">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailTitleBar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
-        <Spinner
-            android:id="@+id/trackOrderSpinner"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="46dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="46dp"
-            android:layout_marginBottom="46dp"
-            android:background="@color/white"
-            android:elevation="5dp" />
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/pet_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Pet Name"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_tv" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
 
-    <TextView
-        android:id="@+id/type_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Pet Type"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pet_name_tv" />
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/owner_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Owner Name"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/type_tv" />
+                    <Spinner
+                        android:id="@+id/trackOrderSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="46dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="46dp"
+                        android:layout_marginBottom="46dp"
+                        android:background="@color/white"
+                        android:elevation="5dp" />
+                </RelativeLayout>
 
-    <TextView
-        android:id="@+id/owner_phone_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Phone Number"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/owner_name_tv" />
+                <TextView
+                    android:id="@+id/pet_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="50dp"
+                    android:text="Pet Name"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/owner_email_tv" />
 
-    <TextView
-        android:id="@+id/owner_email_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="Email"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="483dp" />
+                <TextView
+                    android:id="@+id/type_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Pet Type"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pet_name_tv" />
 
-    <TextView
-        android:id="@+id/booking_type_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Booking Type"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/owner_email_tv" />
+                <TextView
+                    android:id="@+id/owner_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="50dp"
+                    android:text="Owner Name"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/booking_services_tv" />
 
-    <EditText
-        android:id="@+id/id_edt"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="123456"
-        app:layout_constraintBottom_toBottomOf="@+id/name_tv"
-        app:layout_constraintStart_toEndOf="@+id/name_tv"
-        app:layout_constraintTop_toTopOf="@+id/name_tv" />
+                <TextView
+                    android:id="@+id/owner_phone_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Phone Number"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/owner_name_tv" />
 
-    <TextView
-        android:id="@+id/name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:text="ID"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
+                <TextView
+                    android:id="@+id/owner_email_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Email"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/owner_phone_tv" />
 
-    <EditText
-        android:id="@+id/pet_name_edt"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Milo"
-        app:layout_constraintBottom_toBottomOf="@+id/pet_name_tv"
-        app:layout_constraintStart_toStartOf="@+id/id_edt"
-        app:layout_constraintTop_toTopOf="@+id/pet_name_tv" />
+                <TextView
+                    android:id="@+id/pet_variety_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Pet Variety"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/type_tv" />
 
-    <EditText
-        android:id="@+id/type_edt"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Corgi"
-        app:layout_constraintBottom_toBottomOf="@+id/type_tv"
-        app:layout_constraintStart_toStartOf="@+id/pet_name_edt"
-        app:layout_constraintTop_toTopOf="@+id/type_tv" />
+                <TextView
+                    android:id="@+id/pet_gender_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Gender"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pet_variety_tv" />
 
-    <EditText
-        android:id="@+id/owner_name_edt"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Thái Chí Hiện"
-        app:layout_constraintBottom_toBottomOf="@+id/owner_name_tv"
-        app:layout_constraintStart_toStartOf="@+id/type_edt"
-        app:layout_constraintTop_toTopOf="@+id/owner_name_tv" />
+                <TextView
+                    android:id="@+id/pet_color_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Color"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pet_gender_tv" />
 
-    <EditText
-        android:id="@+id/owner_phone_edt"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:text="0909123456"
-        app:layout_constraintBottom_toBottomOf="@+id/owner_phone_tv"
-        app:layout_constraintStart_toStartOf="@+id/owner_name_edt"
-        app:layout_constraintTop_toTopOf="@+id/owner_phone_tv" />
+                <EditText
+                    android:id="@+id/id_edt"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="123456"
+                    app:layout_constraintBottom_toBottomOf="@+id/name_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/name_tv"
+                    app:layout_constraintTop_toTopOf="@+id/name_tv" />
 
-    <EditText
-        android:id="@+id/booking_type_edt"
-        android:layout_width="230dp"
-        android:layout_height="45dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:text="Spa"
-        app:layout_constraintBottom_toBottomOf="@+id/booking_type_tv"
-        app:layout_constraintStart_toStartOf="@+id/owner_email_edt"
-        app:layout_constraintTop_toTopOf="@+id/booking_type_tv" />
+                <EditText
+                    android:id="@+id/booking_check_in_edt"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="10/04/2023"
+                    app:layout_constraintBottom_toBottomOf="@+id/booking_check_in_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/name_tv"
+                    app:layout_constraintTop_toTopOf="@+id/booking_check_in_tv" />
 
-    <EditText
-        android:id="@+id/owner_email_edt"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:text="tchien@gmail.com"
-        app:layout_constraintBottom_toBottomOf="@+id/owner_email_tv"
-        app:layout_constraintStart_toStartOf="@+id/owner_phone_edt"
-        app:layout_constraintTop_toTopOf="@+id/owner_email_tv" />
+                <EditText
+                    android:id="@+id/booking_time_edt"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="5:19 PM"
+                    app:layout_constraintBottom_toBottomOf="@+id/booking_time_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/name_tv"
+                    app:layout_constraintTop_toTopOf="@+id/booking_time_tv" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnUpdate"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+                <EditText
+                    android:id="@+id/booking_services_edt"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Hair cut"
+                    app:layout_constraintBottom_toBottomOf="@+id/booking_services_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/name_tv"
+                    app:layout_constraintTop_toTopOf="@+id/booking_services_tv" />
 
-        android:layout_marginTop="25dp"
+                <TextView
+                    android:id="@+id/name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="Booking ID"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
 
-        android:background="@drawable/primary_button_background"
-        android:text="UPDATE"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/booking_type_edt" />
+                <TextView
+                    android:id="@+id/booking_check_in_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Check in"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name_tv" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnDelete"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/third_button_background"
-        android:text="DELETE"
-        android:textColor="@color/main_dark"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnUpdate" />
+                <TextView
+                    android:id="@+id/booking_time_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Time"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/booking_check_in_tv" />
+
+                <TextView
+                    android:id="@+id/booking_services_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Services"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/booking_time_tv" />
+
+                <EditText
+                    android:id="@+id/pet_name_edt"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Milo"
+                    app:layout_constraintBottom_toBottomOf="@+id/pet_name_tv"
+                    app:layout_constraintStart_toStartOf="@+id/id_edt"
+                    app:layout_constraintTop_toTopOf="@+id/pet_name_tv" />
+
+                <EditText
+                    android:id="@+id/pet_type_edt"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Dog"
+                    app:layout_constraintBottom_toBottomOf="@+id/type_tv"
+                    app:layout_constraintStart_toStartOf="@+id/pet_name_edt"
+                    app:layout_constraintTop_toTopOf="@+id/type_tv" />
+
+                <EditText
+                    android:id="@+id/owner_name_edt"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Thái Chí Hiện"
+                    app:layout_constraintBottom_toBottomOf="@+id/owner_name_tv"
+                    app:layout_constraintStart_toStartOf="@+id/pet_type_edt"
+                    app:layout_constraintTop_toTopOf="@+id/owner_name_tv" />
+
+                <EditText
+                    android:id="@+id/owner_phone_edt"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:text="0909123456"
+                    app:layout_constraintBottom_toBottomOf="@+id/owner_phone_tv"
+                    app:layout_constraintStart_toStartOf="@+id/owner_name_edt"
+                    app:layout_constraintTop_toTopOf="@+id/owner_phone_tv" />
+
+                <EditText
+                    android:id="@+id/pet_variety_edt"
+                    android:layout_width="230dp"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:text="Corgi"
+                    app:layout_constraintBottom_toBottomOf="@+id/pet_variety_tv"
+                    app:layout_constraintStart_toStartOf="@+id/pet_type_edt"
+                    app:layout_constraintTop_toTopOf="@+id/pet_variety_tv" />
+
+                <EditText
+                    android:id="@+id/pet_gender_edt"
+                    android:layout_width="230dp"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:text="Male"
+                    app:layout_constraintBottom_toBottomOf="@+id/pet_gender_tv"
+                    app:layout_constraintStart_toStartOf="@+id/pet_variety_edt"
+                    app:layout_constraintTop_toTopOf="@+id/pet_gender_tv" />
+
+                <EditText
+                    android:id="@+id/pet_color_edt"
+                    android:layout_width="230dp"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:text="Brown"
+                    app:layout_constraintBottom_toBottomOf="@+id/pet_color_tv"
+                    app:layout_constraintStart_toStartOf="@+id/pet_gender_edt"
+                    app:layout_constraintTop_toTopOf="@+id/pet_color_tv" />
+
+                <EditText
+                    android:id="@+id/owner_email_edt"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:text="tchien@gmail.com"
+                    app:layout_constraintBottom_toBottomOf="@+id/owner_email_tv"
+                    app:layout_constraintStart_toStartOf="@+id/owner_phone_edt"
+                    app:layout_constraintTop_toTopOf="@+id/owner_email_tv" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/primary_button_background"
+                    android:text="UPDATE"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.51"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pet_color_edt" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnDelete"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/third_button_background"
+                    android:text="DELETE"
+                    android:textColor="@color/main_dark"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.509"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnUpdate" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
