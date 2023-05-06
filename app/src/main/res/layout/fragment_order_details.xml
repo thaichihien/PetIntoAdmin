@@ -72,6 +72,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
+                    <ImageView
+                        android:id="@+id/servicesSpinnerBtn"
+                        android:layout_width="37dp"
+                        android:layout_height="36dp"
+                        android:layout_alignTop="@+id/trackOrderSpinner"
+                        android:layout_alignEnd="@+id/trackOrderSpinner"
+                        android:layout_alignBottom="@+id/trackOrderSpinner"
+                        android:layout_marginStart="164dp"
+                        android:layout_marginEnd="18dp"
+                        android:elevation="50dp"
+                        android:padding="5dp"
+                        android:src="@drawable/dropdown_icon" />
+
                     <Spinner
                         android:id="@+id/trackOrderSpinner"
                         android:layout_width="match_parent"
@@ -85,8 +98,6 @@
                         android:layout_marginBottom="46dp"
                         android:background="@color/white"
                         android:elevation="5dp" />
-
-
                 </RelativeLayout>
 
                 <TextView
