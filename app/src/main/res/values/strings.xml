@@ -9,4 +9,5 @@
     <string name="booking">Booking</string>
     <string name="pet">Pet</string>
     <string name="profile">Profile</string>
+    <string name="success_condition">Success</string>
 </resources>

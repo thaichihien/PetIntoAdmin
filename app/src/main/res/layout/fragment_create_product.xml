@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_light"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.fragments.ProductDetailsFragment">
+    tools:context=".views.fragments.CreateProductFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detailTitleBar"
@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Product Details"
+            android:text="Add New Product"
             android:textColor="@color/main_dark"
             android:textSize="@dimen/header_text_size"
             android:textStyle="bold"
@@ -45,15 +45,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/ivProduct"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailTitleBar" />
+
 
     <TextView
         android:id="@+id/address_tv"
@@ -65,7 +57,7 @@
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/detailTitleBar" />
 
     <TextView
         android:id="@+id/price_tv"
@@ -116,49 +108,28 @@
         app:layout_constraintTop_toBottomOf="@+id/is_delivered_tv" />
 
     <TextView
-        android:id="@+id/tvImage"
-        android:layout_width="wrap_content"
+        android:id="@+id/lbImage"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:text="Details"
+        android:text="Image Source"
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/payment_method_tv" />
 
-    <TextView
-        android:id="@+id/id_edt"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:textColor="@color/main_dark"
-        android:text="123456"
-        app:layout_constraintBottom_toBottomOf="@+id/id_tv"
-        app:layout_constraintStart_toEndOf="@+id/id_tv"
-        app:layout_constraintTop_toTopOf="@+id/id_tv" />
-
-    <TextView
-        android:id="@+id/id_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:text="ID"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivProduct" />
-
     <EditText
         android:id="@+id/etName"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Bed"
+
         app:layout_constraintBottom_toBottomOf="@+id/address_tv"
-        app:layout_constraintStart_toStartOf="@+id/id_edt"
+
+        app:layout_constraintStart_toEndOf="@+id/address_tv"
         app:layout_constraintTop_toTopOf="@+id/address_tv"
         app:layout_constraintVertical_bias="0.523" />
 
@@ -167,8 +138,8 @@
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="345.000đ"
+        android:inputType="number"
+
         app:layout_constraintBottom_toBottomOf="@+id/price_tv"
         app:layout_constraintStart_toStartOf="@+id/etName"
         app:layout_constraintTop_toTopOf="@+id/price_tv" />
@@ -179,18 +150,18 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Cat"
+        android:hint="Ex : Cat,Dog,..."
         app:layout_constraintBottom_toBottomOf="@+id/date_delivery_tv"
         app:layout_constraintStart_toStartOf="@+id/etPrice"
         app:layout_constraintTop_toTopOf="@+id/date_delivery_tv" />
 
     <EditText
-        android:id="@+id/is_delivered_edt"
+        android:id="@+id/etStock"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
-        android:text="5"
+
         app:layout_constraintBottom_toBottomOf="@+id/is_delivered_tv"
         app:layout_constraintStart_toStartOf="@+id/etTypePet"
         app:layout_constraintTop_toTopOf="@+id/is_delivered_tv" />
@@ -201,54 +172,39 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="start|top"
-        android:text="32*28*63cm"
+
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="@+id/payment_method_tv"
-        app:layout_constraintStart_toStartOf="@+id/is_delivered_edt"
+        app:layout_constraintStart_toStartOf="@+id/etStock"
         app:layout_constraintTop_toTopOf="@+id/payment_method_tv" />
+
     <EditText
         android:id="@+id/etImage"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="start|top"
-        android:text="32*28*63cm"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="@+id/tvImage"
-        app:layout_constraintStart_toStartOf="@+id/etDetail"
-        app:layout_constraintTop_toTopOf="@+id/tvImage" />
+        android:hint="url"
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="@+id/lbImage"
+        app:layout_constraintStart_toStartOf="@+id/etDetail"
+        app:layout_constraintTop_toTopOf="@+id/lbImage" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCreate"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+
+        android:layout_marginTop="50dp"
+        android:background="@drawable/primary_button_background"
+        android:text="Create"
+
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etImage"
-        >
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnUpdate"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/etImage" />
 
-            android:layout_marginTop="24dp"
-            android:background="@drawable/primary_button_background"
-            android:text="UPDATE"
-            android:layout_marginStart="30dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-             />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnDelete"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/third_button_background"
-            android:text="DELETE"
-            android:textColor="@color/main_dark"
-            android:textStyle="bold"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

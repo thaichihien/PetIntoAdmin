@@ -1,60 +1,72 @@
 package com.mobye.petintoadmin.views.fragments
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import com.mobye.petintoadmin.R
+import com.mobye.petintoadmin.databinding.FragmentProductDetailsBinding
+import com.mobye.petintoadmin.repositories.ProductRepository
+import com.mobye.petintoadmin.viewmodels.AdminViewModelFactory
+import com.mobye.petintoadmin.viewmodels.ProductViewModel
+import com.mobye.petintoadmin.views.MainActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProductDetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProductDetailsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val args : ProductDetailsFragmentArgs by navArgs()
+    private val productViewModel : ProductViewModel by activityViewModels {
+        AdminViewModelFactory(ProductRepository())
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_details, container, false)
+    private val loadingDialog : AlertDialog by lazy {
+        val activity = requireActivity() as MainActivity
+        activity.loadingDialog
+    }
+    private val notiDialog : Dialog by lazy {
+        val activity = requireActivity() as MainActivity
+        activity.notiDialog
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProductDetailsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProductDetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun validated(): Boolean {
+
+    }
+
+    override fun setup() {
+        fillFields()
+
+        binding.apply {
+            btnUpdate.setOnClickListener {
+                if(validated()){
+                    sendUpdateProduct()
                 }
             }
+            btnDelete.setOnClickListener {
+                sendDeleteProduct()
+            }
+        }
+
+
     }
+
+    private fun sendDeleteProduct() {
+        TODO("Not yet implemented")
+    }
+
+    private fun sendUpdateProduct() {
+        TODO("Not yet implemented")
+    }
+
+    private fun fillFields() {
+        TODO("Not yet implemented")
+    }
+
+
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductDetailsBinding
+        get() = FragmentProductDetailsBinding::inflate
+
 }

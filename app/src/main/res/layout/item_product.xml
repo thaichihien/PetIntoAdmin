@@ -3,10 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:background="@color/white"
+    android:paddingVertical="6dp">
 
     <ImageView
-        android:id="@+id/product_img"
+        android:id="@+id/ivProduct"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="20dp"
@@ -16,8 +19,8 @@
         app:srcCompat="@drawable/home" />
 
     <TextView
-        android:id="@+id/product_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvName"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
@@ -25,11 +28,13 @@
         android:textColor="@color/main_dark"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/product_img"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintStart_toEndOf="@+id/ivProduct"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/product_price"
+        android:id="@+id/tvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -38,8 +43,8 @@
         android:textColor="@color/red"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/product_img"
-        app:layout_constraintTop_toBottomOf="@+id/product_name" />
+        app:layout_constraintStart_toEndOf="@+id/ivProduct"
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
     <TextView
         android:id="@+id/product_for_title"
@@ -48,38 +53,38 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:text="For: "
-        app:layout_constraintStart_toEndOf="@+id/product_img"
-        app:layout_constraintTop_toBottomOf="@+id/product_price" />
+        app:layout_constraintStart_toEndOf="@+id/ivProduct"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
 
     <TextView
-        android:id="@+id/product_for"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvTypePet"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="TextView"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/product_for_title"
-        app:layout_constraintTop_toBottomOf="@+id/product_price" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
 
     <TextView
         android:id="@+id/product_stock_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
         android:text="Stock: "
-        app:layout_constraintStart_toEndOf="@+id/product_for"
-        app:layout_constraintTop_toBottomOf="@+id/product_price" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvStock"
+        app:layout_constraintEnd_toStartOf="@+id/tvStock"
+        app:layout_constraintTop_toTopOf="@+id/tvStock" />
 
     <TextView
-        android:id="@+id/product_stock"
+        android:id="@+id/tvStock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="24dp"
         android:text="TextView"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/product_stock_title"
-        app:layout_constraintTop_toBottomOf="@+id/product_price" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
 
     <TextView
         android:id="@+id/product_details_title"
@@ -88,18 +93,20 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:text="Details: "
-        app:layout_constraintStart_toEndOf="@+id/product_img"
+        app:layout_constraintStart_toEndOf="@+id/ivProduct"
         app:layout_constraintTop_toBottomOf="@+id/product_for_title" />
 
     <TextView
-        android:id="@+id/product_details"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvDetail"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="TextView"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/product_details_title"
-        app:layout_constraintTop_toBottomOf="@+id/product_for" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTypePet" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

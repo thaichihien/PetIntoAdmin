@@ -14,7 +14,14 @@
         android:id="@+id/productManagementFragment"
         android:name="com.mobye.petintoadmin.views.fragments.ProductManagementFragment"
         android:label="fragment_product_management"
-        tools:layout="@layout/fragment_product_management" />
+        tools:layout="@layout/fragment_product_management" >
+        <action
+            android:id="@+id/action_productManagementFragment_to_createProductFragment"
+            app:destination="@id/createProductFragment" />
+        <action
+            android:id="@+id/action_productManagementFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/orderManagementFragment"
         android:name="com.mobye.petintoadmin.views.fragments.OrderManagementFragment"
@@ -27,4 +34,18 @@
         android:id="@+id/bookingManagementFragment"
         android:name="com.mobye.petintoadmin.views.fragments.BookingManagementFragment"
         android:label="BookingManagementFragment" />
+    <fragment
+        android:id="@+id/createProductFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.CreateProductFragment"
+        android:label="fragment_create_product"
+        tools:layout="@layout/fragment_create_product" />
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.ProductDetailsFragment"
+        android:label="fragment_product_details"
+        tools:layout="@layout/fragment_product_details" >
+        <argument
+            android:name="currentProduct"
+            app:argType="com.mobye.petintoadmin.models.Product" />
+    </fragment>
 </navigation>
