@@ -32,9 +32,7 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>() {
         activity.notiDialog
     }
 
-    private fun validated(): Boolean {
 
-    }
 
     override fun setup() {
         fillFields()
@@ -53,6 +51,10 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>() {
 
     }
 
+    private fun validated(): Boolean {
+        return true
+    }
+
     private fun sendDeleteProduct() {
         TODO("Not yet implemented")
     }
@@ -64,6 +66,7 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>() {
     private fun fillFields() {
         TODO("Not yet implemented")
     }
+
 
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductDetailsBinding
