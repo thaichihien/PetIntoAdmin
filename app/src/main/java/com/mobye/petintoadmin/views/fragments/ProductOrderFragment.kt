@@ -1,22 +1,26 @@
 package com.mobye.petintoadmin.views.fragments
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
+
 import android.view.LayoutInflater
-import android.view.View
+
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.mobye.petintoadmin.R
-import com.mobye.petintoadmin.adapters.OrderAdapter
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+
+import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.mobye.petintoadmin.adapters.OrderPagingAdapter
-import com.mobye.petintoadmin.adapters.ProductPagingAdapter
+
 import com.mobye.petintoadmin.databinding.FragmentProductOrderBinding
 import com.mobye.petintoadmin.repositories.OrderRepository
-import com.mobye.petintoadmin.repositories.ProductRepository
+
 import com.mobye.petintoadmin.viewmodels.AdminViewModelFactory
 import com.mobye.petintoadmin.viewmodels.OrderViewModel
-import com.mobye.petintoadmin.viewmodels.ProductViewModel
+
 import com.mobye.petintoadmin.views.MainActivity
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 class ProductOrderFragment : BaseFragment<FragmentProductOrderBinding>() {
@@ -29,6 +33,46 @@ class ProductOrderFragment : BaseFragment<FragmentProductOrderBinding>() {
 
     override fun setup() {
         (requireActivity() as MainActivity).showNav()
+
+
+        orderAdapter = OrderPagingAdapter {
+            findNavController().navigate(OrderManagementFragmentDirections.actionOrderManagementFragmentToProductOrderDetailFragment(it))
+        }
+
+
+        lifecycleScope.launchWhenCreated {
+            orderViewModel.orderItemList.collectLatest {
+                orderAdapter.submitData(it)
+            }
+        }
+
+
+
+        binding.apply {
+
+
+            rvOrder.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = orderAdapter
+            }
+
+
+            btnAdd.setOnClickListener {
+                findNavController().navigate(ProductManagementFragmentDirections.actionProductManagementFragmentToCreateProductFragment())
+            }
+
+            btnRefresh.setOnClickListener {
+                lifecycleScope.launch {
+//                    orderAdapter.submitData(PagingData.empty())
+//                    orderAdapter.notifyDataSetChanged()
+                    orderAdapter.refresh()
+
+                    //orderViewModel.filterOrder(binding.etSearchProduct.text.toString().trim())
+                }
+
+            }
+        }
+
 
 
     }

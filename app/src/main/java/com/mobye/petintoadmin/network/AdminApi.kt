@@ -92,6 +92,11 @@ interface AdminApi {
         @Query("status") status : String = ""
     ) : ApiResponse<List<Order>>
 
+    @GET("/admin/order/detail")
+    suspend fun getOrderDetail(
+        @Query("id") id : String = ""
+    ) : ApiResponse<List<Product>>
+
     @POST("/admin/order/create")
     suspend fun createOrder(
         @Body order: Order

@@ -2,7 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/productManagementFragment"
             android:title="@string/product"
-            android:icon="@drawable/foot_icon"/>
+            android:icon="@drawable/foot_icon"
+            />
     <item android:id="@+id/orderManagementFragment"
         android:title="@string/order"
         android:icon="@drawable/foot_icon"/>

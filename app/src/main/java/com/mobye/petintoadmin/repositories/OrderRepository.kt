@@ -13,6 +13,10 @@ class OrderRepository : IRepository {
         pagingSourceFactory = {OrderPagingSource(from,to,status)})
         .flow
 
+
+    suspend fun getOrderDetail(id : String)
+        = RetrofitInstance.api.getOrderDetail(id)
+
     suspend fun createOrder(order : Order)
             = RetrofitInstance.api.createOrder(order)
 

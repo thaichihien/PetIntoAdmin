@@ -25,7 +25,11 @@
     <fragment
         android:id="@+id/orderManagementFragment"
         android:name="com.mobye.petintoadmin.views.fragments.OrderManagementFragment"
-        android:label="OrderManagementFragment" />
+        android:label="OrderManagementFragment" >
+        <action
+            android:id="@+id/action_orderManagementFragment_to_productOrderDetailFragment"
+            app:destination="@id/productOrderDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/petManagmentFragment"
         android:name="com.mobye.petintoadmin.views.fragments.PetManagmentFragment"
@@ -89,5 +93,14 @@
         <argument
             android:name="currentBooking"
             app:argType="com.mobye.petintoadmin.models.Booking" />
+    </fragment>
+    <fragment
+        android:id="@+id/productOrderDetailFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.ProductOrderDetailFragment"
+        android:label="fragment_product_order_detail"
+        tools:layout="@layout/fragment_product_order_detail" >
+        <argument
+            android:name="currentOrder"
+            app:argType="com.mobye.petintoadmin.models.Order" />
     </fragment>
 </navigation>

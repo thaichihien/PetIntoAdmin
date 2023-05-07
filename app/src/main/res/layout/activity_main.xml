@@ -32,6 +32,7 @@
         android:backgroundTint="@color/main_dark"
         app:itemTextColor="@color/main_dark"
         app:itemIconTint="@color/main_dark"
+        app:labelVisibilityMode="labeled"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

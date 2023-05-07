@@ -11,6 +11,7 @@ class Product  (
     var typePet : String = "",
     var detail : String ="",
     var stock : Int = 0,
-    var image : String = ""
+    var image : String = "",
+    var quantity : Int = 0
 ) : Parcelable {
 }

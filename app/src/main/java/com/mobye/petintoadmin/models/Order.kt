@@ -1,5 +1,9 @@
 package com.mobye.petintoadmin.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 class Order(
     var id : String = "",
     var address : String = "",
@@ -15,5 +19,5 @@ class Order(
     var total : Int = 0,
     var orderDate : String = "",
     var petId : String = ""
-) {
+) : Parcelable {
 }
