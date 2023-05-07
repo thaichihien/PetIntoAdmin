@@ -12,10 +12,11 @@ import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.utils.Utils
 
 class ProductPagingAdapter(
-    private val detailListener :(Product) -> Unit
+    private val detailListener :(Product) -> Unit    // dùng để bắt sự kiện nhấn vào item -> mở ra chi tiết
 )
     : PagingDataAdapter<Product,ProductPagingAdapter.ProductViewHolder>(DiffUtilCallBack()) {
 
+    //copy y chang thay đổi kiểu biến cho phù hợp
     private lateinit var binding : ItemProductBinding
     class DiffUtilCallBack : DiffUtil.ItemCallback<Product>(){
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
@@ -29,6 +30,7 @@ class ProductPagingAdapter(
 
     }
 
+    //lớp ViewHolder dùng để set giá trị từ item vào UI
     inner class  ProductViewHolder() : RecyclerView.ViewHolder(binding.root) {
         fun setData(item : Product){
             binding.apply {
@@ -53,6 +55,8 @@ class ProductPagingAdapter(
 
     }
 
+
+    //hàm lấy dữ liệu để truyền vào UI
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = getItem(position)
         product?.let {
@@ -62,6 +66,7 @@ class ProductPagingAdapter(
 
     }
 
+    //hàm tạo view holder, thay đổi kiểu biến cho phù hợp
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         binding = ItemProductBinding.inflate(
             LayoutInflater.from(parent.context),parent,false

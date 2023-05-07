@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_light"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.fragments.ProductDetailsFragment">
+    tools:context=".views.fragments.CreatePetFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detailTitleBar"
@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Product Details"
+            android:text="Add New Pet"
             android:textColor="@color/main_dark"
             android:textSize="@dimen/header_text_size"
             android:textStyle="bold"
@@ -44,14 +44,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <ScrollView
 
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detailTitleBar">
 
         <LinearLayout
@@ -59,51 +59,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/ivProduct"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-
-                    android:src="@drawable/cat_blue_golden"
-                    android:layout_centerHorizontal="true"/>
-
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
-
-                <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ID :"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    />
-
-                <TextView
-                    android:id="@+id/tvId"
-                    android:layout_width="260dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:ems="10"
-                    android:textColor="@color/main_dark"
-                    android:textSize="18dp"
-                    android:inputType="textPersonName"
-                    android:text="123456"
-                    />
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -124,11 +79,11 @@
                     android:id="@+id/etName"
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
+                   android:layout_alignParentEnd="true"
                     android:ems="10"
-                    android:inputType="numberDecimal"
-
-                    />
+                    android:inputType="textPersonName"
+                    android:text="123456"
+                     />
 
             </RelativeLayout>
             <RelativeLayout
@@ -152,6 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:ems="10"
+
                     android:inputType="number"
 
                     />
@@ -167,13 +123,132 @@
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TypePet :"
+                    android:text="Type :"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     />
 
                 <EditText
-                    android:id="@+id/etTypePet"
+                    android:id="@+id/etType"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <TextView
+                    android:id="@+id/lbGender"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/rgGender"
+                    android:layout_marginStart="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/lbGender"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Male" />
+
+                    <RadioButton
+                        android:id="@+id/rbFemale"
+                        android:layout_marginStart="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female" />
+
+
+                </RadioGroup>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weight :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:id="@+id/etWeight"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Age :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:id="@+id/etAge"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:inputType="number"
+
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Color :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:id="@+id/etColor"
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -193,13 +268,13 @@
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Stock :"
+                    android:text="Vaccine :"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     />
 
                 <EditText
-                    android:id="@+id/etStock"
+                    android:id="@+id/etVaccine"
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -209,7 +284,32 @@
                     />
 
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
 
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Variety :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:id="@+id/etVariety"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+
+
+                    />
+
+            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -231,81 +331,55 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:ems="10"
-                    android:scrollHorizontally="true"
-                    android:inputType="textLongMessage"
 
 
                     />
 
             </RelativeLayout>
             <RelativeLayout
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingHorizontal="30dp">
 
-                <LinearLayout
+                <TextView
+                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <TextView
-
-                        android:layout_centerVertical="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Detail :"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        />
-
-
-                </LinearLayout>
-
-                <EditText
-                    android:id="@+id/etDetail"
-                    android:layout_width="260dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:ems="10"
-                    android:padding="6dp"
-
-                    android:background="@color/white"
+                    android:text="Status :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
                     />
+
+               <Spinner
+                   android:id="@+id/spStatus"
+                   android:layout_alignParentEnd="true"
+                   android:layout_width="260dp"
+                   android:layout_height="40dp"
+
+
+                   />
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="30dp">
+                android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnUpdate"
+                    android:id="@+id/btnCreate"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
 
-
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/primary_button_background"
-                    android:text="Update"
-
+                    android:text="Create"
+                    android:layout_centerHorizontal="true"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnDelete"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-
-
-                    android:background="@drawable/third_button_background"
-                    android:text="DELETE"
-                    android:textColor="@color/main_dark"
-                    android:textStyle="bold" />
 
 
             </RelativeLayout>

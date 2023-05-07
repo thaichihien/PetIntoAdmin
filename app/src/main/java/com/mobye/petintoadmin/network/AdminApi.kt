@@ -40,7 +40,7 @@ interface AdminApi {
     suspend fun getPet(
         @Query("page") page : Int,
         @Query("query") query : String = ""
-    ) : ApiResponse<List<Product>>
+    ) : ApiResponse<List<Pet>>
 
     @POST("/admin/pet/create")
     suspend fun createPet(
@@ -62,7 +62,7 @@ interface AdminApi {
     suspend fun getBooking(
         @Query("page") page : Int,
         @Query("query") query : String = ""
-    ) : ApiResponse<List<Product>>
+    ) : ApiResponse<List<Booking>>
 
     @POST("/admin/pet/create")
     suspend fun createBooking(

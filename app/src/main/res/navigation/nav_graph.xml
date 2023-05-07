@@ -29,11 +29,25 @@
     <fragment
         android:id="@+id/petManagmentFragment"
         android:name="com.mobye.petintoadmin.views.fragments.PetManagmentFragment"
-        android:label="PetManagmentFragment" />
+        android:label="PetManagmentFragment" >
+        <action
+            android:id="@+id/action_petManagmentFragment_to_createPetFragment"
+            app:destination="@id/createPetFragment" />
+        <action
+            android:id="@+id/action_petManagmentFragment_to_petDetailsFragment"
+            app:destination="@id/petDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bookingManagementFragment"
         android:name="com.mobye.petintoadmin.views.fragments.BookingManagementFragment"
-        android:label="BookingManagementFragment" />
+        android:label="BookingManagementFragment" >
+        <action
+            android:id="@+id/action_bookingManagementFragment_to_createBookingFragment"
+            app:destination="@id/createBookingFragment" />
+        <action
+            android:id="@+id/action_bookingManagementFragment_to_bookingDetailsFragment"
+            app:destination="@id/bookingDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/createProductFragment"
         android:name="com.mobye.petintoadmin.views.fragments.CreateProductFragment"
@@ -47,5 +61,33 @@
         <argument
             android:name="currentProduct"
             app:argType="com.mobye.petintoadmin.models.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPetFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.CreatePetFragment"
+        android:label="fragment_create_pet"
+        tools:layout="@layout/fragment_create_pet" />
+    <fragment
+        android:id="@+id/petDetailsFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.PetDetailsFragment"
+        android:label="fragment_pet_details"
+        tools:layout="@layout/fragment_pet_details" >
+        <argument
+            android:name="currentPet"
+            app:argType="com.mobye.petintoadmin.models.Pet" />
+    </fragment>
+    <fragment
+        android:id="@+id/createBookingFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.CreateBookingFragment"
+        android:label="fragment_create_booking"
+        tools:layout="@layout/fragment_create_booking" />
+    <fragment
+        android:id="@+id/bookingDetailsFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.BookingDetailsFragment"
+        android:label="fragment_booking_details"
+        tools:layout="@layout/fragment_booking_details" >
+        <argument
+            android:name="currentBooking"
+            app:argType="com.mobye.petintoadmin.models.Booking" />
     </fragment>
 </navigation>

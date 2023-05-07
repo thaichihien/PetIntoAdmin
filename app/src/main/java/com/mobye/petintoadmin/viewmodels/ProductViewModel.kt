@@ -17,22 +17,28 @@ class ProductViewModel(
     private val repository: ProductRepository
 )  : ViewModel(){
 
-    private val TAG = "ProductViewModel"
+    private val TAG = "ProductViewModel"    // dùng cho debug
 
+    //dùng để nhận kết quả từ Server và thông báo lên UI
     private var _response : MutableLiveData<ApiResponse<*>> = MutableLiveData()
     val response get() = _response
 
+    //chuỗi tìm kiếm , rỗng là lấy tất cả
     private val searchQuery : MutableStateFlow<String> by lazy { MutableStateFlow("") }
+
+    //danh sách dữ liệu
     val productItemList = searchQuery.flatMapLatest {query ->
         repository.getProductSource(query)
             .cachedIn(viewModelScope)
     }
 
+    //thực hiện tìm kiếm
     fun searchProduct(query : String){
         searchQuery.value = query
     }
 
 
+    //Tạo
     fun createProduct(product: Product){
         try {
             viewModelScope.launch {
@@ -43,6 +49,7 @@ class ProductViewModel(
         }
     }
 
+    //Sửa
     fun updateProduct(product: Product){
         try {
             viewModelScope.launch {
@@ -53,6 +60,8 @@ class ProductViewModel(
         }
     }
 
+
+    //Xóa
     fun deleteProduct(product: Product){
         try {
             viewModelScope.launch {

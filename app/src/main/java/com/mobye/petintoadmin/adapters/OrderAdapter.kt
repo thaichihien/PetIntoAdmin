@@ -1,4 +1,4 @@
-package com.mobye.petintoadmin.views
+package com.mobye.petintoadmin.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

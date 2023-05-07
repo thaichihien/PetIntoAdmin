@@ -6,28 +6,25 @@ import androidx.paging.PagingState
 import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.network.RetrofitInstance
 
-
+//Lớp lấy dữ liệu bằng phân trang
 class ProductPagingSource(
-    private val query : String
-) : PagingSource<Int, Product>() {
+    private val query : String          //câu truy vấn tìm kiếm sản phẩm
+) : PagingSource<Int, Product>() {      // <chỉ số là số nguyên nên Int, kiểu dữ liệu muốn lấy>
     companion object{
-        const val FIRST_PAGE = 1
+        const val FIRST_PAGE = 1        // bắt đầu từ trang 1
     }
+
+    //copy y hệt
     override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
         return state.anchorPosition
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> {
         return try {
-            val nextPage = params.key ?: FIRST_PAGE
-//            val queryMap = mapOf<String,String>(
-//                Pair("page",nextPage.toString()),
-//                Pair("query",query)
-//            )
+            val nextPage = params.key ?: FIRST_PAGE //lấy chỉ số trang
+            val response = RetrofitInstance.api.getProduct(nextPage,query)  // gọi hàm API lấy dữ liệu tương ứng
 
-            val response = RetrofitInstance.api.getProduct(nextPage,query)
-
-
+            //copy y hệt
             LoadResult.Page(
                 data = response.body!!,
                 prevKey = if(nextPage == FIRST_PAGE) null else nextPage - 1,
@@ -35,7 +32,7 @@ class ProductPagingSource(
             )
 
         }catch (e: Exception){
-            Log.e("ProductPagingSource",e.toString())
+            Log.e("ProductPagingSource",e.toString())   // thay đổi tag để debug
             LoadResult.Error(e)
         }
     }

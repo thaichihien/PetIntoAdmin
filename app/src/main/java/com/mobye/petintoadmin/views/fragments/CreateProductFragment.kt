@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -28,23 +30,40 @@ class CreateProductFragment : BaseFragment<FragmentCreateProductBinding>() {
         AdminViewModelFactory(ProductRepository())
     }
 
+    //hai cửa sổ dùng để hiện loading và thông báo
     private val loadingDialog : AlertDialog by lazy {
         val activity = requireActivity() as MainActivity
         activity.loadingDialog
     }
-    private val notiDialog : Dialog by lazy {
-        val activity = requireActivity() as MainActivity
-        activity.notiDialog
+    val notiDialog : Dialog by lazy {
+        Dialog(requireContext()).apply {
+            setCancelable(true)
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setContentView(R.layout.notification_dialog)
+            findViewById<Button>(R.id.btnClose).setOnClickListener{
+                this.dismiss()
+            }
+        }
     }
 
 
+    //Hàm này tương tự onViewCreated(), thực hiện các chức năng tại đây
     override fun setup() {
 
+        //ẩn thanh nav
+        (requireActivity() as MainActivity).hideNav()
+
         binding.apply {
+            //Nút tạo
             btnCreate.setOnClickListener {
-                if(validated()){
-                    sendCreateProduct()
+                if(validated()){    //Kiểm tra các ô không nhập trống
+                    sendCreateProduct() // gửi yêu cầu tạo
                 }
+            }
+
+            //Nút quay lại
+            btnBackDetail.setOnClickListener {
+                findNavController().popBackStack()
             }
         }
 
@@ -69,8 +88,8 @@ class CreateProductFragment : BaseFragment<FragmentCreateProductBinding>() {
 
 
     private fun sendCreateProduct()  {
-        loadingDialog.show()
-       with(binding){
+        loadingDialog.show()        //mở cửa sở loading
+       with(binding){   // dùng with để đỡ phải ghi binding nhiều lần
            val newProduct = Product(
                name = etName.text.toString().trim(),
                price = etPrice.text.toString().toInt(),
@@ -81,20 +100,42 @@ class CreateProductFragment : BaseFragment<FragmentCreateProductBinding>() {
            )
 
 
+           //Gửi yêu cầu lên server tạo product
            productViewModel.createProduct(newProduct)
 
-
+           //Hàm nhận kết quả
            productViewModel.response.observe(viewLifecycleOwner){
-                loadingDialog.dismiss()
-                if(it.result){
+                loadingDialog.dismiss() // đã có kết quả, tắt loading
+                if(it.result){      //result = true là thành công
+
+                    //hiện thông báo thành công kèm nội dung thông báo ở reason
                     notiDialog.changeToSuccess(it.reason)
-                    notiDialog.show()
-                    notiDialog.setOnCancelListener {
-                        findNavController().popBackStack()
+
+
+                    //Hai hàm bắt sự kiện đóng của sổ thông báo
+                    notiDialog.setOnDismissListener{
+                        findNavController().popBackStack()  //quay về
                     }
+                    notiDialog.setOnCancelListener {
+                        findNavController().popBackStack() //quay về
+                    }
+                    notiDialog.show()
+
+
 
                 }else{
+
+                    //Hiện thông báo thất bại
                     notiDialog.changeToFail(it.reason)
+
+
+                    //Hai hàm bắt sự kiện đóng của sổ thông báo
+                    notiDialog.setOnDismissListener{
+                       //nothing
+                    }
+                    notiDialog.setOnCancelListener {
+                        //nothing
+                    }
                     notiDialog.show()
                 }
 

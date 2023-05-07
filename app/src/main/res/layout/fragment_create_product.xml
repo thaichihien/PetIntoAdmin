@@ -47,164 +47,227 @@
 
 
 
-    <TextView
-        android:id="@+id/address_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Name"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailTitleBar" />
+    <ScrollView
 
-    <TextView
-        android:id="@+id/price_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Price"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/address_tv" />
-
-    <TextView
-        android:id="@+id/date_delivery_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="TypePet"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price_tv" />
-
-    <TextView
-        android:id="@+id/is_delivered_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Stock"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_delivery_tv" />
-
-    <TextView
-        android:id="@+id/payment_method_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Details"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/is_delivered_tv" />
-
-    <TextView
-        android:id="@+id/lbImage"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Image Source"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/payment_method_tv" />
-
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-
-        app:layout_constraintBottom_toBottomOf="@+id/address_tv"
-
-        app:layout_constraintStart_toEndOf="@+id/address_tv"
-        app:layout_constraintTop_toTopOf="@+id/address_tv"
-        app:layout_constraintVertical_bias="0.523" />
-
-    <EditText
-        android:id="@+id/etPrice"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-
-        app:layout_constraintBottom_toBottomOf="@+id/price_tv"
-        app:layout_constraintStart_toStartOf="@+id/etName"
-        app:layout_constraintTop_toTopOf="@+id/price_tv" />
-
-    <EditText
-        android:id="@+id/etTypePet"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Ex : Cat,Dog,..."
-        app:layout_constraintBottom_toBottomOf="@+id/date_delivery_tv"
-        app:layout_constraintStart_toStartOf="@+id/etPrice"
-        app:layout_constraintTop_toTopOf="@+id/date_delivery_tv" />
-
-    <EditText
-        android:id="@+id/etStock"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-
-        app:layout_constraintBottom_toBottomOf="@+id/is_delivered_tv"
-        app:layout_constraintStart_toStartOf="@+id/etTypePet"
-        app:layout_constraintTop_toTopOf="@+id/is_delivered_tv" />
-
-    <EditText
-        android:id="@+id/etDetail"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="@+id/payment_method_tv"
-        app:layout_constraintStart_toStartOf="@+id/etStock"
-        app:layout_constraintTop_toTopOf="@+id/payment_method_tv" />
-
-    <EditText
-        android:id="@+id/etImage"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="url"
-
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="@+id/lbImage"
-        app:layout_constraintStart_toStartOf="@+id/etDetail"
-        app:layout_constraintTop_toTopOf="@+id/lbImage" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCreate"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="50dp"
-        android:background="@drawable/primary_button_background"
-        android:text="Create"
-
-        android:textColor="@color/white"
-        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etImage" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailTitleBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:id="@+id/etName"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+
+
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:id="@+id/etPrice"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:inputType="number"
+
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TypePet :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:id="@+id/etTypePet"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+
+
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stock :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:id="@+id/etStock"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+
+
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Image Source :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:id="@+id/etImage"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:scrollHorizontally="true"
+                    android:inputType="textLongMessage"
+
+
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <TextView
+
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Detail :"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/etDetail"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:padding="6dp"
+
+                    android:background="@color/white"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCreate"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+
+                    android:background="@drawable/primary_button_background"
+                    android:text="Create"
+
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    />
+
+
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
