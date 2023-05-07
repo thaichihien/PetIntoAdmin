@@ -34,7 +34,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/order_TabLayout"
+        android:id="@+id/orderTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,10 +45,10 @@
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/order_viewPager"
+        android:id="@+id/orderViewPager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/order_TabLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/orderTabLayout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

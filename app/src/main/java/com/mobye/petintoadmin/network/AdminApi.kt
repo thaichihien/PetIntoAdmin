@@ -1,6 +1,7 @@
 package com.mobye.petintoadmin.network
 
 import com.mobye.petintoadmin.models.Booking
+import com.mobye.petintoadmin.models.Order
 import com.mobye.petintoadmin.models.Pet
 import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.models.apimodels.ApiResponse
@@ -61,7 +62,9 @@ interface AdminApi {
     @GET("/admin/pet/get")
     suspend fun getBooking(
         @Query("page") page : Int,
-        @Query("query") query : String = ""
+        @Query("from") from : String = "",
+        @Query("to") to : String = "",
+        @Query("status") status : String = ""
     ) : ApiResponse<List<Booking>>
 
     @POST("/admin/pet/create")
@@ -78,5 +81,34 @@ interface AdminApi {
     suspend fun deleteBooking(
         @Body booking: Booking
     ) : ApiResponse<Any>
+
+
+    //Order
+    @GET("/admin/order/get")
+    suspend fun getOrder(
+        @Query("page") page : Int,
+        @Query("from") from : String = "",
+        @Query("to") to : String = "",
+        @Query("status") status : String = ""
+    ) : ApiResponse<List<Order>>
+
+    @POST("/admin/order/create")
+    suspend fun createOrder(
+        @Body order: Order
+    ) : ApiResponse<String>
+
+    @POST("/admin/order/update")
+    suspend fun updateOrder(
+        @Body order: Order
+    ) : ApiResponse<Any>
+
+    @POST("/admin/order/delete")
+    suspend fun deleteOrder(
+        @Body order: Order
+    ) : ApiResponse<Any>
+
+
+
+
 
 }
