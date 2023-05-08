@@ -2,6 +2,7 @@ package com.mobye.petintoadmin.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -13,7 +14,9 @@ import com.mobye.petintoadmin.databinding.ItemProductBinding
 import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.utils.Utils
 
-class ProductItemAdapter : RecyclerView.Adapter<ProductItemAdapter.ProductViewHolder>()  {
+class ProductItemAdapter(
+    private val detailListener : (Product) -> Unit
+) : RecyclerView.Adapter<ProductItemAdapter.ProductViewHolder>()  {
 
     private lateinit var binding: ItemProductBinding
     private val differCallBack = object : DiffUtil.ItemCallback<Product>(){
@@ -41,6 +44,23 @@ class ProductItemAdapter : RecyclerView.Adapter<ProductItemAdapter.ProductViewHo
                     .load(item.image)
                     .placeholder(R.drawable.logo)
                     .into(ivProduct)
+                if(item.quantity >= 0){
+                    lbQuantity.visibility = View.VISIBLE
+                    tvQuantity.visibility = View.VISIBLE
+                    tvQuantity.text = item.quantity.toString()
+                }else{
+                    lbQuantity.visibility = View.GONE
+                    tvQuantity.visibility = View.GONE
+                }
+                ivProduct.setOnClickListener {
+                    detailListener(item)
+                }
+                tvName.setOnClickListener {
+                    detailListener(item)
+                }
+
+
+
             }
         }
     }

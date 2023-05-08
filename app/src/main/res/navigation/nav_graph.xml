@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_orderManagementFragment_to_productOrderDetailFragment"
             app:destination="@id/productOrderDetailFragment" />
+        <action
+            android:id="@+id/action_orderManagementFragment_to_createProductOrderFragment"
+            app:destination="@id/createProductOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/petManagmentFragment"
@@ -103,4 +106,18 @@
             android:name="currentOrder"
             app:argType="com.mobye.petintoadmin.models.Order" />
     </fragment>
+    <fragment
+        android:id="@+id/createProductOrderFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.CreateProductOrderFragment"
+        android:label="fragment_create_product_order"
+        tools:layout="@layout/fragment_create_product_order" >
+        <action
+            android:id="@+id/action_createProductOrderFragment_to_addProductOrderFragment"
+            app:destination="@id/addProductOrderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addProductOrderFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.AddProductOrderFragment"
+        android:label="fragment_add_product_order"
+        tools:layout="@layout/fragment_add_product_order" />
 </navigation>

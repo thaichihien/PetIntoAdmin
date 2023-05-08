@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class Order(
+open class Order(
     var id : String = "",
     var address : String = "",
     var note : String = "",

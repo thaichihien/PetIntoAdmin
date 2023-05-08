@@ -3,6 +3,7 @@ package com.mobye.petintoadmin.repositories
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.mobye.petintoadmin.models.Order
+import com.mobye.petintoadmin.models.apimodels.OrderCart
 import com.mobye.petintoadmin.network.RetrofitInstance
 
 class OrderRepository : IRepository {
@@ -17,7 +18,7 @@ class OrderRepository : IRepository {
     suspend fun getOrderDetail(id : String)
         = RetrofitInstance.api.getOrderDetail(id)
 
-    suspend fun createOrder(order : Order)
+    suspend fun createOrder(order : OrderCart)
             = RetrofitInstance.api.createOrder(order)
 
 

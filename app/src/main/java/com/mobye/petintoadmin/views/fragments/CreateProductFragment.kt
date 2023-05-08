@@ -35,7 +35,7 @@ class CreateProductFragment : BaseFragment<FragmentCreateProductBinding>() {
         val activity = requireActivity() as MainActivity
         activity.loadingDialog
     }
-    val notiDialog : Dialog by lazy {
+    private val notiDialog : Dialog by lazy {
         Dialog(requireContext()).apply {
             setCancelable(true)
             requestWindowFeature(Window.FEATURE_NO_TITLE)

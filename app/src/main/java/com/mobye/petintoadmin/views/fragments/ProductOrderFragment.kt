@@ -58,7 +58,8 @@ class ProductOrderFragment : BaseFragment<FragmentProductOrderBinding>() {
 
 
             btnAdd.setOnClickListener {
-                findNavController().navigate(ProductManagementFragmentDirections.actionProductManagementFragmentToCreateProductFragment())
+                orderViewModel.emptyProductOrderList()
+                findNavController().navigate(OrderManagementFragmentDirections.actionOrderManagementFragmentToCreateProductOrderFragment())
             }
 
             btnRefresh.setOnClickListener {

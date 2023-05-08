@@ -5,6 +5,7 @@ import com.mobye.petintoadmin.models.Order
 import com.mobye.petintoadmin.models.Pet
 import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.models.apimodels.ApiResponse
+import com.mobye.petintoadmin.models.apimodels.OrderCart
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -99,7 +100,7 @@ interface AdminApi {
 
     @POST("/admin/order/create")
     suspend fun createOrder(
-        @Body order: Order
+        @Body order: OrderCart
     ) : ApiResponse<String>
 
     @POST("/admin/order/update")

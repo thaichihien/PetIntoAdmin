@@ -106,6 +106,9 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>() {
                 .load(product.image)
                 .placeholder(R.drawable.logo)
                 .into(ivProduct)
+
+
+
         }
     }
 

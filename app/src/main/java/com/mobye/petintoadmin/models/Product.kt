@@ -7,11 +7,11 @@ import kotlinx.parcelize.Parcelize
 class Product  (
     var id : String = "",
     var name : String = "",
-    var price : Int = 0,
+    var price : Int = -1,
     var typePet : String = "",
     var detail : String ="",
-    var stock : Int = 0,
+    var stock : Int = -1,
     var image : String = "",
-    var quantity : Int = 0
+    var quantity : Int = -1
 ) : Parcelable {
 }
