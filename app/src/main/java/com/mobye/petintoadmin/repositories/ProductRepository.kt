@@ -2,6 +2,7 @@ package com.mobye.petintoadmin.repositories
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import com.mobye.petintoadmin.models.Pet
 import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.network.RetrofitInstance
 
@@ -29,6 +30,22 @@ class ProductRepository : IRepository {
 
 
     //Pet viết phần lấy dữ liệu pet dưới này
+    //Danh sách
+    fun getPetSource(query : String) = Pager(
+        config = PagingConfig(pageSize = 10),
+        pagingSourceFactory = {PetPagingSource(query)})
+        .flow
 
+    //hàm thêm
+    suspend fun createPet(Pet : Pet)
+            = RetrofitInstance.api.createPet(Pet)
+
+    //Hàm cập nhật
+    suspend fun updatePet(Pet: Pet)
+            = RetrofitInstance.api.updatePet(Pet)
+
+    //Hàm xóa
+    suspend fun deletePet(Pet: Pet)
+            = RetrofitInstance.api.deletePet(Pet)
 
 }
