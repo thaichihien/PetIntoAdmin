@@ -82,6 +82,38 @@ class Utils {
             else -> 0
             }
 
+        fun getIndexBookingStatus(status : String)
+                = when(status){
+            "Waiting for reply" -> 0
+            "Accepted" -> 1
+            "Unaccepted" -> 2
+            "Cancelled" -> 3
+            "Done" -> 4
+            else -> 0
+        }
+
+        fun getIndexBookingTypeHotel(status : String)
+                = when(status){
+            "vip" -> 0
+            "normal" -> 1
+            else -> 0
+        }
+
+        fun getIndexBookingTypeSpa(status : String)
+                = when(status){
+            "Hair" -> 0
+            "Nail cut" -> 1
+            "Bath" -> 2
+            else -> 0
+        }
+
+        fun getIndexService(status: String)
+            = when(status){
+                "Hotel" -> 0
+                "Spa" -> 1
+                else -> 0
+            }
+
 
         fun checkEditText(et : EditText) : Boolean{
             return if(et.text.isBlank()){

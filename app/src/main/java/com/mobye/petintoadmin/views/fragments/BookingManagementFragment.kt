@@ -1,60 +1,82 @@
 package com.mobye.petintoadmin.views.fragments
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobye.petintoadmin.R
+import com.mobye.petintoadmin.adapters.BookingPagingAdapter
+import com.mobye.petintoadmin.adapters.ProductPagingAdapter
+import com.mobye.petintoadmin.databinding.FragmentBookingDetailsBinding
+import com.mobye.petintoadmin.databinding.FragmentBookingManagementBinding
+import com.mobye.petintoadmin.databinding.FragmentProductManagementBinding
+import com.mobye.petintoadmin.repositories.BookingRepository
+import com.mobye.petintoadmin.repositories.ProductRepository
+import com.mobye.petintoadmin.viewmodels.AdminViewModelFactory
+import com.mobye.petintoadmin.viewmodels.BookingViewModel
+import com.mobye.petintoadmin.viewmodels.ProductViewModel
+import com.mobye.petintoadmin.views.MainActivity
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class BookingManagementFragment : BaseFragment<FragmentBookingManagementBinding>() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BookingManagementFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class BookingManagementFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val bookingViewModel : BookingViewModel by activityViewModels {
+        AdminViewModelFactory(BookingRepository())
+    }
+    private lateinit var bookingAdapter : BookingPagingAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun setup() {
+
+        //Hiện thanh nav
+        (requireActivity() as MainActivity).showNav()
+
+
+        //adapter phân trang
+        bookingAdapter = BookingPagingAdapter {
+            //khi nhấn vào item -> di chuyển đến detail
+            findNavController().navigate(BookingManagementFragmentDirections.actionBookingManagementFragmentToBookingDetailsFragment(it))
         }
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_booking_management, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BookingManagementFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BookingManagementFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        //Gọi lấy dữ liệu
+        lifecycleScope.launchWhenCreated {
+            bookingViewModel.bookingItemList.collectLatest {
+                bookingAdapter.submitData(it)
             }
+        }
+
+
+        //binding dữ liệu lấy được
+        binding.apply {
+            //Recycle view
+            rvBooking.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = bookingAdapter
+            }
+
+            //nút thêm
+            btnAdd.setOnClickListener {
+                findNavController().navigate(BookingManagementFragmentDirections.actionBookingManagementFragmentToCreateBookingFragment())
+            }
+
+            btnRefresh.setOnClickListener{
+                bookingAdapter.refresh()
+            }
+        }
+
+
     }
+
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentBookingManagementBinding
+        get() = FragmentBookingManagementBinding::inflate
+
+
 }

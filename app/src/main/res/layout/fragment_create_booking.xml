@@ -1,14 +1,387 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_light"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".views.fragments.CreateBookingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/detailTitleBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@color/background_dark"
+        android:paddingHorizontal="9dp"
+        android:paddingBottom="9dp"
+        android:paddingTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/btnBackDetail"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@android:color/transparent"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add New Booking"
+            android:textColor="@color/main_dark"
+            android:textSize="@dimen/header_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailTitleBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Service :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/serviceSpinnerBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="310dp"
+                    android:layout_marginTop="16dp"
+                    android:elevation="50dp"
+                    android:padding="5dp"
+                    android:src="@drawable/dropdown_icon" />
+
+                <Spinner
+                    android:id="@+id/serviceBookingSpinner"
+                    android:layout_width="200dp"
+                    android:layout_height="42dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="95dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:elevation="5dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PetName :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/etPetName"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Gender :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+                <EditText
+                    android:id="@+id/etGender"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:scrollHorizontally="true"
+                    android:inputType="textLongMessage"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Weight :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+                <EditText
+                    android:id="@+id/etWeight"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:scrollHorizontally="true"
+                    android:inputType="textLongMessage"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Customer Name :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+                <EditText
+                    android:id="@+id/etCustomerName"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:scrollHorizontally="true"
+                    android:inputType="textLongMessage"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Phone :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+                <EditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:scrollHorizontally="true"
+                    android:inputType="textLongMessage"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Charge :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+                <EditText
+                    android:id="@+id/etCharge"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:scrollHorizontally="true"
+                    android:inputType="number"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Type :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/typeSpinnerBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="310dp"
+                    android:layout_marginTop="16dp"
+                    android:elevation="50dp"
+                    android:padding="5dp"
+                    android:src="@drawable/dropdown_icon" />
+
+                <Spinner
+                    android:id="@+id/typeBookingSpinner"
+                    android:layout_width="200dp"
+                    android:layout_height="42dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="95dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:elevation="5dp"/>
+<!--                <EditText-->
+<!--                    android:id="@+id/etService"-->
+<!--                    android:layout_width="260dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:ems="10"-->
+<!--                    android:scrollHorizontally="true"-->
+<!--                    android:inputType="textLongMessage"/>-->
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Check In :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+                <EditText
+                    android:id="@+id/etCheckIn"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:scrollHorizontally="true"
+                    android:inputType="date"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Check Out :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+                <EditText
+                    android:id="@+id/etCheckOut"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:scrollHorizontally="true"
+                    android:inputType="date"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Status :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <ImageView
+                    android:id="@+id/servicesSpinnerBtn"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignTop="@+id/spBookingStatus"
+                    android:layout_alignEnd="@+id/spBookingStatus"
+                    android:layout_alignBottom="@+id/spBookingStatus"
+                    android:layout_marginStart="164dp"
+                    android:layout_marginEnd="16dp"
+                    android:elevation="50dp"
+                    android:padding="5dp"
+                    android:src="@drawable/dropdown_icon" />
+
+                <Spinner
+                    android:id="@+id/spBookingStatus"
+                    android:layout_width="250dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@color/white"
+                    android:elevation="5dp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCreate"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/primary_button_background"
+                    android:text="Create"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
