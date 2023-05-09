@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_light"
-    tools:context=".views.fragments.ProductOrderDetailFragment">
+    tools:context=".views.fragments.PetOrderDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detailTitleBar"
@@ -47,14 +47,16 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
-        app:layout_constraintTop_toBottomOf="@+id/detailTitleBar">
+        app:layout_constraintTop_toBottomOf="@+id/detailTitleBar"
+        android:paddingBottom="10dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -287,36 +289,7 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
 
-                <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Amount :"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    />
-
-                <TextView
-                    android:textColor="@color/main_dark"
-                    android:id="@+id/tvAmount"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:textSize="18dp"
-                    android:scrollHorizontally="true"
-                    android:inputType="textLongMessage"
-                    android:text="15"
-
-                    />
-
-            </RelativeLayout>
             <RelativeLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -454,14 +427,93 @@
                 android:textStyle="bold"
                 />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="16dp"
-                android:id="@+id/rvProductOrder"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
+                android:layout_height="match_parent"
+                android:paddingVertical="16dp"
+                android:layout_marginTop="16dp"
+                >
 
-                />
+                <ImageView
+                    android:id="@+id/ivPet"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="20dp"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logo" />
+
+                <TextView
+                    android:id="@+id/tvPetName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text=""
+                    android:textColor="@color/main_dark"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/tvPetPrice"
+                    app:layout_constraintStart_toEndOf="@+id/ivPet"
+                    app:layout_constraintTop_toTopOf="@+id/ivPet" />
+
+                <TextView
+                    android:id="@+id/tvPetPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text=""
+                    android:textColor="@color/red"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/pet_gender_title"
+                    app:layout_constraintStart_toEndOf="@+id/ivPet"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPetName" />
+
+                <TextView
+                    android:id="@+id/pet_gender_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Gender: "
+                    app:layout_constraintBottom_toBottomOf="@+id/ivPet"
+                    app:layout_constraintStart_toEndOf="@+id/ivPet"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPetPrice" />
+
+                <TextView
+                    android:id="@+id/tvPetGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivPet"
+                    app:layout_constraintStart_toEndOf="@+id/pet_gender_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPetPrice" />
+
+                <TextView
+                    android:id="@+id/pet_type_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="Type: "
+                    app:layout_constraintBottom_toBottomOf="@+id/ivPet"
+                    app:layout_constraintStart_toEndOf="@+id/tvPetGender"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPetPrice" />
+
+                <TextView
+                    android:id="@+id/tvPetType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivPet"
+                    app:layout_constraintStart_toEndOf="@+id/pet_type_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPetPrice" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 
@@ -470,7 +522,7 @@
         </LinearLayout>
 
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
     <RelativeLayout
         android:id="@+id/bottomLayout"

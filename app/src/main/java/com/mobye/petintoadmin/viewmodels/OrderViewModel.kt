@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.mobye.petintoadmin.models.Order
+import com.mobye.petintoadmin.models.Pet
 import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.models.apimodels.ApiResponse
 import com.mobye.petintoadmin.models.apimodels.OrderCart
@@ -31,10 +32,18 @@ class OrderViewModel(
     private var toDate : String = ""
     private var statusQuery : String = ""
 
+    //Pet order
+    private val fromDatePet : MutableStateFlow<String> by lazy { MutableStateFlow("") }
+    private var toDatePet : String = ""
+    private var statusQueryPet : String = ""
+
     //Create Order
     val selectedProduct : MutableLiveData<Product?> = MutableLiveData(null)
     var previousSelectedProduct : Product? = null
 
+    //Create Pet Order
+    val selectedPet : MutableLiveData<Pet?> = MutableLiveData(null)
+    val previousSelectedPet : MutableLiveData<Pet?> = MutableLiveData(null)
 
 
     //danh sách dữ liệu
@@ -176,5 +185,70 @@ class OrderViewModel(
             Log.e(TAG,ex.toString())
         }
     }
+
+    //Pet order
+    val petOrderList = fromDatePet.flatMapLatest {query ->
+        repository.getPetOrderSource(query,toDate,statusQuery)
+            .cachedIn(viewModelScope)
+    }
+
+    //thực hiện tìm kiếm
+    fun filterPetOrder(from : String,to : String,status : String = ""){
+        toDatePet = to
+        statusQueryPet = status
+        fromDatePet.value = from
+    }
+
+    fun getPetDetail(id : String){
+        try {
+            viewModelScope.launch {
+                val res = repository.getPetOrderDetail(id)
+                if(res.result){
+                    previousSelectedPet.value = res.body
+                }else{
+                    Log.e(TAG,res.error)
+                }
+            }
+        }catch (ex : Exception){
+            Log.e(TAG,ex.toString())
+        }
+    }
+
+
+    fun createPetOrder(order : Order){
+
+        val pet = previousSelectedPet.value!!
+        order.petId = pet.id
+
+        try {
+            viewModelScope.launch {
+                _response.value = repository.createPetOrder(order)
+            }
+        }catch (ex : Exception){
+            Log.e(TAG,ex.toString())
+        }
+    }
+
+    fun updatePetOrder(order: Order){
+        try {
+            viewModelScope.launch {
+                _response.value = repository.updatePetOrder(order)
+            }
+        }catch (ex : Exception){
+            Log.e(TAG,ex.toString())
+        }
+    }
+
+    fun deletePetOrder(order: Order){
+        try {
+            viewModelScope.launch {
+                _response.value = repository.deletePetOrder(order)
+            }
+        }catch (ex : Exception){
+            Log.e(TAG,ex.toString())
+        }
+    }
+
+
 
 }

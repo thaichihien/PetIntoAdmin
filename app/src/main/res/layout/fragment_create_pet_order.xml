@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_light"
-    tools:context=".views.fragments.ProductOrderDetailFragment">
+    tools:context=".views.fragments.CreatePetOrderFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detailTitleBar"
@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order Details"
+            android:text="Create New Order"
             android:textColor="@color/main_dark"
             android:textSize="@dimen/header_text_size"
             android:textStyle="bold"
@@ -47,7 +47,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
@@ -105,35 +105,7 @@
             </RelativeLayout>
 
 
-            <RelativeLayout
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
 
-                <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ID :"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    />
-
-                <TextView
-                    android:id="@+id/tvId"
-                    android:layout_width="260dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:ems="10"
-                    android:textColor="@color/main_dark"
-                    android:textSize="18dp"
-                    android:inputType="textPersonName"
-                    android:text="123456"
-                    />
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -156,7 +128,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:ems="10"
-                    android:inputType="numberDecimal"
+
+                    android:inputType="textLongMessage"
 
                     />
 
@@ -182,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:ems="10"
-                    android:inputType="number"
+
 
                     />
 
@@ -208,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:ems="10"
-
+                    android:inputType="number"
 
                     />
 
@@ -287,66 +260,7 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
 
-                <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Amount :"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    />
-
-                <TextView
-                    android:textColor="@color/main_dark"
-                    android:id="@+id/tvAmount"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:textSize="18dp"
-                    android:scrollHorizontally="true"
-                    android:inputType="textLongMessage"
-                    android:text="15"
-
-                    />
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
-
-                <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_width="100dp"
-                    android:layout_height="35dp"
-                    android:text="Total :"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    />
-
-                <TextView
-                    android:id="@+id/tvTotal"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:textSize="18dp"
-                    android:text="150.000d"
-                    android:scrollHorizontally="true"
-                    android:inputType="textLongMessage"
-                    android:textColor="@color/main_dark"
-
-                    />
-
-            </RelativeLayout>
             <RelativeLayout
 
                 android:layout_width="match_parent"
@@ -383,94 +297,131 @@
                     />
 
             </RelativeLayout>
+
+
+
             <RelativeLayout
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingHorizontal="30dp">
 
                 <TextView
                     android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Detail : "
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnAddPet"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/primary_button_background"
+                    android:text="Add Pet"
+
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="16dp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivPet"
                     android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="20dp"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logo" />
+
+                <TextView
+                    android:id="@+id/tvPetName"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date Delivery :"
+                    android:layout_marginStart="20dp"
+                    android:text=""
+                    android:textColor="@color/main_dark"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/tvPetPrice"
+                    app:layout_constraintStart_toEndOf="@+id/ivPet"
+                    app:layout_constraintTop_toTopOf="@+id/ivPet" />
+
+                <TextView
+                    android:id="@+id/tvPetPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text=""
+                    android:textColor="@color/red"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    />
+                    app:layout_constraintBottom_toTopOf="@+id/pet_gender_title"
+                    app:layout_constraintStart_toEndOf="@+id/ivPet"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPetName" />
 
                 <TextView
-                    android:layout_centerVertical="true"
-                    android:id="@+id/tvDateDelivery"
-                    android:layout_width="250dp"
+                    android:id="@+id/pet_gender_title"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:ems="10"
-                    android:scrollHorizontally="true"
-                    android:textSize="18sp"
-                    android:textColor="@color/main_dark"
-
-
-                    />
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
+                    android:layout_marginStart="20dp"
+                    android:text="Gender: "
+                    app:layout_constraintBottom_toBottomOf="@+id/ivPet"
+                    app:layout_constraintStart_toEndOf="@+id/ivPet"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPetPrice" />
 
                 <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_width="80dp"
+                    android:id="@+id/tvPetGender"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Order Date :"
-                    android:textSize="18dp"
+                    android:text=""
                     android:textStyle="bold"
-                    />
+                    app:layout_constraintBottom_toBottomOf="@+id/ivPet"
+                    app:layout_constraintStart_toEndOf="@+id/pet_gender_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPetPrice" />
 
                 <TextView
-                    android:id="@+id/tvOrderDate"
-                    android:layout_width="250dp"
+                    android:id="@+id/pet_type_title"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:ems="10"
-                    android:scrollHorizontally="true"
-                    android:layout_centerVertical="true"
-                    android:textSize="18sp"
-                    android:textColor="@color/main_dark"
+                    android:layout_marginStart="30dp"
+                    android:text="Type: "
+                    app:layout_constraintBottom_toBottomOf="@+id/ivPet"
+                    app:layout_constraintStart_toEndOf="@+id/tvPetGender"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPetPrice" />
 
-                    />
-
-            </RelativeLayout>
-
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="30dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Detail : "
-                android:textSize="18dp"
-                android:textStyle="bold"
-                />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="16dp"
-                android:id="@+id/rvProductOrder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-
-                />
+                <TextView
+                    android:id="@+id/tvPetType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivPet"
+                    app:layout_constraintStart_toEndOf="@+id/pet_type_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPetPrice" />
 
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
         </LinearLayout>
 
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
     <RelativeLayout
         android:id="@+id/bottomLayout"
@@ -483,28 +434,18 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnUpdate"
+            android:id="@+id/btnCreate"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
 
-
+            android:layout_centerInParent="true"
             android:background="@drawable/primary_button_background"
-            android:text="Update"
+            android:text="Create"
 
             android:textColor="@color/white"
             android:textStyle="bold" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnDelete"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
 
-
-            android:background="@drawable/third_button_background"
-            android:text="DELETE"
-            android:textColor="@color/main_dark"
-            android:textStyle="bold" />
 
 
     </RelativeLayout>

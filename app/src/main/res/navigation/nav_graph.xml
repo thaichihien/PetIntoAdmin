@@ -32,6 +32,12 @@
         <action
             android:id="@+id/action_orderManagementFragment_to_createProductOrderFragment"
             app:destination="@id/createProductOrderFragment" />
+        <action
+            android:id="@+id/action_orderManagementFragment_to_createPetOrderFragment"
+            app:destination="@id/createPetOrderFragment" />
+        <action
+            android:id="@+id/action_orderManagementFragment_to_petOrderDetailsFragment"
+            app:destination="@id/petOrderDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/petManagmentFragment"
@@ -120,4 +126,27 @@
         android:name="com.mobye.petintoadmin.views.fragments.AddProductOrderFragment"
         android:label="fragment_add_product_order"
         tools:layout="@layout/fragment_add_product_order" />
+    <fragment
+        android:id="@+id/createPetOrderFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.CreatePetOrderFragment"
+        android:label="fragment_create_pet_order"
+        tools:layout="@layout/fragment_create_pet_order" >
+        <action
+            android:id="@+id/action_createPetOrderFragment_to_addPetOrderFragment"
+            app:destination="@id/addPetOrderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPetOrderFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.AddPetOrderFragment"
+        android:label="fragment_add_pet_order"
+        tools:layout="@layout/fragment_add_pet_order" />
+    <fragment
+        android:id="@+id/petOrderDetailsFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.PetOrderDetailsFragment"
+        android:label="fragment_pet_order_details"
+        tools:layout="@layout/fragment_pet_order_details" >
+        <argument
+            android:name="currentOrder"
+            app:argType="com.mobye.petintoadmin.models.Order" />
+    </fragment>
 </navigation>

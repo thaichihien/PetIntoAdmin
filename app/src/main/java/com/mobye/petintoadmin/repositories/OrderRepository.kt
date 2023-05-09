@@ -30,4 +30,26 @@ class OrderRepository : IRepository {
             = RetrofitInstance.api.deleteOrder(order)
 
 
+    //Pet order
+    fun getPetOrderSource(from : String,to : String,status : String)
+            =  Pager(
+        config = PagingConfig(pageSize = 10),
+        pagingSourceFactory = {PetOrderPagingSource(from,to,status)})
+        .flow
+
+
+    suspend fun getPetOrderDetail(id : String)
+            = RetrofitInstance.api.getPetOrderDetail(id)
+
+    suspend fun createPetOrder(order : Order)
+            = RetrofitInstance.api.createPetOrder(order)
+
+
+    suspend fun updatePetOrder(order: Order)
+            = RetrofitInstance.api.updatePetOrder(order)
+
+
+    suspend fun deletePetOrder(order: Order)
+            = RetrofitInstance.api.deletePetOrder(order)
+
 }

@@ -3,51 +3,42 @@ package com.mobye.petintoadmin.views.fragments
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.ArrayAdapter
-import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobye.petintoadmin.R
-import com.mobye.petintoadmin.adapters.ProductItemAdapter
-import com.mobye.petintoadmin.databinding.FragmentProductOrderDetailBinding
+import com.mobye.petintoadmin.databinding.FragmentPetOrderBinding
+import com.mobye.petintoadmin.databinding.FragmentPetOrderDetailsBinding
 import com.mobye.petintoadmin.models.Order
 import com.mobye.petintoadmin.repositories.OrderRepository
-import com.mobye.petintoadmin.repositories.ProductRepository
-import com.mobye.petintoadmin.utils.Constants.Companion.orderStatus
+import com.mobye.petintoadmin.utils.Constants
 import com.mobye.petintoadmin.utils.Utils
-import com.mobye.petintoadmin.utils.Utils.Companion.checkEditText
-import com.mobye.petintoadmin.utils.Utils.Companion.checkRadioGroup
 import com.mobye.petintoadmin.viewmodels.AdminViewModelFactory
 import com.mobye.petintoadmin.viewmodels.OrderViewModel
-import com.mobye.petintoadmin.viewmodels.ProductViewModel
 import com.mobye.petintoadmin.views.MainActivity
 import com.mobye.petintoadmin.views.changeToFail
 import com.mobye.petintoadmin.views.changeToSuccess
 
 
-class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBinding>() {
+class PetOrderDetailsFragment : BaseFragment<FragmentPetOrderDetailsBinding>() {
 
-    private val args : ProductOrderDetailFragmentArgs by navArgs()
+
+    private val args : PetOrderDetailsFragmentArgs by navArgs()
     private val orderViewModel : OrderViewModel by activityViewModels {
         AdminViewModelFactory(OrderRepository())
     }
-
-    private val productAdapter : ProductItemAdapter by lazy { ProductItemAdapter{} }
-
     private val loadingDialog : AlertDialog by lazy { Utils.getLoadingDialog(requireActivity()) }
     private val notiDialog : Dialog by lazy { Utils.createNotificationDialog(requireContext()) }
     private val warningDeleteDialog : AlertDialog by lazy {
         val builder = AlertDialog.Builder(requireActivity())
         builder.apply {
-            setMessage("Do you really want to delete this order?")
+            setMessage("Do you really want to delete this item?")
             setTitle("Delete")
             setPositiveButton("Yes") { _, _ ->
                 sendDeleteOrder()
@@ -59,29 +50,27 @@ class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBindin
         builder.create()
     }
 
-
-
     override fun setup() {
-        //ẩn thanh nav
         (requireActivity() as MainActivity).hideNav()
 
         val statusAdapter = ArrayAdapter<String>(
             requireActivity().baseContext,
             android.R.layout.simple_spinner_dropdown_item,
-            orderStatus
+            Constants.orderStatus
         )
 
-        orderViewModel.getOrderDetail(args.currentOrder.id)
-        orderViewModel.productOrderList.observe(viewLifecycleOwner){
-
-            productAdapter.differ.submitList(it)
+        orderViewModel.getPetDetail(args.currentOrder.petId)
+        orderViewModel.previousSelectedPet.observe(viewLifecycleOwner){
+            val pet = it!!
+            binding.apply {
+                tvPetName.text = pet.name
+                tvPetPrice.text = Utils.formatMoneyVND(pet.price)
+                tvPetGender.text = pet.gender
+                tvPetType.text = pet.type
+            }
         }
 
         binding.apply {
-            rvProductOrder.apply {
-                layoutManager = LinearLayoutManager(requireContext())
-                adapter = productAdapter
-            }
             btnBackDetail.setOnClickListener {
                 findNavController().popBackStack()
             }
@@ -102,9 +91,9 @@ class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBindin
 
 
     private fun validate(): Boolean = with(binding){
-        checkEditText(etAddress) && checkEditText(etCustomerName)
-                && checkEditText(etPayment) && checkEditText(etPhone)
-                && checkRadioGroup(rgDelievery,rbNo)
+        Utils.checkEditText(etAddress) && Utils.checkEditText(etCustomerName)
+                && Utils.checkEditText(etPayment) && Utils.checkEditText(etPhone)
+                && Utils.checkRadioGroup(rgDelievery, rbNo)
     }
 
     private fun sendUpdateOrder() {
@@ -121,7 +110,7 @@ class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBindin
                 isdelivery = if(rbYes.isChecked) "yes" else "no"
             )
 
-            orderViewModel.updateOrder(updatedOrder)
+            orderViewModel.updatePetOrder(updatedOrder)
             orderViewModel.response.observe(viewLifecycleOwner){
                 loadingDialog.dismiss()
                 if(it.result){
@@ -152,7 +141,7 @@ class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBindin
             id = args.currentOrder.id
         )
 
-        orderViewModel.deleteOrder(deletedOrder)
+        orderViewModel.deletePetOrder(deletedOrder)
         orderViewModel.response.observe(viewLifecycleOwner){
             loadingDialog.dismiss()
             if(it.result){
@@ -192,14 +181,12 @@ class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBindin
                 rbNo.isChecked = true
             }
             tvTotal.text = Utils.formatMoneyVND(order.total)
-            tvAmount.text = order.amount.toString()
             tvOrderDate.text = Utils.formatToLocalDate(order.orderDate)
             tvDateDelivery.text = Utils.formatToLocalDate(order.dateDelivery)
             spOrderStatus.setSelection(Utils.getIndexOrderStatus(order.status))
         }
     }
 
-    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductOrderDetailBinding
-        get() = FragmentProductOrderDetailBinding::inflate
-
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentPetOrderDetailsBinding
+        get() = FragmentPetOrderDetailsBinding::inflate
 }

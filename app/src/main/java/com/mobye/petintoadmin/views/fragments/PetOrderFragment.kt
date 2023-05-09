@@ -5,56 +5,70 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobye.petintoadmin.R
+import com.mobye.petintoadmin.adapters.OrderPagingAdapter
+import com.mobye.petintoadmin.databinding.FragmentPetOrderBinding
+import com.mobye.petintoadmin.repositories.OrderRepository
+import com.mobye.petintoadmin.viewmodels.AdminViewModelFactory
+import com.mobye.petintoadmin.viewmodels.OrderViewModel
+import com.mobye.petintoadmin.views.MainActivity
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PetOrderFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class PetOrderFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class PetOrderFragment : BaseFragment<FragmentPetOrderBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+    private val orderViewModel : OrderViewModel by activityViewModels {
+        AdminViewModelFactory(OrderRepository())
+    }
+    private lateinit var orderAdapter: OrderPagingAdapter
+
+    override fun setup() {
+        (requireActivity() as MainActivity).showNav()
+
+        orderAdapter = OrderPagingAdapter {
+            findNavController().navigate(OrderManagementFragmentDirections.actionOrderManagementFragmentToPetOrderDetailsFragment(it))
         }
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pet_order, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PetOrderFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PetOrderFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        lifecycleScope.launchWhenCreated {
+            orderViewModel.petOrderList.collectLatest {
+                orderAdapter.submitData(it)
             }
+        }
+
+
+
+        binding.apply {
+            rvPetOrder.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = orderAdapter
+            }
+
+
+            btnAdd.setOnClickListener {
+                findNavController().navigate(OrderManagementFragmentDirections.actionOrderManagementFragmentToCreatePetOrderFragment())
+            }
+
+            btnRefresh.setOnClickListener {
+                lifecycleScope.launch {
+//                    orderAdapter.submitData(PagingData.empty())
+//                    orderAdapter.notifyDataSetChanged()
+                    orderAdapter.refresh()
+
+                    //orderViewModel.filterOrder(binding.etSearchProduct.text.toString().trim())
+                }
+
+            }
+        }
+
     }
+
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentPetOrderBinding
+        get() = FragmentPetOrderBinding::inflate
+
 }

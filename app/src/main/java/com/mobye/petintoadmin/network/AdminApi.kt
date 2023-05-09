@@ -113,6 +113,34 @@ interface AdminApi {
         @Body order: Order
     ) : ApiResponse<Any>
 
+    //Pet order
+    @GET("/admin/pet-order/get")
+    suspend fun getPetOrder(
+        @Query("page") page : Int,
+        @Query("from") from : String = "",
+        @Query("to") to : String = "",
+        @Query("status") status : String = ""
+    ) : ApiResponse<List<Order>>
+
+    @GET("/admin/pet-order/detail")
+    suspend fun getPetOrderDetail(
+        @Query("id") id : String = ""
+    ) : ApiResponse<Pet>
+
+    @POST("/admin/pet-order/create")
+    suspend fun createPetOrder(
+        @Body order: Order
+    ) : ApiResponse<String>
+
+    @POST("/admin/pet-order/update")
+    suspend fun updatePetOrder(
+        @Body order: Order
+    ) : ApiResponse<Any>
+
+    @POST("/admin/pet-order/delete")
+    suspend fun deletePetOrder(
+        @Body order: Order
+    ) : ApiResponse<Any>
 
 
 
