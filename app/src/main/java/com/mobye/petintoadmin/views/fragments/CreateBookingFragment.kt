@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.mobye.petintoadmin.R
 import com.mobye.petintoadmin.databinding.FragmentCreateBookingBinding
 import com.mobye.petintoadmin.databinding.FragmentCreateProductBinding
@@ -22,6 +23,7 @@ import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.repositories.BookingRepository
 import com.mobye.petintoadmin.repositories.ProductRepository
 import com.mobye.petintoadmin.utils.Constants
+import com.mobye.petintoadmin.utils.Utils
 import com.mobye.petintoadmin.viewmodels.AdminViewModelFactory
 import com.mobye.petintoadmin.viewmodels.BookingViewModel
 import com.mobye.petintoadmin.viewmodels.ProductViewModel
@@ -64,6 +66,7 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
     }
 
     var typeAdapter : ArrayAdapter<String?>? = null
+    private var checkInPicker : MaterialDatePicker<Long>? = null
 
     override fun setup() {
         //ẩn thanh nav
@@ -93,6 +96,11 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
         )
 
         binding.apply {
+            checkInPicker = Utils.createSingleDatePicker("Check in", {
+                checkInPicked = it
+                etCheckIn.setText(it)
+            }, "MM/dd/yyyy")
+
             //Nút tạo
             btnCreate.setOnClickListener {
                 if(validated()){    //Kiểm tra các ô không nhập trống
@@ -113,6 +121,11 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
                 adapter = serviceAdapter
                 setSelection(0)
             }
+
+            etCheckIn.setOnClickListener{
+                checkInPicker!!.show(parentFragmentManager, "DAY_PICKER")
+            }
+
 
 
             serviceBookingSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -141,20 +154,6 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
                     // Do nothing
                 }
             }
-
-
-//            if(serviceBookingSpinner.selectedItem == "Hotel"){
-//                typeBookingSpinner.apply {
-//                    adapter = typeAdapterHotel
-//                    setSelection(0)
-//                }
-//            }
-//            else{
-//                typeBookingSpinner.apply {
-//                    adapter = typeAdapterSpa
-//                    setSelection(0)
-//                }
-//            }
         }
     }
 
@@ -176,18 +175,22 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
                 checkEditText(etPetName) && checkEditText(etPhone) && checkEditText(etWeight)
     }
 
+    private var checkInPicked : String = ""
+
+
 
     private fun sendCreateBooking()  {
         loadingDialog.show()        //mở cửa sở loading
         with(binding){   // dùng with để đỡ phải ghi binding nhiều lần
             var newBooking : Booking? = null
 
+
             if(serviceBookingSpinner.selectedItem.toString() == "Spa"){
                 newBooking = Booking(
                     service = serviceBookingSpinner.selectedItem.toString(),
                     charge = etCharge.text.toString().trim().toInt(),
                     type = typeBookingSpinner.selectedItem.toString(),
-                    checkIn = etCheckIn.text.toString().trim(),
+                    checkIn = checkInPicked,
                     customerName = etCustomerName.text.toString().trim(),
                     genre = etGender.text.toString().trim(),
                     petName = etPetName.text.toString().trim(),
@@ -201,7 +204,7 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
                     service = serviceBookingSpinner.selectedItem.toString(),
                     charge = etCharge.text.toString().trim().toInt(),
                     type = typeBookingSpinner.selectedItem.toString(),
-                    checkIn = etCheckIn.text.toString().trim(),
+                    checkIn = checkInPicked,
                     checkOut = etCheckOut.text.toString().trim(),
                     customerName = etCustomerName.text.toString().trim(),
                     genre = etGender.text.toString().trim(),
