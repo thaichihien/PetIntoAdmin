@@ -3,6 +3,8 @@ package com.mobye.petintoadmin.views.fragments
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.os.Message
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -67,6 +69,7 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
 
     var typeAdapter : ArrayAdapter<String?>? = null
     private var checkInPicker : MaterialDatePicker<Long>? = null
+    private var checkOutPicker : MaterialDatePicker<Long>? = null
 
     override fun setup() {
         //ẩn thanh nav
@@ -101,10 +104,18 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
                 etCheckIn.setText(it)
             }, "MM/dd/yyyy")
 
+            checkOutPicker = Utils.createSingleDatePicker("Check out", {
+                checkOutPicked = it
+                etCheckOut.setText(it)
+            }, "MM/dd/yyyy")
+
             //Nút tạo
             btnCreate.setOnClickListener {
                 if(validated()){    //Kiểm tra các ô không nhập trống
                     sendCreateBooking() // gửi yêu cầu tạo
+                }
+                else{
+                    Log.d("CheckValidate", "NOT VALIDATED")
                 }
             }
 
@@ -138,6 +149,8 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
                             adapter = typeAdapterHotel
                             setSelection(0)
                         }
+                        tvCheckOut.visibility = View.VISIBLE
+                        etCheckOut.visibility = View.VISIBLE
                     }
                     else{
                         typeBookingSpinner.apply {
@@ -176,7 +189,7 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
     }
 
     private var checkInPicked : String = ""
-
+    private var checkOutPicked : String = ""
 
 
     private fun sendCreateBooking()  {
@@ -205,7 +218,7 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
                     charge = etCharge.text.toString().trim().toInt(),
                     type = typeBookingSpinner.selectedItem.toString(),
                     checkIn = checkInPicked,
-                    checkOut = etCheckOut.text.toString().trim(),
+                    checkOut = checkOutPicked,
                     customerName = etCustomerName.text.toString().trim(),
                     genre = etGender.text.toString().trim(),
                     petName = etPetName.text.toString().trim(),
