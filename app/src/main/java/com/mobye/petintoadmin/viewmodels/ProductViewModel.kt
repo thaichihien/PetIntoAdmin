@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import com.mobye.petintoadmin.models.Pet
 import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.models.apimodels.ApiResponse
 import com.mobye.petintoadmin.repositories.ProductRepository
@@ -72,5 +73,51 @@ class ProductViewModel(
         }
     }
 
+
+    //---------PET----------
+    val petItemList = searchQuery.flatMapLatest {query ->
+        repository.getPetSource(query)
+            .cachedIn(viewModelScope)
+    }
+
+    //thực hiện tìm kiếm
+    fun searchPet(query : String){
+        searchQuery.value = query
+    }
+
+
+    //Tạo
+    fun createPet(Pet: Pet){
+        try {
+            viewModelScope.launch {
+                _response.value = repository.createPet(Pet)
+            }
+        }catch (ex : Exception){
+            Log.e(TAG,ex.toString())
+        }
+    }
+
+    //Sửa
+    fun updatePet(Pet: Pet){
+        try {
+            viewModelScope.launch {
+                _response.value = repository.updatePet(Pet)
+            }
+        }catch (ex : Exception){
+            Log.e(TAG,ex.toString())
+        }
+    }
+
+
+    //Xóa
+    fun deletePet(Pet: Pet){
+        try {
+            viewModelScope.launch {
+                _response.value = repository.deletePet(Pet)
+            }
+        }catch (ex : Exception){
+            Log.e(TAG,ex.toString())
+        }
+    }
 
 }
