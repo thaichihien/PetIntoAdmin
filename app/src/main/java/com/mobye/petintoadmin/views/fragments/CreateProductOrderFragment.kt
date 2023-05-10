@@ -56,8 +56,6 @@ class CreateProductOrderFragment : BaseFragment<FragmentCreateProductOrderBindin
 
 
 
-
-
         productAdapter = ProductItemAdapter {
             orderViewModel.selectProduct(it)
             findNavController().navigate(

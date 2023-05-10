@@ -305,6 +305,7 @@
                 android:orientation="horizontal"
                 android:paddingHorizontal="30dp">
                 <TextView
+                    android:id="@+id/tvCheckOut"
                     android:layout_centerVertical="true"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"

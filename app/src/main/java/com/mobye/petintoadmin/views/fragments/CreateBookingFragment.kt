@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.activityViewModels
@@ -19,6 +21,7 @@ import com.mobye.petintoadmin.models.Booking
 import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.repositories.BookingRepository
 import com.mobye.petintoadmin.repositories.ProductRepository
+import com.mobye.petintoadmin.utils.Constants
 import com.mobye.petintoadmin.viewmodels.AdminViewModelFactory
 import com.mobye.petintoadmin.viewmodels.BookingViewModel
 import com.mobye.petintoadmin.viewmodels.ProductViewModel
@@ -60,9 +63,34 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
         }
     }
 
+    var typeAdapter : ArrayAdapter<String?>? = null
+
     override fun setup() {
         //ẩn thanh nav
         (requireActivity() as MainActivity).hideNav()
+
+        val statusAdapter = ArrayAdapter(
+            requireActivity().baseContext,
+            android.R.layout.simple_spinner_dropdown_item,
+            Constants.orderStatus
+        )
+        val serviceAdapter = ArrayAdapter(
+            requireActivity().baseContext,
+            android.R.layout.simple_spinner_dropdown_item,
+            Constants.serviceBooking
+        )
+
+        val typeAdapterHotel = ArrayAdapter(
+            requireActivity().baseContext,
+            android.R.layout.simple_spinner_dropdown_item,
+            Constants.typeBookingHotel
+        )
+
+        val typeAdapterSpa = ArrayAdapter(
+            requireActivity().baseContext,
+            android.R.layout.simple_spinner_dropdown_item,
+            Constants.typeBookingSpa
+        )
 
         binding.apply {
             //Nút tạo
@@ -76,6 +104,57 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
             btnBackDetail.setOnClickListener {
                 findNavController().popBackStack()
             }
+
+            spBookingStatus.apply {
+                adapter = statusAdapter
+                setSelection(0)
+            }
+            serviceBookingSpinner.apply {
+                adapter = serviceAdapter
+                setSelection(0)
+            }
+
+
+            serviceBookingSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                    // Get the selected item from the adapter
+                    val selectedItem = parent.getItemAtPosition(position) as String
+
+                    if(selectedItem == "Hotel"){
+                        typeBookingSpinner.apply {
+                            adapter = typeAdapterHotel
+                            setSelection(0)
+                        }
+                    }
+                    else{
+                        typeBookingSpinner.apply {
+                            adapter = typeAdapterSpa
+                            setSelection(0)
+                        }
+                        tvCheckOut.visibility = View.GONE
+                        etCheckOut.visibility = View.GONE
+                    }
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // Do nothing
+                }
+            }
+
+
+//            if(serviceBookingSpinner.selectedItem == "Hotel"){
+//                typeBookingSpinner.apply {
+//                    adapter = typeAdapterHotel
+//                    setSelection(0)
+//                }
+//            }
+//            else{
+//                typeBookingSpinner.apply {
+//                    adapter = typeAdapterSpa
+//                    setSelection(0)
+//                }
+//            }
         }
     }
 
