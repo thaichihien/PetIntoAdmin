@@ -18,27 +18,31 @@ class BookingViewModel(
     private val repository: BookingRepository
 ) : ViewModel(){
 
-    private val TAG = "BookingViewModel"    // dùng cho debug
+    private val TAG = "BookingViewModel"
 
-    //dùng để nhận kết quả từ Server và thông báo lên UI
+
     private var _response : MutableLiveData<ApiResponse<*>> = MutableLiveData()
     val response get() = _response
 
-    //chuỗi tìm kiếm , rỗng là lấy tất cả
-    private val searchQuery : MutableStateFlow<String> by lazy { MutableStateFlow("") }
+    private val fromDate : MutableStateFlow<String> by lazy { MutableStateFlow("") }
+    private var toDate : String = ""
+    private var statusQuery : String = ""
+
 
     //danh sách dữ liệu
-    val bookingItemList = searchQuery.flatMapLatest {query ->
+    val bookingItemList = fromDate.flatMapLatest {query ->
         repository.getBookingSource(query)
             .cachedIn(viewModelScope)
     }
 
-    //thực hiện tìm kiếm
-    fun searchBooking(query : String){
-        searchQuery.value = query
+    fun filterOrder(from : String,to : String,status : String = ""){
+        toDate = to
+        statusQuery = status
+        fromDate.value = from
     }
 
-    var checkIn : Date = Date()
+
+    var checkIn  = Date()
     var checkOut = Date()
 
 

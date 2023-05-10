@@ -26,6 +26,7 @@ import com.mobye.petintoadmin.repositories.BookingRepository
 import com.mobye.petintoadmin.repositories.ProductRepository
 import com.mobye.petintoadmin.utils.Constants
 import com.mobye.petintoadmin.utils.Utils
+import com.mobye.petintoadmin.utils.Utils.Companion.checkRadioGroup
 import com.mobye.petintoadmin.viewmodels.AdminViewModelFactory
 import com.mobye.petintoadmin.viewmodels.BookingViewModel
 import com.mobye.petintoadmin.viewmodels.ProductViewModel
@@ -35,16 +36,6 @@ import com.mobye.petintoadmin.views.changeToSuccess
 import java.text.SimpleDateFormat
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CreateBookingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCreateBookingBinding
         get() = FragmentCreateBookingBinding::inflate
@@ -53,25 +44,11 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
         AdminViewModelFactory(BookingRepository())
     }
 
-    //hai cửa sổ dùng để hiện loading và thông báo
-    private val loadingDialog : AlertDialog by lazy {
-        val activity = requireActivity() as MainActivity
-        activity.loadingDialog
-    }
-    val notiDialog : Dialog by lazy {
-        Dialog(requireContext()).apply {
-            setCancelable(true)
-            requestWindowFeature(Window.FEATURE_NO_TITLE)
-            setContentView(R.layout.notification_dialog)
-            findViewById<Button>(R.id.btnClose).setOnClickListener{
-                this.dismiss()
-            }
-        }
-    }
 
-    var typeAdapter : ArrayAdapter<String?>? = null
-    private var checkInPicker : MaterialDatePicker<Long>? = null
-    private var checkOutPicker : MaterialDatePicker<Long>? = null
+    private val loadingDialog : AlertDialog by lazy {(activity as MainActivity).loadingDialog}
+    private val notiDialog : Dialog by lazy { Utils.createNotificationDialog(requireContext())}
+
+
 
     override fun setup() {
         //ẩn thanh nav
@@ -80,7 +57,7 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
         val statusAdapter = ArrayAdapter(
             requireActivity().baseContext,
             android.R.layout.simple_spinner_dropdown_item,
-            Constants.orderStatus
+            Constants.statusBooking
         )
         val serviceAdapter = ArrayAdapter(
             requireActivity().baseContext,
@@ -100,22 +77,26 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
             Constants.typeBookingSpa
         )
 
-        val format1 = SimpleDateFormat("yyyy-MM-dd")
-        val format2 = SimpleDateFormat()
-        val formattedDateCheckInHotel: String = format1.format(bookingViewModel.checkIn)
-        val dateCheckInHotel = "$formattedDateCheckInHotel"
+        val timeAdapterSpa = ArrayAdapter(
+            requireActivity().baseContext,
+            android.R.layout.simple_spinner_dropdown_item,
+            Constants.timeSpa
+        )
+
+        val checkInPicker = Utils.createSingleDatePicker("From date",{ formatted,date ->
+            binding.etCheckIn.setText(formatted)
+            bookingViewModel.checkIn = date
+        })
+
+        val checkOutPicker = Utils.createSingleDatePicker("To date",{ formatted,date ->
+            binding.etCheckOut.setText(formatted)
+            bookingViewModel.checkOut = date
+        })
+
+
 
         binding.apply {
-            checkInPicker = Utils.createSingleDatePicker("Check in", {
-                calendar.timeInMillis = it
-                checkInPicked = it
-                etCheckIn.setText(it)
-            }, formattedDate)
 
-            checkOutPicker = Utils.createSingleDatePicker("Check out", {
-                checkOutPicked = it
-                etCheckOut.setText(it)
-            }, "MM/dd/yyyy")
 
             //Nút tạo
             btnCreate.setOnClickListener {
@@ -140,14 +121,20 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
                 adapter = serviceAdapter
                 setSelection(0)
             }
+            spTime.apply {
+                adapter = timeAdapterSpa
+                setSelection(0)
+            }
 
             etCheckIn.setOnClickListener{
-                checkInPicker!!.show(parentFragmentManager, "DAY_PICKER")
+                checkInPicker.show(parentFragmentManager, "FROM_DATE_PICKER")
             }
 
             etCheckOut.setOnClickListener{
-                checkOutPicker!!.show(parentFragmentManager, "DAY_PICKER")
+                checkOutPicker.show(parentFragmentManager, "TO_DATE_PICKER")
             }
+
+
 
 
 
@@ -161,16 +148,18 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
                             adapter = typeAdapterHotel
                             setSelection(0)
                         }
-                        tvCheckOut.visibility = View.VISIBLE
-                        etCheckOut.visibility = View.VISIBLE
+                        layoutCheckOut.visibility = View.VISIBLE
+                        layoutTime.visibility = View.GONE
+
+
                     }
                     else{
                         typeBookingSpinner.apply {
                             adapter = typeAdapterSpa
                             setSelection(0)
                         }
-                        tvCheckOut.visibility = View.GONE
-                        etCheckOut.visibility = View.GONE
+                       layoutCheckOut.visibility = View.GONE
+                        layoutTime.visibility =View.VISIBLE
                     }
 
                 }
@@ -194,10 +183,18 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
 
 
     private fun validated(): Boolean = with(binding){
-        return checkEditText(etCharge) &&
-                checkEditText(etCheckIn) && checkEditText(etCheckOut) &&
-                checkEditText(etCustomerName) && checkEditText(etGender) &&
+        val validatedFields = checkEditText(etCharge) &&
+                checkEditText(etCustomerName) && checkEditText(etGenre) &&
                 checkEditText(etPetName) && checkEditText(etPhone) && checkEditText(etWeight)
+
+        var validateDate = false
+        if(serviceBookingSpinner.selectedItemPosition == 0){
+            validateDate = checkEditText(etCheckIn) && checkEditText(etCheckOut)
+        }else{
+           validateDate =checkEditText(etCheckIn)
+        }
+
+        return validatedFields && validateDate
     }
 
     private var checkInPicked : String = ""
@@ -205,55 +202,42 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
 
 
     private fun sendCreateBooking()  {
-        loadingDialog.show()        //mở cửa sở loading
-        with(binding){   // dùng with để đỡ phải ghi binding nhiều lần
-            var newBooking : Booking? = null
+        loadingDialog.show()
+        with(binding){
+            val newBooking = Booking(
+                customerName = etCustomerName.text.toString().trim(),
+                phone = etPhone.text.toString().trim(),
+                petName = etPetName.text.toString().trim(),
+                genre = etGenre.text.toString().trim(),
+                weight = etWeight.text.toString().trim(),
+                service = serviceBookingSpinner.selectedItem.toString(),
+                charge = etCharge.text.toString().toInt(),
+                status = spBookingStatus.selectedItem.toString(),
+                type = typeBookingSpinner.selectedItem.toString()
+            )
 
+            // 0 == Hotel
+            if(serviceBookingSpinner.selectedItemPosition == 0){
+                newBooking.apply {
+                    checkIn = Utils.formatStandardTimeString(bookingViewModel.checkIn, "00:00:00")
+                    checkOut = Utils.formatStandardTimeString(bookingViewModel.checkOut, "00:00:00")
+                }
 
-            if(serviceBookingSpinner.selectedItem.toString() == "Spa"){
-                newBooking = Booking(
-                    service = serviceBookingSpinner.selectedItem.toString(),
-                    charge = etCharge.text.toString().trim().toInt(),
-                    type = typeBookingSpinner.selectedItem.toString(),
-                    checkIn = checkInPicked,
-                    customerName = etCustomerName.text.toString().trim(),
-                    genre = etGender.text.toString().trim(),
-                    petName = etPetName.text.toString().trim(),
-                    phone = etPhone.text.toString().trim(),
-                    weight = etWeight.text.toString().trim(),
-                    status = spBookingStatus.selectedItem.toString()
-                )
-            }
-            else{
-                newBooking = Booking(
-                    service = serviceBookingSpinner.selectedItem.toString(),
-                    charge = etCharge.text.toString().trim().toInt(),
-                    type = typeBookingSpinner.selectedItem.toString(),
-                    checkIn = checkInPicked,
-                    checkOut = checkOutPicked,
-                    customerName = etCustomerName.text.toString().trim(),
-                    genre = etGender.text.toString().trim(),
-                    petName = etPetName.text.toString().trim(),
-                    phone = etPhone.text.toString().trim(),
-                    weight = etWeight.text.toString().trim(),
-                    status = spBookingStatus.selectedItem.toString()
-                )
+            }else{
+                newBooking.apply {
+                    checkIn = Utils.formatStandardTimeString(bookingViewModel.checkIn,
+                            spTime.selectedItem.toString()
+                        )
+                }
             }
 
-
-
-            //Gửi yêu cầu lên server tạo Booking
             bookingViewModel.createBooking(newBooking)
 
-            //Hàm nhận kết quả
+
             bookingViewModel.response.observe(viewLifecycleOwner){
-                loadingDialog.dismiss() // đã có kết quả, tắt loading
-                if(it.result){      //result = true là thành công
-
-                    //hiện thông báo thành công kèm nội dung thông báo ở reason
+                loadingDialog.dismiss()
+                if(it.result){
                     notiDialog.changeToSuccess(it.reason)
-
-
                     //Hai hàm bắt sự kiện đóng của sổ thông báo
                     notiDialog.setOnDismissListener{
                         findNavController().popBackStack()  //quay về
@@ -270,8 +254,6 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
                     //Hiện thông báo thất bại
                     notiDialog.changeToFail(it.reason)
 
-
-                    //Hai hàm bắt sự kiện đóng của sổ thông báo
                     notiDialog.setOnDismissListener{
                         //nothing
                     }

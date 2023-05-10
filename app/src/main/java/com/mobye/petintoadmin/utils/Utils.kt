@@ -24,10 +24,10 @@ import java.util.*
 class Utils {
     companion object{
         @RequiresApi(Build.VERSION_CODES.O)
-        fun formatToLocalDate(ourDate: String) : String
+        fun formatToLocalDate(ourDate: String,formatDate : String = "HH:mm MM-dd-yyyy") : String
                 = try {
             val value: Date = Date.from(Instant.parse(ourDate))
-            val dateFormatter = SimpleDateFormat("HH:mm MM-dd-yyyy") //this format changeable
+            val dateFormatter = SimpleDateFormat(formatDate) //this format changeable
             dateFormatter.timeZone = TimeZone.getDefault()
             dateFormatter.format(value)
             //Log.d("ourDate", ourDate);
@@ -35,12 +35,15 @@ class Utils {
             "00-00-0000 00:00"
         }
 
+        fun getDateFromString(date : String) : Date
+            = Date.from(Instant.parse(date))
+
         fun formatMoneyVND(amount : Int) : String
                 = "%,d đ".format(amount)
 
 
         @SuppressLint("SimpleDateFormat")
-        fun createSingleDatePicker(title : String,listener : (String) -> Unit,formatDate : String = "dd/MM/yyyy") : MaterialDatePicker<Long> {
+        fun createSingleDatePicker(title : String,listener : (String,Date) -> Unit,formatDate : String = "dd/MM/yyyy") : MaterialDatePicker<Long> {
             val dayPicker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText(title)
                 .setCalendarConstraints(
@@ -53,7 +56,7 @@ class Utils {
                 calendar.timeInMillis = it
                 val format = SimpleDateFormat(formatDate)
                 val formattedDate: String = format.format(calendar.time)
-                listener(formattedDate)
+                listener(formattedDate,calendar.time)
             }
 
             return dayPicker
@@ -130,6 +133,15 @@ class Utils {
                 else -> 0
             }
 
+        fun getIndexTimeSpa(time: String)
+                = when(time){
+            "08:00:00" -> 0
+            "10:00:00" -> 1
+            "15:00:00" -> 2
+            "17:00:00" -> 3
+            else -> 0
+        }
+
 
         fun checkEditText(et : EditText) : Boolean{
             return if(et.text.isBlank()){
@@ -150,5 +162,13 @@ class Utils {
                 true
             }
         }
+
+        fun formatStandardTimeString(date : Date,time : String) : String{
+            val format = SimpleDateFormat("yyyy-MM-dd")
+            val formattedDate: String = format.format(date)
+            return "${formattedDate}T${time}"
+        }
+
+
     }
 }

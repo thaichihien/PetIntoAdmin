@@ -3,14 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingVertical="16dp"
+    android:layout_marginVertical="6dp"
+    android:background="@color/white"
+    android:id="@+id/layoutBooking"
+    >
 
     <TextView
         android:id="@+id/tvBookingType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
         android:text="TextView"
         android:textColor="@color/main_dark"
         android:textSize="16dp"
@@ -42,12 +46,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Type: "
+        android:text="Genre: "
         app:layout_constraintStart_toStartOf="@+id/pet_info_title"
         app:layout_constraintTop_toBottomOf="@+id/pet_info_title" />
 
     <TextView
-        android:id="@+id/tvPetType"
+        android:id="@+id/tvPetGenre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -80,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Service:"
+        android:text="Type :"
         app:layout_constraintStart_toStartOf="@+id/tvBookingType"
         app:layout_constraintTop_toBottomOf="@+id/tvBookingType" />
 
@@ -118,17 +122,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:text="Variety: "
+        android:text="Status: "
         app:layout_constraintBottom_toBottomOf="@+id/pet_type_title"
-        app:layout_constraintStart_toEndOf="@+id/tvPetType"
+        app:layout_constraintStart_toEndOf="@+id/tvPetGenre"
         app:layout_constraintTop_toTopOf="@+id/pet_type_title" />
 
     <TextView
-        android:id="@+id/tvBookingVariety"
+        android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textStyle="bold"
+        android:textColor="@color/red"
         app:layout_constraintBottom_toBottomOf="@+id/booking_variety_title"
         app:layout_constraintStart_toEndOf="@+id/booking_variety_title"
         app:layout_constraintTop_toTopOf="@+id/booking_variety_title" />

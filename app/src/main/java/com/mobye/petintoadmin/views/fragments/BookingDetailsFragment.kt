@@ -38,20 +38,11 @@ class BookingDetailsFragment : BaseFragment<FragmentBookingDetailsBinding>() {
         AdminViewModelFactory(BookingRepository())
     }
 
-    private val loadingDialog : AlertDialog by lazy {
-        val activity = requireActivity() as MainActivity
-        activity.loadingDialog
-    }
-    val notiDialog : Dialog by lazy {
-        Dialog(requireContext()).apply {
-            setCancelable(true)
-            requestWindowFeature(Window.FEATURE_NO_TITLE)
-            setContentView(R.layout.notification_dialog)
-            findViewById<Button>(R.id.btnClose).setOnClickListener{
-                this.dismiss()
-            }
-        }
-    }
+    private var isHotel = true
+    private lateinit var typeAdapter : ArrayAdapter<String>
+
+    private val loadingDialog : AlertDialog by lazy {(activity as MainActivity).loadingDialog}
+    private val notiDialog : Dialog by lazy { Utils.createNotificationDialog(requireContext())}
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentBookingDetailsBinding
         get() = FragmentBookingDetailsBinding::inflate
@@ -63,22 +54,17 @@ class BookingDetailsFragment : BaseFragment<FragmentBookingDetailsBinding>() {
         val statusAdapter = ArrayAdapter<String>(
             requireActivity().baseContext,
             android.R.layout.simple_spinner_dropdown_item,
-            Constants.orderStatus
+            Constants.statusBooking
         )
 
-        val typeAdapter = ArrayAdapter<String>(
+        val timeAdapterSpa = ArrayAdapter(
             requireActivity().baseContext,
             android.R.layout.simple_spinner_dropdown_item,
-            Constants.orderStatus
+            Constants.timeSpa
         )
 
-        val serviceAdapter = ArrayAdapter<String>(
-            requireActivity().baseContext,
-            android.R.layout.simple_spinner_dropdown_item,
-            Constants.orderStatus
-        )
 
-        fillFields()
+
 
         val warningDeleteDialog = requireActivity().let {
             val builder = AlertDialog.Builder(it)
@@ -108,35 +94,67 @@ class BookingDetailsFragment : BaseFragment<FragmentBookingDetailsBinding>() {
             btnBackDetail.setOnClickListener {
                 findNavController().popBackStack()
             }
-            statusBookingSpinner.adapter = statusAdapter
-            typeBookingSpinner.adapter = typeAdapter
-            serviceBookingSpinner.adapter = serviceAdapter
+            spTime.apply {
+                adapter = timeAdapterSpa
+            }
+
+            statusBookingSpinner.apply {
+                adapter = statusAdapter
+            }
+
         }
+
+        fillFields()
     }
 
     private fun fillFields() {
         with(binding){
             val booking = args.currentBooking
 
-            etBookingCheckIn.setText(booking.checkIn.toString().trim())
-            etOwnerName.setText(booking.customerName)
-            etOwnerPhone.setText(booking.phone)
+            tvService.text = booking.service
+            etCustomerName.setText(booking.customerName)
+            etPhone.setText(booking.phone)
             etPetName.setText(booking.petName)
-            etPetGender.setText(booking.genre)
-            etPetWeight.setText(booking.weight)
+            etGenre.setText(booking.genre)
+            etWeight.setText(booking.weight)
+            etCharge.setText(booking.charge.toString())
             statusBookingSpinner.setSelection(Utils.getIndexBookingStatus(booking.status))
 
             if(booking.service == "Spa"){
-                tvBookingCheckOut.visibility = View.GONE
-                etBookingCheckOut.visibility = View.GONE
-                serviceBookingSpinner.setSelection(Utils.getIndexService(booking.service))
+                isHotel =false
+                layoutCheckOut.visibility = View.GONE
+                layoutTime.visibility = View.VISIBLE
+                typeAdapter = ArrayAdapter(
+                    requireActivity().baseContext,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    Constants.typeBookingSpa
+                )
+                typeBookingSpinner.adapter = typeAdapter
                 typeBookingSpinner.setSelection(Utils.getIndexBookingTypeSpa(booking.type))
+                bookingViewModel.checkIn = Utils.getDateFromString(booking.checkIn)
+                etCheckIn.setText(Utils.formatToLocalDate(booking.checkIn,"dd/MM/yyyy"))
+
+
+                spTime.setSelection(Utils.getIndexTimeSpa(booking.checkIn.substringAfter('T')))
             }
             else{
-                etBookingCheckOut.setText(booking.checkOut)
-                serviceBookingSpinner.setSelection(Utils.getIndexService(booking.service))
+                isHotel = true
+                layoutCheckOut.visibility = View.VISIBLE
+                layoutTime.visibility = View.GONE
+                typeAdapter = ArrayAdapter(
+                    requireActivity().baseContext,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    Constants.typeBookingHotel
+                )
+                typeBookingSpinner.adapter = typeAdapter
                 typeBookingSpinner.setSelection(Utils.getIndexBookingTypeHotel(booking.type))
+                bookingViewModel.checkIn = Utils.getDateFromString(booking.checkIn)
+                etCheckIn.setText(Utils.formatToLocalDate(booking.checkIn,"dd/MM/yyyy"))
+                bookingViewModel.checkOut = Utils.getDateFromString(booking.checkOut)
+                etCheckOut.setText(Utils.formatToLocalDate(booking.checkOut,"dd/MM/yyyy"))
             }
+
+
 
         }
     }
@@ -153,45 +171,50 @@ class BookingDetailsFragment : BaseFragment<FragmentBookingDetailsBinding>() {
 
 
     private fun validated(): Boolean = with(binding){
-        return checkEditText(etBookingCheckIn) &&
-                checkEditText(etOwnerName) && checkEditText(etOwnerPhone) &&
-                checkEditText(etPetName) && checkEditText(etPetGender) &&
-                checkEditText(etPetWeight)
+        val validatedFields = checkEditText(etCharge) &&
+                checkEditText(etCustomerName) && checkEditText(etGenre) &&
+                checkEditText(etPetName) && checkEditText(etPhone) && checkEditText(etWeight)
+
+        val validateDate = if(isHotel){
+            checkEditText(etCheckIn) && checkEditText(etCheckOut)
+        }else{
+            checkEditText(etCheckIn)
+        }
+
+        return validatedFields && validateDate
     }
 
     private fun sendDeleteBooking() {
         loadingDialog.show()
-        with(binding) {
-            val deletedBooking = Booking(
-                id = idEdt.text.toString()
-            )
+        val deletedBooking = Booking(
+            id = args.currentBooking.id
+        )
 
-            bookingViewModel.deleteBooking(deletedBooking)
+        bookingViewModel.deleteBooking(deletedBooking)
 
-            bookingViewModel.response.observe(viewLifecycleOwner){
-                loadingDialog.dismiss()
-                if(it.result){
-                    notiDialog.changeToSuccess(it.reason)
-                    notiDialog.setOnDismissListener{
-                        findNavController().popBackStack()  //quay về
-                    }
-                    notiDialog.setOnCancelListener {
-                        findNavController().popBackStack() //quay về
-                    }
-                    notiDialog.show()
-
-
+        bookingViewModel.response.observe(viewLifecycleOwner){
+            loadingDialog.dismiss()
+            if(it.result){
+                notiDialog.changeToSuccess(it.reason)
+                notiDialog.setOnDismissListener{
+                    findNavController().popBackStack()  //quay về
                 }
-                else{
-                    notiDialog.changeToFail(it.reason)
-                    notiDialog.setOnDismissListener{
-                        //nothing
-                    }
-                    notiDialog.setOnCancelListener {
-                        //nothing
-                    }
-                    notiDialog.show()
+                notiDialog.setOnCancelListener {
+                    findNavController().popBackStack() //quay về
                 }
+                notiDialog.show()
+
+
+            }
+            else{
+                notiDialog.changeToFail(it.reason)
+                notiDialog.setOnDismissListener{
+                    //nothing
+                }
+                notiDialog.setOnCancelListener {
+                    //nothing
+                }
+                notiDialog.show()
             }
         }
     }
@@ -199,18 +222,32 @@ class BookingDetailsFragment : BaseFragment<FragmentBookingDetailsBinding>() {
     private fun sendUpdateBooking() {
         loadingDialog.show()
         with(binding) {
-            val updatedBooking = Booking(
-                id = idEdt.text.toString().trim(),
-                checkIn = etBookingCheckIn.text.toString().trim(),
-                service = serviceBookingSpinner.selectedItem.toString(),
-                type = typeBookingSpinner.selectedItem.toString(),
-                customerName = etOwnerName.text.toString().trim(),
-                phone = etOwnerPhone.text.toString().trim(),
-                petName = etPetName.text.toString().trim(),
-                genre = etPetGender.text.toString().trim(),
-                weight = etPetWeight.text.toString().trim(),
-                status = statusBookingSpinner.selectedItem.toString()
+                val updatedBooking  = Booking(
+                    id = args.currentBooking.id,
+                    customerName = etCustomerName.text.toString().trim(),
+                    phone = etPhone.text.toString().trim(),
+                    petName = etPetName.text.toString().trim(),
+                    genre = etGenre.text.toString().trim(),
+                    weight = etWeight.text.toString().trim(),
+                    charge = etCharge.text.toString().toInt(),
+                    status = statusBookingSpinner.selectedItem.toString(),
+                    type = typeBookingSpinner.selectedItem.toString(),
+                    service = args.currentBooking.service
             )
+
+            if(isHotel){
+                updatedBooking.apply {
+                    checkIn = Utils.formatStandardTimeString(bookingViewModel.checkIn, "00:00:00")
+                    checkOut = Utils.formatStandardTimeString(bookingViewModel.checkOut, "00:00:00")
+                }
+            }else{
+                updatedBooking.apply {
+                    checkIn = Utils.formatStandardTimeString(bookingViewModel.checkIn,
+                        spTime.selectedItem.toString()
+                    )
+                }
+            }
+
 
             bookingViewModel.updateBooking(updatedBooking)
 

@@ -29,17 +29,19 @@ class BookingPagingAdapter(
 
     }
 
-    //lớp ViewHolder dùng để set giá trị từ item vào UI
+
     inner class  BookingViewHolder() : RecyclerView.ViewHolder(binding.root) {
         fun setData(item : Booking){
             binding.apply {
-                tvBookingType.text = item.type
-                tvBookingService.text = item.service
-                tvBookingDate.text = item.checkIn
-                tvCustomerInfo.text = item.customerName
+                tvBookingType.text = item.service
+                tvBookingService.text = item.type
+                tvBookingDate.text = Utils.formatToLocalDate(item.checkIn)
+                tvCustomerInfo.text = "${item.customerName} | ${item.phone}"
                 tvPetInformation.text = item.petName
+                tvPetGenre.text = item.genre
+                tvStatus.text = item.status
 
-                tvBookingType.setOnClickListener {
+                layoutBooking.setOnClickListener {
                     detailListener(item)
                 }
             }
@@ -58,7 +60,7 @@ class BookingPagingAdapter(
 
     }
 
-    //hàm tạo view holder, thay đổi kiểu biến cho phù hợp
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookingViewHolder {
         binding = ItemBookingBinding.inflate(
             LayoutInflater.from(parent.context),parent,false

@@ -78,7 +78,8 @@
                     android:id="@+id/serviceSpinnerBtn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="310dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="16dp"
                     android:elevation="50dp"
                     android:padding="5dp"
@@ -86,14 +87,11 @@
 
                 <Spinner
                     android:id="@+id/serviceBookingSpinner"
-                    android:layout_width="200dp"
-                    android:layout_height="42dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
+                    android:layout_width="230dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="95dp"
                     android:layout_marginEnd="5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginVertical="10dp"
                     android:background="@color/white"
                     android:elevation="5dp"/>
 
@@ -107,15 +105,15 @@
 
                 <TextView
                     android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="PetName :"
+                    android:text="Pet Name :"
                     android:textSize="18dp"
                     android:textStyle="bold"/>
 
                 <EditText
                     android:id="@+id/etPetName"
-                    android:layout_width="260dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:ems="10"/>
@@ -128,20 +126,21 @@
                 android:orientation="horizontal"
                 android:paddingHorizontal="30dp">
                 <TextView
+                    android:id="@+id/lbGenre"
                     android:layout_centerVertical="true"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Gender :"
-                    android:textSize="18dp"
+                    android:text="Genre :"
+                    android:textSize="18sp"
                     android:textStyle="bold"/>
+
                 <EditText
-                    android:id="@+id/etGender"
-                    android:layout_width="260dp"
+                    android:id="@+id/etGenre"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:ems="10"
-                    android:scrollHorizontally="true"
-                    android:inputType="textLongMessage"/>
+                    android:ems="10"/>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -158,12 +157,12 @@
                     android:textStyle="bold"/>
                 <EditText
                     android:id="@+id/etWeight"
-                    android:layout_width="260dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:ems="10"
                     android:scrollHorizontally="true"
-                    android:inputType="textLongMessage"/>
+                    android:inputType="numberDecimal"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -180,7 +179,7 @@
                     android:textStyle="bold"/>
                 <EditText
                     android:id="@+id/etCustomerName"
-                    android:layout_width="260dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:ems="10"
@@ -202,12 +201,12 @@
                     android:textStyle="bold"/>
                 <EditText
                     android:id="@+id/etPhone"
-                    android:layout_width="260dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:ems="10"
                     android:scrollHorizontally="true"
-                    android:inputType="textLongMessage"/>
+                    android:inputType="number"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -224,7 +223,7 @@
                     android:textStyle="bold"/>
                 <EditText
                     android:id="@+id/etCharge"
-                    android:layout_width="260dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:ems="10"
@@ -246,10 +245,12 @@
                     android:textStyle="bold"/>
 
                 <ImageView
+
                     android:id="@+id/typeSpinnerBtn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="310dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="16dp"
                     android:elevation="50dp"
                     android:padding="5dp"
@@ -257,24 +258,14 @@
 
                 <Spinner
                     android:id="@+id/typeBookingSpinner"
-                    android:layout_width="200dp"
-                    android:layout_height="42dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
+                    android:layout_width="230dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="95dp"
                     android:layout_marginEnd="5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginVertical="10dp"
                     android:background="@color/white"
                     android:elevation="5dp"/>
-<!--                <EditText-->
-<!--                    android:id="@+id/etService"-->
-<!--                    android:layout_width="260dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:ems="10"-->
-<!--                    android:scrollHorizontally="true"-->
-<!--                    android:inputType="textLongMessage"/>-->
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -291,15 +282,16 @@
                     android:textStyle="bold"/>
                 <EditText
                     android:id="@+id/etCheckIn"
-                    android:layout_width="260dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:ems="10"
                     android:scrollHorizontally="true"
-                    android:inputType="date"/>
+                    android:inputType="none"/>
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/layoutCheckOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -314,12 +306,51 @@
                     android:textStyle="bold"/>
                 <EditText
                     android:id="@+id/etCheckOut"
-                    android:layout_width="260dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:ems="10"
                     android:scrollHorizontally="true"
-                    android:inputType="date"/>
+                    android:inputType="none"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutTime"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+                <TextView
+                    android:id="@+id/lbTime"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time :"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+                <ImageView
+                    android:id="@+id/spTimeBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="16dp"
+                    android:elevation="50dp"
+                    android:padding="5dp"
+                    android:src="@drawable/dropdown_icon" />
+
+                <Spinner
+                    android:id="@+id/spTime"
+                    android:layout_width="230dp"
+                    android:layout_height="40dp"
+
+                    android:layout_alignParentEnd="true"
+
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@color/white"
+                    android:elevation="5dp"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -339,26 +370,24 @@
 
                 <ImageView
                     android:id="@+id/servicesSpinnerBtn"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_alignTop="@+id/spBookingStatus"
-                    android:layout_alignEnd="@+id/spBookingStatus"
-                    android:layout_alignBottom="@+id/spBookingStatus"
-                    android:layout_marginStart="164dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="16dp"
                     android:elevation="50dp"
                     android:padding="5dp"
-                    android:src="@drawable/dropdown_icon" />
+                    android:src="@drawable/dropdown_icon"/>
 
                 <Spinner
                     android:id="@+id/spBookingStatus"
-                    android:layout_width="250dp"
-                    android:layout_height="45dp"
+                    android:layout_width="230dp"
+                    android:layout_height="40dp"
+
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginEnd="6dp"
-                    android:layout_marginBottom="6dp"
+
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginVertical="10dp"
                     android:background="@color/white"
                     android:elevation="5dp" />
 

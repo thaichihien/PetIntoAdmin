@@ -1,60 +1,88 @@
 package com.mobye.petintoadmin.views.fragments
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
 import com.mobye.petintoadmin.R
+import com.mobye.petintoadmin.databinding.FragmentLoginBinding
+import com.mobye.petintoadmin.utils.Utils
+import com.mobye.petintoadmin.views.MainActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val firebaseAuth : FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+
+    private val loadingDialog : AlertDialog by lazy {(activity as MainActivity).loadingDialog}
+
+    override fun setup() {
+
+        binding.apply {
+            btnSignIn.setOnClickListener {
+                if(validate()){
+                    login()
+                }
+            }
         }
+
+
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
-    }
+    private fun login() {
+        val email = binding.etEmail.text.toString().trim()
+        val password = binding.etPassword.text.toString().trim()
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LoginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoginFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
+        firebaseAuth.signInWithEmailAndPassword(email,password)
+            .addOnCompleteListener(requireActivity()){task ->
+                if(task.isSuccessful){
+                    loadingDialog.dismiss()
+                    goToMainActivity()
+                }else{
+                    // TODO show error
+                    Log.e("SignIn",task.exception.toString())
                 }
             }
     }
+
+    private fun validate(): Boolean {
+        var isValidated = true
+        if(binding.etEmail.text.isBlank()){
+            binding.etEmail.error = "Please fill in a email"
+            isValidated = false
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(binding.etEmail.text).matches()){
+            binding.etEmail.error = "Please fill in a valid email"
+            isValidated = false
+        }else{
+            binding.etEmail.error = null
+        }
+
+
+        if(binding.etPassword.text!!.isBlank()){
+            binding.etPassword.error = "Please fill in a name"
+            isValidated =false
+        }else{
+            binding.etPassword.error = null
+        }
+
+        return isValidated
+    }
+
+    private fun goToMainActivity(){
+        val gotoMainIntent = Intent(this@LoginFragment.requireContext(), MainActivity::class.java)
+        gotoMainIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(gotoMainIntent)
+    }
+
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding
+        get() = FragmentLoginBinding::inflate
+
 }

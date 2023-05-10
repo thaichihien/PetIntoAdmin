@@ -19,6 +19,10 @@ class Constants {
             "Hair cut", "Nail cut", "Bath", "Massage"
         )
 
+        val timeSpa : List<String> = listOf(
+            "08:00:00", "10:00:00", "15:00:00", "17:00:00"
+        )
+
         val statusBooking : List<String> = listOf(
             "Waiting for reply", "Accepted",
             "Unaccepted", "Cancelled", "Done"
