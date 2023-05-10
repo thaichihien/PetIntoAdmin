@@ -45,18 +45,9 @@ class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBindin
     private val loadingDialog : AlertDialog by lazy { Utils.getLoadingDialog(requireActivity()) }
     private val notiDialog : Dialog by lazy { Utils.createNotificationDialog(requireContext()) }
     private val warningDeleteDialog : AlertDialog by lazy {
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.apply {
-            setMessage("Do you really want to delete this order?")
-            setTitle("Delete")
-            setPositiveButton("Yes") { _, _ ->
-                sendDeleteOrder()
-            }
-            setNegativeButton("No") { _, _ ->
-                //nothing
-            }
+        Utils.createConfirmDialog(requireContext(),"Delete","Delete this order ?") {
+            sendDeleteOrder()
         }
-        builder.create()
     }
 
 

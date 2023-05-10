@@ -60,7 +60,7 @@ interface AdminApi {
     ) : ApiResponse<Any>
 
     //Booking
-    @GET("/admin/pet/get")
+    @GET("/admin/booking/get")
     suspend fun getBooking(
         @Query("page") page : Int,
         @Query("from") from : String = "",
@@ -68,17 +68,17 @@ interface AdminApi {
         @Query("status") status : String = ""
     ) : ApiResponse<List<Booking>>
 
-    @POST("/admin/pet/create")
+    @POST("/admin/booking/create")
     suspend fun createBooking(
         @Body booking: Booking
     ) : ApiResponse<Booking>
 
-    @POST("/admin/pet/update")
+    @POST("/admin/booking/update")
     suspend fun updateBooking(
         @Body booking: Booking
     ) : ApiResponse<Any>
 
-    @POST("/admin/pet/delete")
+    @POST("/admin/booking/delete")
     suspend fun deleteBooking(
         @Body booking: Booking
     ) : ApiResponse<Any>

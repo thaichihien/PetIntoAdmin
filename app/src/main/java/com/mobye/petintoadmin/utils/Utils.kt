@@ -2,6 +2,7 @@ package com.mobye.petintoadmin.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Build
@@ -41,7 +42,7 @@ class Utils {
         @SuppressLint("SimpleDateFormat")
         fun createSingleDatePicker(title : String,listener : (String) -> Unit,formatDate : String = "dd/MM/yyyy") : MaterialDatePicker<Long> {
             val dayPicker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select a date")
+                .setTitleText(title)
                 .setCalendarConstraints(
                     CalendarConstraints.Builder().setValidator(
                         DateValidatorPointForward.now()).build())
@@ -69,6 +70,21 @@ class Utils {
             findViewById<Button>(R.id.btnClose).setOnClickListener{
                 this.dismiss()
             }
+        }
+
+        fun createConfirmDialog(context : Context,title : String,message : String,listener : () -> Unit) : AlertDialog {
+            val builder = AlertDialog.Builder(context)
+            builder.apply {
+                setMessage(message)
+                setTitle(title)
+                setPositiveButton("Yes") { _, _ ->
+                    listener()
+                }
+                setNegativeButton("No") { _, _ ->
+                    //nothing
+                }
+            }
+            return builder.create()
         }
 
 
