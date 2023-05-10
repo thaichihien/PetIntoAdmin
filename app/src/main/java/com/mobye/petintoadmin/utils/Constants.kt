@@ -7,6 +7,22 @@ class Constants {
             "Delivered","Cancelled"
         )
 
+        val serviceBooking : List<String> = listOf(
+            "Hotel", "Spa"
+        )
+
+        val typeBookingHotel : List<String> = listOf(
+            "vip", "normal"
+        )
+
+        val typeBookingSpa : List<String> = listOf(
+            "Hair cut", "Nail cut", "Bath", "Massage"
+        )
+
+        val statusBooking : List<String> = listOf(
+            "Waiting for reply", "Accepted",
+            "Unaccepted", "Cancelled", "Done"
+        )
 
     }
 
