@@ -12,6 +12,7 @@ import com.mobye.petintoadmin.repositories.BookingRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
+import java.util.*
 
 class BookingViewModel(
     private val repository: BookingRepository
@@ -36,6 +37,9 @@ class BookingViewModel(
     fun searchBooking(query : String){
         searchQuery.value = query
     }
+
+    var checkIn : Date = Date()
+    var checkOut = Date()
 
 
     //Tạo

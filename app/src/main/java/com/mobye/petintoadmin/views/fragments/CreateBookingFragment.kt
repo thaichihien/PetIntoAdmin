@@ -32,6 +32,8 @@ import com.mobye.petintoadmin.viewmodels.ProductViewModel
 import com.mobye.petintoadmin.views.MainActivity
 import com.mobye.petintoadmin.views.changeToFail
 import com.mobye.petintoadmin.views.changeToSuccess
+import java.text.SimpleDateFormat
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -98,11 +100,17 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
             Constants.typeBookingSpa
         )
 
+        val format1 = SimpleDateFormat("yyyy-MM-dd")
+        val format2 = SimpleDateFormat()
+        val formattedDateCheckInHotel: String = format1.format(bookingViewModel.checkIn)
+        val dateCheckInHotel = "$formattedDateCheckInHotel"
+
         binding.apply {
             checkInPicker = Utils.createSingleDatePicker("Check in", {
+                calendar.timeInMillis = it
                 checkInPicked = it
                 etCheckIn.setText(it)
-            }, "MM/dd/yyyy")
+            }, formattedDate)
 
             checkOutPicker = Utils.createSingleDatePicker("Check out", {
                 checkOutPicked = it
@@ -135,6 +143,10 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
 
             etCheckIn.setOnClickListener{
                 checkInPicker!!.show(parentFragmentManager, "DAY_PICKER")
+            }
+
+            etCheckOut.setOnClickListener{
+                checkOutPicker!!.show(parentFragmentManager, "DAY_PICKER")
             }
 
 
