@@ -8,10 +8,10 @@ import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.network.RetrofitInstance
 
 class PetPagingSource(
-    private val query : String          //câu truy vấn tìm kiếm sản phẩm
-) : PagingSource<Int, Pet>() {      // <chỉ số là số nguyên nên Int, kiểu dữ liệu muốn lấy>
+    private val query : String
+) : PagingSource<Int, Pet>() {
     companion object{
-        const val FIRST_PAGE = 1        // bắt đầu từ trang 1
+        const val FIRST_PAGE = 1
     }
 
     //copy y hệt
@@ -21,10 +21,10 @@ class PetPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pet> {
         return try {
-            val nextPage = params.key ?: FIRST_PAGE //lấy chỉ số trang
-            val response = RetrofitInstance.api.getPet(nextPage,query)  // gọi hàm API lấy dữ liệu tương ứng
+            val nextPage = params.key ?: FIRST_PAGE
+            val response = RetrofitInstance.api.getPet(nextPage,query)
 
-            //copy y hệt
+
             LoadResult.Page(
                 data = response.body!!,
                 prevKey = if(nextPage == FIRST_PAGE) null else nextPage - 1,
@@ -32,7 +32,7 @@ class PetPagingSource(
             )
 
         }catch (e: Exception){
-            Log.e("PetPagingSource",e.toString())   // thay đổi tag để debug
+            Log.e("PetPagingSource",e.toString())
             LoadResult.Error(e)
         }
     }

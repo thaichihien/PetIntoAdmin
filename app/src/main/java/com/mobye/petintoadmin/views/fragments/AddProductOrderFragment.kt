@@ -90,10 +90,8 @@ class AddProductOrderFragment : BaseFragment<FragmentAddProductOrderBinding>() {
 
         binding.apply {
             rvProduct.apply {
-                rvProduct.apply {
-                    layoutManager = LinearLayoutManager(requireContext())
-                    adapter = productAdapter
-                }
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = productAdapter
             }
             btnBackDetail.setOnClickListener {
                 findNavController().popBackStack()

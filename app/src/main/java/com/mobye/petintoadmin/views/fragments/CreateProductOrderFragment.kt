@@ -70,6 +70,32 @@ class CreateProductOrderFragment : BaseFragment<FragmentCreateProductOrderBindin
             productAdapter.differ.submitList(it)
         }
 
+
+//
+//        val fromPicker = Utils.createSingleDatePicker("Pick start day",{
+//            // trả về String với dạng "dd/MM/yyyy"
+//            //lưu trữ string này vào biến from trong view model
+//            //hoặc một biến nào đó
+//            //khi nhấn nút search thì sử dụng biến này để tìm dữ liệu
+//
+//            etDay.setText(it)
+//        },"MM/dd/yyyy")
+//
+//
+//        binding.apply {
+//            etDay.setOnClickListener{
+//                fromPicker.show(parentFragmentManager,"DAY_PICKER")
+//            }
+//        }
+
+
+
+
+
+
+
+
+
         binding.apply {
             rvProductOrder.apply {
                 layoutManager = LinearLayoutManager(requireContext())
@@ -93,6 +119,9 @@ class CreateProductOrderFragment : BaseFragment<FragmentCreateProductOrderBindin
                     sendCreateOrder()
                 }
             }
+
+
+
         }
     }
 

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.mobye.petintoadmin.R
+import com.mobye.petintoadmin.adapters.PetPagingAdapter
 import com.mobye.petintoadmin.adapters.ProductItemAdapter
 import com.mobye.petintoadmin.databinding.FragmentCreatePetOrderBinding
 import com.mobye.petintoadmin.models.Order
@@ -72,8 +73,8 @@ class CreatePetOrderFragment : BaseFragment<FragmentCreatePetOrderBinding>() {
                 setSelection(0)
             }
             btnAddPet.setOnClickListener {
-
-
+                orderViewModel.selectedPet.value = null
+                findNavController().navigate(CreatePetOrderFragmentDirections.actionCreatePetOrderFragmentToAddPetOrderFragment())
             }
             btnCreate.setOnClickListener {
                 if(validate()){

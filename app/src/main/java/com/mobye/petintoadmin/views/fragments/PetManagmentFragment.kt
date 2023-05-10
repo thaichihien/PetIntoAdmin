@@ -31,10 +31,7 @@ class PetManagmentFragment : BaseFragment<FragmentPetManagmentBinding>() {
     override fun setup() {
         (requireActivity() as MainActivity).showNav()
 
-
-        //adapter phân trang
         petAdapter = PetPagingAdapter {
-            //khi nhấn vào item -> di chuyển đến detail
             findNavController().navigate(PetManagmentFragmentDirections.actionPetManagmentFragmentToPetDetailsFragment(it))
         }
 

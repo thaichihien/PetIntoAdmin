@@ -249,6 +249,9 @@ class OrderViewModel(
         }
     }
 
+    fun addPetToOrder(){
+        previousSelectedPet.value = selectedPet.value
+    }
 
 
 }
