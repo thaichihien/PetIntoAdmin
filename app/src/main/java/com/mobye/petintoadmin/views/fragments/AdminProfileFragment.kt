@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -19,6 +20,7 @@ import com.mobye.petintoadmin.utils.Utils
 import com.mobye.petintoadmin.viewmodels.AdminViewModelFactory
 import com.mobye.petintoadmin.viewmodels.ProfileViewModel
 import com.mobye.petintoadmin.views.AuthenticationActivity
+import com.mobye.petintoadmin.views.MainActivity
 
 
 class AdminProfileFragment : BaseFragment<FragmentAdminProfileBinding>() {
@@ -38,6 +40,8 @@ class AdminProfileFragment : BaseFragment<FragmentAdminProfileBinding>() {
 
     override fun setup() {
 
+        (requireActivity() as MainActivity).showNav()
+
         profileViewModel.admin.observe(viewLifecycleOwner){
             binding.tvAdminName.text = it.name
         }
@@ -45,6 +49,9 @@ class AdminProfileFragment : BaseFragment<FragmentAdminProfileBinding>() {
         binding.apply {
             btnLogout.setOnClickListener {
                 warningLogoutDialog.show()
+            }
+            btnViewReports.setOnClickListener {
+                findNavController().navigate(AdminProfileFragmentDirections.actionAdminProfileFragmentToReportManagementFragment())
             }
         }
 

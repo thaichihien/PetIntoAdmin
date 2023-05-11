@@ -9,7 +9,11 @@
         android:id="@+id/adminProfileFragment"
         android:name="com.mobye.petintoadmin.views.fragments.AdminProfileFragment"
         android:label="fragment_admin_profile"
-        tools:layout="@layout/fragment_admin_profile" />
+        tools:layout="@layout/fragment_admin_profile" >
+        <action
+            android:id="@+id/action_adminProfileFragment_to_reportManagementFragment"
+            app:destination="@id/reportManagementFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productManagementFragment"
         android:name="com.mobye.petintoadmin.views.fragments.ProductManagementFragment"
@@ -148,5 +152,23 @@
         <argument
             android:name="currentOrder"
             app:argType="com.mobye.petintoadmin.models.Order" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportManagementFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.ReportManagementFragment"
+        android:label="fragment_report_management"
+        tools:layout="@layout/fragment_report_management" >
+        <action
+            android:id="@+id/action_reportManagementFragment_to_reportDetailFragment"
+            app:destination="@id/reportDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportDetailFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.ReportDetailFragment"
+        android:label="fragment_report_detail"
+        tools:layout="@layout/fragment_report_detail" >
+        <argument
+            android:name="currentReport"
+            app:argType="com.mobye.petintoadmin.models.Report" />
     </fragment>
 </navigation>

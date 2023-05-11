@@ -149,5 +149,13 @@ interface AdminApi {
         @Body token : Map<String, String>
     ) : Response<ApiResponse<Admin>>
 
+    @GET("/admin/report/get")
+    suspend fun getReport(
+        @Query("page") page : Int
+    ) : ApiResponse<List<Report>>
 
+    @GET("/admin/report/delete")
+    suspend fun deleteReport(
+        @Query("id") id : String
+    ) : ApiResponse<Any>
 }

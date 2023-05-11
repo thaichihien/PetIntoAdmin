@@ -4,9 +4,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.mobye.petintoadmin.models.Admin
 import com.mobye.petintoadmin.models.apimodels.ApiResponse
 import com.mobye.petintoadmin.repositories.ProfileRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
 
@@ -15,6 +18,10 @@ class ProfileViewModel(
 ) : ViewModel(){
 
     private val TAG = "ProfileViewModel"
+
+    private var _response : MutableLiveData<ApiResponse<*>> = MutableLiveData()
+    val response get() = _response
+
     val admin : MutableLiveData<Admin> by lazy { MutableLiveData() }
     val responseAPI : MutableLiveData<ApiResponse<Any>> by lazy { MutableLiveData() }
 
@@ -52,5 +59,21 @@ class ProfileViewModel(
 
     }
 
+    private val dumb : MutableStateFlow<String> by lazy { MutableStateFlow("") }
+
+    val reportList = dumb.flatMapLatest {
+        repository.getReportSource().cachedIn(viewModelScope)
+    }
+
+
+    fun deleteReport(id : String){
+        try {
+            viewModelScope.launch {
+                _response.value = repository.deleteReport(id)
+            }
+        }catch (ex : Exception){
+            Log.e(TAG,ex.toString())
+        }
+    }
 
 }

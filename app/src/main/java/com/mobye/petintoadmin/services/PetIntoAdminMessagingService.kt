@@ -3,16 +3,20 @@ package com.mobye.petintoadmin.services
 import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.navigation.NavDeepLinkBuilder
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.mobye.petintoadmin.R
+import com.mobye.petintoadmin.views.MainActivity
 
 class PetIntoAdminMessagingService : FirebaseMessagingService() {
 
@@ -29,8 +33,9 @@ class PetIntoAdminMessagingService : FirebaseMessagingService() {
             //Log.d(TAG, "title: ${remoteMessage.data["title"]}")
             val body = remoteMessage.data["body"]
             val title = remoteMessage.data["title"]
+            val type = remoteMessage.data["type"]
 
-            showNotification(title!!,body!!)
+            showNotification(title!!,body!!, type!!)
 
 //            if (/* Check if data needs to be processed by long running job */ true) {
 //                // For long-running tasks (10 seconds or more) use WorkManager.
@@ -42,15 +47,16 @@ class PetIntoAdminMessagingService : FirebaseMessagingService() {
         }
 
         // Check if message contains a notification payload.
-        remoteMessage.notification?.let {
-            Log.d(TAG, "Message Notification Body: ${it.body}")
-
-            val body = remoteMessage.notification!!.body
-            val title = remoteMessage.notification!!.title
-
-            showNotification(title!!,body!!)
-
-        }
+//        remoteMessage.notification?.let {
+//            Log.d(TAG, "Message Notification Body: ${it.body}")
+//
+//            val body = remoteMessage.notification!!.body
+//            val title = remoteMessage.notification!!.title
+//            val tag = remoteMessage.notification!!.tag
+//
+//            showNotification(title!!,body!!,tag!!)
+//
+//        }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
@@ -58,7 +64,7 @@ class PetIntoAdminMessagingService : FirebaseMessagingService() {
 
     }
 
-    private fun showNotification(title: String, body: String) {
+    private fun showNotification(title: String, body: String,type : String) {
         val channelID = "PetIntoChannel"
         val notificationID = 111111
 
@@ -74,6 +80,8 @@ class PetIntoAdminMessagingService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
+
+
         val builder = NotificationCompat.Builder(this,channelID)
             .setSmallIcon(R.drawable.logo)
             .setContentTitle(title)
@@ -84,6 +92,26 @@ class PetIntoAdminMessagingService : FirebaseMessagingService() {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
 
+        if(type == "REPORT"){
+//            val profileIntent = Intent(this,MainActivity::class.java)
+//            profileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//            profileIntent.putExtra("fragment","report")
+//            val pendingIntent = PendingIntent.getActivity(this,0,
+//                profileIntent,PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+
+            val pendingIntent = NavDeepLinkBuilder(this)
+                .setGraph(R.navigation.nav_graph)
+                .setDestination(R.id.reportManagementFragment)
+                .setComponentName(MainActivity::class.java)
+                .createPendingIntent()
+
+
+            builder.setContentIntent(pendingIntent)
+
+
+
+        }
+
 
         with(NotificationManagerCompat.from(this)){
             if (ActivityCompat.checkSelfPermission(
@@ -91,13 +119,7 @@ class PetIntoAdminMessagingService : FirebaseMessagingService() {
                     Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+
                 Log.e(TAG,"Permission denied")
                 return
             }
