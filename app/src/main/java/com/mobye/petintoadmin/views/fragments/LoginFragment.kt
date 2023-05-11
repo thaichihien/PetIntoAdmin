@@ -14,14 +14,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.mobye.petintoadmin.R
 import com.mobye.petintoadmin.databinding.FragmentLoginBinding
 import com.mobye.petintoadmin.utils.Utils
+import com.mobye.petintoadmin.views.AuthenticationActivity
 import com.mobye.petintoadmin.views.MainActivity
+import com.mobye.petintoadmin.views.changeToFail
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private val firebaseAuth : FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    private val loadingDialog : AlertDialog by lazy {(activity as MainActivity).loadingDialog}
+    private val loadingDialog : AlertDialog by lazy {(activity as AuthenticationActivity).loadingDialog}
+    private val notiDialog : Dialog by lazy { Utils.createNotificationDialog(requireContext()) }
 
     override fun setup() {
 
@@ -37,17 +40,29 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     private fun login() {
+        loadingDialog.show()
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
 
 
         firebaseAuth.signInWithEmailAndPassword(email,password)
             .addOnCompleteListener(requireActivity()){task ->
+                loadingDialog.dismiss()
                 if(task.isSuccessful){
-                    loadingDialog.dismiss()
+
                     goToMainActivity()
                 }else{
                     // TODO show error
+                    notiDialog.changeToFail(task.exception!!.message!!)
+                    notiDialog.setOnCancelListener {
+
+                    }
+                    notiDialog.setOnDismissListener {
+
+                    }
+                    notiDialog.show()
+
+
                     Log.e("SignIn",task.exception.toString())
                 }
             }
