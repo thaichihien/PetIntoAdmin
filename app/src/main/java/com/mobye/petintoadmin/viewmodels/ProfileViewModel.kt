@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.mobye.petintoadmin.models.Admin
+import com.mobye.petintoadmin.models.Notification
 import com.mobye.petintoadmin.models.apimodels.ApiResponse
 import com.mobye.petintoadmin.repositories.ProfileRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,6 +25,8 @@ class ProfileViewModel(
 
     val admin : MutableLiveData<Admin> by lazy { MutableLiveData() }
     val responseAPI : MutableLiveData<ApiResponse<Any>> by lazy { MutableLiveData() }
+
+    val notificationList : MutableLiveData<List<Notification>> by lazy { MutableLiveData(listOf()) }
 
     fun getAdmin(id : String,token : String){
         // get user data by id from backend (id,email,name)
@@ -75,5 +78,30 @@ class ProfileViewModel(
             Log.e(TAG,ex.toString())
         }
     }
+
+    fun getNotification(){
+        viewModelScope.launch {
+            notificationList.value = repository.getAllNotification()
+        }
+    }
+
+    fun removeNotification(index : Int){
+        val notiList = notificationList.value!!.toMutableList()
+        val itemRemove = notiList.removeAt(index)
+        viewModelScope.launch{
+            repository.removeNotification(itemRemove)
+        }
+
+        notificationList.value = notiList
+    }
+
+    fun clearAllNotification(){
+        viewModelScope.launch{
+            repository.clearNotification()
+        }
+        notificationList.value = listOf()
+    }
+
+
 
 }

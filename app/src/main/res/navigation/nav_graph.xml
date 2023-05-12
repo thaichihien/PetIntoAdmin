@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_adminProfileFragment_to_reportManagementFragment"
             app:destination="@id/reportManagementFragment" />
+        <action
+            android:id="@+id/action_adminProfileFragment_to_bookingDetailsFragment"
+            app:destination="@id/bookingDetailsFragment" />
+        <action
+            android:id="@+id/action_adminProfileFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/productManagementFragment"
@@ -170,5 +176,20 @@
         <argument
             android:name="currentReport"
             app:argType="com.mobye.petintoadmin.models.Report" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" >
+        <action
+            android:id="@+id/action_notificationFragment_to_bookingManagementFragment"
+            app:destination="@id/bookingManagementFragment" />
+        <action
+            android:id="@+id/action_notificationFragment_to_reportManagementFragment"
+            app:destination="@id/reportManagementFragment" />
+        <action
+            android:id="@+id/action_notificationFragment_to_orderManagementFragment"
+            app:destination="@id/orderManagementFragment" />
     </fragment>
 </navigation>

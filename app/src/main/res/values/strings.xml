@@ -10,4 +10,5 @@
     <string name="pet">Pet</string>
     <string name="profile">Profile</string>
     <string name="success_condition">Success</string>
+    <string name="clear_all"><u>Clear all</u></string>
 </resources>

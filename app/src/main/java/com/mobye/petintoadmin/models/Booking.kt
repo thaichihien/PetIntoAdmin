@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 class Booking(
     var id : String = "",
-    var customerID : String = "",
+    var CustomerId : String = "",
     var customerName : String = "",
     var phone : String = "",
     var petName: String = "",

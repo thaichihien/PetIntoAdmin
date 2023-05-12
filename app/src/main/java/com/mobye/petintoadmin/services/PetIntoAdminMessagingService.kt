@@ -16,6 +16,9 @@ import androidx.navigation.NavDeepLinkBuilder
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.mobye.petintoadmin.R
+import com.mobye.petintoadmin.database.NotificationDatabase
+import com.mobye.petintoadmin.models.Notification
+import com.mobye.petintoadmin.utils.Utils
 import com.mobye.petintoadmin.views.MainActivity
 
 class PetIntoAdminMessagingService : FirebaseMessagingService() {
@@ -34,6 +37,13 @@ class PetIntoAdminMessagingService : FirebaseMessagingService() {
             val body = remoteMessage.data["body"]
             val title = remoteMessage.data["title"]
             val type = remoteMessage.data["type"]
+
+            val notification = Notification(
+                title!!,body!!,type!!,
+                Utils.getCurrentTimeString()
+            )
+
+            NotificationDatabase.createNotification(notification)
 
             showNotification(title!!,body!!, type!!)
 
@@ -107,9 +117,15 @@ class PetIntoAdminMessagingService : FirebaseMessagingService() {
 
 
             builder.setContentIntent(pendingIntent)
+        }else if(type == "BOOKING"){
+            val pendingIntent = NavDeepLinkBuilder(this)
+                .setGraph(R.navigation.nav_graph)
+                .setDestination(R.id.bookingManagementFragment)
+                .setComponentName(MainActivity::class.java)
+                .createPendingIntent()
 
 
-
+            builder.setContentIntent(pendingIntent)
         }
 
 

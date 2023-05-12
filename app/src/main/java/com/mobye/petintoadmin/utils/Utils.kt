@@ -35,6 +35,13 @@ class Utils {
             "00-00-0000 00:00"
         }
 
+        fun getCurrentTimeString(pattern : String ="HH:mm dd-MM-yyyy") : String{
+            val value = Calendar.getInstance().time
+            val dateFormatter = SimpleDateFormat(pattern) //this format changeable
+            dateFormatter.timeZone = TimeZone.getDefault()
+            return dateFormatter.format(value)
+        }
+
         fun getDateFromString(date : String) : Date
             = Date.from(Instant.parse(date))
 

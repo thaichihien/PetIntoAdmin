@@ -109,7 +109,8 @@ class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBindin
                 payment = etPayment.text.toString().trim(),
                 note = etNote.text.toString().trim(),
                 status = spOrderStatus.selectedItem.toString(),
-                isdelivery = if(rbYes.isChecked) "yes" else "no"
+                isdelivery = if(rbYes.isChecked) "yes" else "no",
+                CustomerId = args.currentOrder.CustomerId
             )
 
             orderViewModel.updateOrder(updatedOrder)

@@ -28,6 +28,7 @@ class BookingViewModel(
     private var toDate : String = ""
     private var statusQuery : String = ""
 
+    val scanBooking : MutableLiveData<Booking> by lazy { MutableLiveData() }
 
     //danh sách dữ liệu
     val bookingItemList = fromDate.flatMapLatest {query ->
@@ -74,6 +75,21 @@ class BookingViewModel(
         try {
             viewModelScope.launch {
                 _response.value = repository.deleteBooking(booking)
+            }
+        }catch (ex : Exception){
+            Log.e(TAG,ex.toString())
+        }
+    }
+
+    fun getDetail(id: String){
+        try {
+            viewModelScope.launch {
+                val res = repository.getDetail(id)
+                if(res.result){
+                    scanBooking.value = res.body
+                }else{
+                    scanBooking.value = Booking()
+                }
             }
         }catch (ex : Exception){
             Log.e(TAG,ex.toString())

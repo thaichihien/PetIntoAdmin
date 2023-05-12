@@ -14,7 +14,7 @@ open class Order(
     var customerName : String = "",
     var phone : String = "",
     var status : String = "",
-    var customerId : String = "",
+    var CustomerId : String = "",
     var amount : Int = 0,
     var total : Int = 0,
     var orderDate : String = "",

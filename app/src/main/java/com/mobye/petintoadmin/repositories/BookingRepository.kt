@@ -22,4 +22,7 @@ class BookingRepository : IRepository {
     //Hàm xóa
     suspend fun deleteBooking(booking: Booking)
             = RetrofitInstance.api.deleteBooking(booking)
+
+    suspend fun getDetail(id: String)
+            = RetrofitInstance.api.getBookingDetail(id)
 }

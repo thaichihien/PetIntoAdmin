@@ -2,6 +2,8 @@ package com.mobye.petintoadmin.repositories
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import com.mobye.petintoadmin.database.NotificationDatabase
+import com.mobye.petintoadmin.models.Notification
 import com.mobye.petintoadmin.network.RetrofitInstance
 
 class ProfileRepository : IRepository {
@@ -17,4 +19,15 @@ class ProfileRepository : IRepository {
 
     suspend fun deleteReport(id : String)
         = RetrofitInstance.api.deleteReport(id)
+
+
+
+    suspend fun getAllNotification()
+            = NotificationDatabase.getAllNotification()
+
+    suspend fun removeNotification(notification: Notification)
+            =  NotificationDatabase.remove(notification)
+
+    suspend fun clearNotification()
+            = NotificationDatabase.removeAll()
 }

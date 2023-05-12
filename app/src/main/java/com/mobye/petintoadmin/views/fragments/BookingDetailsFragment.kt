@@ -232,7 +232,8 @@ class BookingDetailsFragment : BaseFragment<FragmentBookingDetailsBinding>() {
                     charge = etCharge.text.toString().toInt(),
                     status = statusBookingSpinner.selectedItem.toString(),
                     type = typeBookingSpinner.selectedItem.toString(),
-                    service = args.currentBooking.service
+                    service = args.currentBooking.service,
+                    CustomerId = args.currentBooking.CustomerId
             )
 
             if(isHotel){

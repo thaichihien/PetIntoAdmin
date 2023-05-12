@@ -81,6 +81,11 @@ interface AdminApi {
         @Body booking: Booking
     ) : ApiResponse<Any>
 
+    @GET("/admin/booking/detail")
+    suspend fun getBookingDetail(
+        @Query("id") id : String
+    ) : ApiResponse<Booking>
+
 
     //Order
     @GET("/admin/order/get")
