@@ -27,6 +27,7 @@ import com.mobye.petintoadmin.repositories.ProductRepository
 import com.mobye.petintoadmin.utils.Constants
 import com.mobye.petintoadmin.utils.Utils
 import com.mobye.petintoadmin.utils.Utils.Companion.checkRadioGroup
+import com.mobye.petintoadmin.utils.Utils.Companion.checkTextView
 import com.mobye.petintoadmin.viewmodels.AdminViewModelFactory
 import com.mobye.petintoadmin.viewmodels.BookingViewModel
 import com.mobye.petintoadmin.viewmodels.ProductViewModel
@@ -188,10 +189,10 @@ class CreateBookingFragment : BaseFragment<FragmentCreateBookingBinding>() {
                 checkEditText(etPetName) && checkEditText(etPhone) && checkEditText(etWeight)
 
         var validateDate = false
-        if(serviceBookingSpinner.selectedItemPosition == 0){
-            validateDate = checkEditText(etCheckIn) && checkEditText(etCheckOut)
+        validateDate = if(serviceBookingSpinner.selectedItemPosition == 0){
+            checkTextView(etCheckIn,requireContext()) && checkTextView(etCheckOut,requireContext())
         }else{
-           validateDate =checkEditText(etCheckIn)
+            checkTextView(etCheckIn,requireContext())
         }
 
         return validatedFields && validateDate

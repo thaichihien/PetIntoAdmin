@@ -59,6 +59,12 @@ class OrderViewModel(
         fromDate.value = from
     }
 
+    fun clearFilter(){
+        toDate = ""
+        statusQuery = ""
+        fromDate.value = ""
+    }
+
 
     fun getOrderDetail(id : String){
         try {
@@ -197,6 +203,12 @@ class OrderViewModel(
         toDatePet = to
         statusQueryPet = status
         fromDatePet.value = from
+    }
+
+    fun clearFilterPet(){
+        toDatePet = ""
+        statusQueryPet = ""
+        fromDatePet.value = ""
     }
 
     fun getPetDetail(id : String){

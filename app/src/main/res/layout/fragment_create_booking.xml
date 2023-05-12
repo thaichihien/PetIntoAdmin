@@ -280,17 +280,20 @@
                     android:text="Check In :"
                     android:textSize="18dp"
                     android:textStyle="bold"/>
-                <EditText
+                <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/etCheckIn"
                     android:layout_width="230dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
-                    android:ems="10"
+                    android:padding="6dp"
+                    android:hint="day"
                     android:scrollHorizontally="true"
                     android:inputType="none"/>
             </RelativeLayout>
 
             <RelativeLayout
+                android:layout_marginTop="10dp"
                 android:id="@+id/layoutCheckOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -302,16 +305,18 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Check Out :"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:textStyle="bold"/>
-                <EditText
+                <TextView
                     android:id="@+id/etCheckOut"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:ems="10"
+                    android:padding="6dp"
+                    android:textColor="@color/black"
                     android:scrollHorizontally="true"
-                    android:inputType="none"/>
+                    android:hint="day"
+                    />
             </RelativeLayout>
 
             <RelativeLayout

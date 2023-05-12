@@ -11,6 +11,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
@@ -156,6 +158,16 @@ class Utils {
                 false
             }else{
                 et.error = null
+                true
+            }
+        }
+
+        fun checkTextView(tv : TextView,context: Context) : Boolean{
+            return if(tv.text.isBlank()){
+                Toast.makeText(context,"Please input date",Toast.LENGTH_SHORT).show()
+                false
+            }else{
+
                 true
             }
         }

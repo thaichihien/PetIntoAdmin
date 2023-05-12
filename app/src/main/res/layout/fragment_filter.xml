@@ -7,29 +7,38 @@
     android:background="@color/background_light"
     tools:context=".views.fragments.FilterFragment">
 
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="16dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:text="From"
         android:textColor="@color/main_dark"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btnBack" />
 
-    <EditText
-        android:id="@+id/etDayFrom"
+    <TextView
+        android:id="@+id/tvDayFrom"
         android:layout_width="370dp"
         android:layout_height="52dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/date_background"
-        android:ems="10"
+        android:textColor="@color/main_dark"
         android:hint="Date"
-        android:inputType="textPersonName"
-        android:paddingLeft="20dp"
+        android:padding="16dp"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -44,18 +53,17 @@
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDayFrom" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDayFrom" />
 
-    <EditText
-        android:id="@+id/etDayTo"
+    <TextView
+        android:id="@+id/tvDayTo"
         android:layout_width="370dp"
         android:layout_height="52dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/date_background"
-        android:ems="10"
+        android:textColor="@color/main_dark"
         android:hint="Date"
-        android:inputType="textPersonName"
-        android:paddingLeft="20dp"
+        android:padding="16dp"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -69,7 +77,7 @@
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/etDayTo" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDayTo" />
 
     <ImageView
         android:id="@+id/servicesSpinnerBtn"

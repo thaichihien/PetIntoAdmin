@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_orderManagementFragment_to_petOrderDetailsFragment"
             app:destination="@id/petOrderDetailsFragment" />
+        <action
+            android:id="@+id/action_orderManagementFragment_to_filterFragment"
+            app:destination="@id/filterFragment" />
     </fragment>
     <fragment
         android:id="@+id/petManagmentFragment"
@@ -191,5 +194,14 @@
         <action
             android:id="@+id/action_notificationFragment_to_orderManagementFragment"
             app:destination="@id/orderManagementFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.FilterFragment"
+        android:label="fragment_filter"
+        tools:layout="@layout/fragment_filter" >
+        <argument
+            android:name="type"
+            app:argType="string" />
     </fragment>
 </navigation>
