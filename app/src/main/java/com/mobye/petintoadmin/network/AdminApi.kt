@@ -91,8 +91,8 @@ interface AdminApi {
     @GET("/admin/order/get")
     suspend fun getOrder(
         @Query("page") page : Int,
-        @Query("from") from : String = "",
-        @Query("to") to : String = "",
+        @Query("from",encoded = false) from : String = "",
+        @Query("to", encoded = false) to : String = "",
         @Query("status") status : String = ""
     ) : ApiResponse<List<Order>>
 

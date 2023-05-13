@@ -1,6 +1,7 @@
 package com.mobye.petintoadmin.views.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +32,7 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>() {
 
     private val args : FilterFragmentArgs by navArgs()
     override fun setup() {
-        if(args.type == "Pet"){
+        if(args.type == "pet"){
             filterProduct = false
         }
 
@@ -46,11 +47,11 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>() {
 
         val fromDatePicker = Utils.createSingleDatePicker("From date",{ formatted, date ->
             binding.tvDayFrom.text = formatted
-        },"MM/dd/yyyy")
+        },"MM/dd/yyyy",false)
 
         val toDatePicker = Utils.createSingleDatePicker("To date",{ formatted, date ->
             binding.tvDayTo.text = formatted
-        },"MM/dd/yyyy")
+        },"MM/dd/yyyy",false)
 
         binding.apply {
             trackOrderSpinner.apply {
@@ -89,24 +90,38 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>() {
     private fun clearFilter() {
         if(filterProduct){
             orderViewModel.clearFilter()
+
+
+
         }else{
             orderViewModel.clearFilterPet()
+        }
+        binding.apply {
+            tvDayFrom.text = ""
+            tvDayTo.text = ""
+            trackOrderSpinner.setSelection(0)
         }
     }
 
     private fun applyFilter() {
         with(binding){
+            val status = if(trackOrderSpinner.selectedItemPosition == 0){
+                ""
+            }else {
+                trackOrderSpinner.selectedItem.toString()
+            }
+
             if(filterProduct){
-                orderViewModel.filterOrder(
-                    tvDayFrom.text.toString().trim(),
-                    tvDayTo.text.toString().trim(),
-                    trackOrderSpinner.selectedItem.toString()
-                )
+            orderViewModel.filterOrder(
+                tvDayFrom.text.toString(),
+                tvDayTo.text.toString(),
+                status
+            )
             }else{
                 orderViewModel.filterPetOrder(
                     tvDayFrom.text.toString().trim(),
                     tvDayTo.text.toString().trim(),
-                    trackOrderSpinner.selectedItem.toString()
+                    status
                 )
             }
             findNavController().popBackStack()

@@ -52,13 +52,17 @@ class Utils {
 
 
         @SuppressLint("SimpleDateFormat")
-        fun createSingleDatePicker(title : String,listener : (String,Date) -> Unit,formatDate : String = "dd/MM/yyyy") : MaterialDatePicker<Long> {
-            val dayPicker = MaterialDatePicker.Builder.datePicker()
+        fun createSingleDatePicker(title : String,listener : (String,Date) -> Unit,formatDate : String = "dd/MM/yyyy",fromToday : Boolean =true) : MaterialDatePicker<Long> {
+            val dayPickerBuilder = MaterialDatePicker.Builder.datePicker()
                 .setTitleText(title)
-                .setCalendarConstraints(
+
+            if(fromToday){
+                dayPickerBuilder.setCalendarConstraints(
                     CalendarConstraints.Builder().setValidator(
                         DateValidatorPointForward.now()).build())
-                .build()
+            }
+
+            val dayPicker = dayPickerBuilder.build()
 
             dayPicker.addOnPositiveButtonClickListener {
                 val calendar: Calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
@@ -102,22 +106,24 @@ class Utils {
 
         fun getIndexOrderStatus(status : String)
             = when(status){
-                "Waiting" -> 0
-                "Prepare" -> 1
-                "Delivering" -> 2
-                "Delivered" -> 3
-                "Cancelled" -> 4
+                "All" -> 0
+                "Waiting" -> 1
+                "Prepare" -> 2
+                "Delivering" -> 3
+                "Delivered" -> 4
+                "Cancelled" -> 5
             else -> 0
             }
 
         fun getIndexBookingStatus(status : String)
                 = when(status){
-            "Waiting for reply" -> 0
-            "Accepted" -> 1
-            "Unaccepted" -> 2
-            "Ready" -> 3
-            "Cancelled" -> 4
-            "Done" -> 5
+            "All" -> 0
+            "Waiting for reply" -> 1
+            "Accepted" -> 2
+            "Unaccepted" -> 3
+            "Ready" -> 4
+            "Cancelled" -> 5
+            "Done" -> 6
             else -> 0
         }
 

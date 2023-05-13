@@ -4,9 +4,11 @@ package com.mobye.petintoadmin.views.fragments
 import android.view.LayoutInflater
 
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
 
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -43,6 +45,9 @@ class ProductOrderFragment : BaseFragment<FragmentProductOrderBinding>() {
         lifecycleScope.launchWhenCreated {
             orderViewModel.orderItemList.collectLatest {
                 orderAdapter.submitData(it)
+                if(orderAdapter.itemCount <= 0){
+                    Toast.makeText(requireContext(),"No results were found", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -62,13 +67,21 @@ class ProductOrderFragment : BaseFragment<FragmentProductOrderBinding>() {
                 findNavController().navigate(OrderManagementFragmentDirections.actionOrderManagementFragmentToCreateProductOrderFragment())
             }
 
+            btnFilter.setOnClickListener{
+                findNavController().navigate(OrderManagementFragmentDirections.actionOrderManagementFragmentToFilterFragment("product"))
+            }
+
             btnRefresh.setOnClickListener {
                 lifecycleScope.launch {
-//                    orderAdapter.submitData(PagingData.empty())
-//                    orderAdapter.notifyDataSetChanged()
-                    orderAdapter.refresh()
+                    orderAdapter.submitData(PagingData.empty())
+                    orderAdapter.notifyDataSetChanged()
+                    orderViewModel.orderItemList.collectLatest {
+                        orderAdapter.submitData(it)
+                        if(orderAdapter.itemCount <= 0){
+                            Toast.makeText(requireContext(),"No results were found", Toast.LENGTH_SHORT).show()
+                        }
+                    }
 
-                    //orderViewModel.filterOrder(binding.etSearchProduct.text.toString().trim())
                 }
 
             }

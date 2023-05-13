@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobye.petintoadmin.R
 import com.mobye.petintoadmin.adapters.OrderPagingAdapter
@@ -38,6 +40,9 @@ class PetOrderFragment : BaseFragment<FragmentPetOrderBinding>() {
         lifecycleScope.launchWhenCreated {
             orderViewModel.petOrderList.collectLatest {
                 orderAdapter.submitData(it)
+                if(orderAdapter.itemCount <= 0){
+                    Toast.makeText(requireContext(),"No results were found", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -54,13 +59,20 @@ class PetOrderFragment : BaseFragment<FragmentPetOrderBinding>() {
                 findNavController().navigate(OrderManagementFragmentDirections.actionOrderManagementFragmentToCreatePetOrderFragment())
             }
 
+            btnFilter.setOnClickListener {
+                findNavController().navigate(OrderManagementFragmentDirections.actionOrderManagementFragmentToFilterFragment("pet"))
+            }
+
             btnRefresh.setOnClickListener {
                 lifecycleScope.launch {
-//                    orderAdapter.submitData(PagingData.empty())
-//                    orderAdapter.notifyDataSetChanged()
-                    orderAdapter.refresh()
-
-                    //orderViewModel.filterOrder(binding.etSearchProduct.text.toString().trim())
+                    orderAdapter.submitData(PagingData.empty())
+                    orderAdapter.notifyDataSetChanged()
+                    orderViewModel.petOrderList.collectLatest {
+                        orderAdapter.submitData(it)
+                        if(orderAdapter.itemCount <= 0){
+                            Toast.makeText(requireContext(),"No results were found", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
 
             }

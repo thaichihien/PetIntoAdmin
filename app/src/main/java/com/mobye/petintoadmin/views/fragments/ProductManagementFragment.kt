@@ -73,11 +73,15 @@ class ProductManagementFragment : BaseFragment<FragmentProductManagementBinding>
                 lifecycleScope.launch{
                     productAdapter.submitData(PagingData.empty())
                     productAdapter.notifyDataSetChanged()
-
                     productViewModel.searchProduct(binding.etSearchProduct.text.toString().trim())
+                    productViewModel.productItemList.collectLatest {
+                        productAdapter.submitData(it)
+                    }
                 }
 
             }
+
+
 
 
             etSearchProduct.setOnKeyListener { v, keyCode, event ->

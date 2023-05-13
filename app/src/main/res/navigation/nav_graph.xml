@@ -73,6 +73,9 @@
         <action
             android:id="@+id/action_bookingManagementFragment_to_bookingDetailsFragment"
             app:destination="@id/bookingDetailsFragment" />
+        <action
+            android:id="@+id/action_bookingManagementFragment_to_filterBookingFragment"
+            app:destination="@id/filterBookingFragment" />
     </fragment>
     <fragment
         android:id="@+id/createProductFragment"
@@ -204,4 +207,9 @@
             android:name="type"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/filterBookingFragment"
+        android:name="com.mobye.petintoadmin.views.fragments.FilterBookingFragment"
+        android:label="fragment_filter_booking"
+        tools:layout="@layout/fragment_filter_booking" />
 </navigation>

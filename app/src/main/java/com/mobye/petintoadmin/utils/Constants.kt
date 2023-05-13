@@ -3,7 +3,7 @@ package com.mobye.petintoadmin.utils
 class Constants {
     companion object{
         val orderStatus : List<String> = listOf(
-            "Waiting","Prepare","Delivering",
+            "All","Waiting","Prepare","Delivering",
             "Delivered","Cancelled"
         )
 
@@ -24,7 +24,7 @@ class Constants {
         )
 
         val statusBooking : List<String> = listOf(
-            "Waiting for reply", "Accepted",
+            "All","Waiting for reply", "Accepted",
             "Unaccepted", "Ready","Cancelled", "Done"
         )
 

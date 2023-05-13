@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -50,6 +51,9 @@ class BookingManagementFragment : BaseFragment<FragmentBookingManagementBinding>
         lifecycleScope.launchWhenCreated {
             bookingViewModel.bookingItemList.collectLatest {
                 bookingAdapter.submitData(it)
+                if(bookingAdapter.itemCount <= 0){
+                    Toast.makeText(requireContext(),"No results were found",Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -68,7 +72,23 @@ class BookingManagementFragment : BaseFragment<FragmentBookingManagementBinding>
             }
 
             btnRefresh.setOnClickListener{
-                bookingAdapter.refresh()
+                lifecycleScope.launch {
+                    bookingAdapter.submitData(PagingData.empty())
+                    bookingAdapter.notifyDataSetChanged()
+                    bookingViewModel.refresh()
+                    bookingViewModel.bookingItemList.collectLatest {
+                        bookingAdapter.submitData(it)
+                        if(bookingAdapter.itemCount <= 0){
+                            Toast.makeText(requireContext(),"No results were found",Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                }
+
+            }
+
+            btnFilter.setOnClickListener {
+                findNavController().navigate(BookingManagementFragmentDirections.actionBookingManagementFragmentToFilterBookingFragment())
             }
         }
 

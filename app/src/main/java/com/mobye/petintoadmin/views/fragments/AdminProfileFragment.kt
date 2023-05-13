@@ -73,6 +73,9 @@ class AdminProfileFragment : BaseFragment<FragmentAdminProfileBinding>() {
             btnScanQR.setOnClickListener {
                 barcodeLauncher.launch(ScanOptions())
             }
+            btnNotification.setOnClickListener {
+                findNavController().navigate(AdminProfileFragmentDirections.actionAdminProfileFragmentToNotificationFragment())
+            }
         }
 
 

@@ -42,6 +42,12 @@ class BookingViewModel(
         fromDate.value = from
     }
 
+    fun refresh(){
+        val temp = fromDate.value
+        fromDate.value = "loading"
+        fromDate.value = temp
+    }
+
     fun clearFilter(){
         toDate = ""
         statusQuery = ""

@@ -1,6 +1,7 @@
 package com.mobye.petintoadmin.views.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,11 +36,11 @@ class FilterBookingFragment : BaseFragment<FragmentFilterBookingBinding>() {
 
         val fromDatePicker = Utils.createSingleDatePicker("From date", { formatted, date ->
             binding.tvDayFrom.text = formatted
-        }, "MM/dd/yyyy")
+        }, "MM/dd/yyyy",false)
 
         val toDatePicker = Utils.createSingleDatePicker("To date", { formatted, date ->
             binding.tvDayTo.text = formatted
-        }, "MM/dd/yyyy")
+        }, "MM/dd/yyyy",false)
 
         binding.apply {
             trackOrderSpinner.apply {
@@ -72,14 +73,27 @@ class FilterBookingFragment : BaseFragment<FragmentFilterBookingBinding>() {
 
     private fun clearFilter() {
         bookingViewModel.clearFilter()
+        binding.apply {
+            tvDayFrom.text = ""
+            tvDayTo.text = ""
+            trackOrderSpinner.setSelection(0)
+        }
     }
 
     private fun applyFilter() {
         with(binding){
-            bookingViewModel.filterBooking(
-                tvDayFrom.text.toString().trim(),
-                tvDayTo.text.toString().trim(),
+            val status = if(trackOrderSpinner.selectedItemPosition == 0){
+                ""
+            }else{
                 trackOrderSpinner.selectedItem.toString()
+            }
+
+
+
+            bookingViewModel.filterBooking(
+                tvDayFrom.text.toString(),
+                tvDayTo.text.toString(),
+                status
             )
             findNavController().popBackStack()
         }
