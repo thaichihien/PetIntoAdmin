@@ -8,7 +8,9 @@ import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.network.RetrofitInstance
 
 class BookingPagingSource(
-    private val query : String
+    private val from : String,
+    private val to : String,
+    private val status : String
 ) : PagingSource<Int, Booking>() {
 
     companion object{
@@ -22,7 +24,7 @@ class BookingPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Booking> {
         return try {
             val nextPage = params.key ?: FIRST_PAGE //lấy chỉ số trang
-            val response = RetrofitInstance.api.getBooking(nextPage, query)  // gọi hàm API lấy dữ liệu tương ứng
+            val response = RetrofitInstance.api.getBooking(nextPage,from,to,status)  // gọi hàm API lấy dữ liệu tương ứng
 
             //copy y hệt
             LoadResult.Page(

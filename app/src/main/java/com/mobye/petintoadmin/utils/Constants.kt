@@ -25,7 +25,7 @@ class Constants {
 
         val statusBooking : List<String> = listOf(
             "Waiting for reply", "Accepted",
-            "Unaccepted", "Cancelled", "Done"
+            "Unaccepted", "Ready","Cancelled", "Done"
         )
 
     }

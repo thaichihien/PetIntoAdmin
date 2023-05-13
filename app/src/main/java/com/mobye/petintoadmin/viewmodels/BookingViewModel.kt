@@ -24,22 +24,28 @@ class BookingViewModel(
     private var _response : MutableLiveData<ApiResponse<*>> = MutableLiveData()
     val response get() = _response
 
-    private val fromDate : MutableStateFlow<String> by lazy { MutableStateFlow("") }
-    private var toDate : String = ""
-    private var statusQuery : String = ""
+     val fromDate : MutableStateFlow<String> by lazy { MutableStateFlow("") }
+     var toDate : String = ""
+     var statusQuery : String = ""
 
     val scanBooking : MutableLiveData<Booking> by lazy { MutableLiveData() }
 
     //danh sách dữ liệu
-    val bookingItemList = fromDate.flatMapLatest {query ->
-        repository.getBookingSource(query)
+    val bookingItemList = fromDate.flatMapLatest {from ->
+        repository.getBookingSource(from,toDate,statusQuery)
             .cachedIn(viewModelScope)
     }
 
-    fun filterOrder(from : String,to : String,status : String = ""){
+    fun filterBooking(from : String,to : String,status : String = ""){
         toDate = to
         statusQuery = status
         fromDate.value = from
+    }
+
+    fun clearFilter(){
+        toDate = ""
+        statusQuery = ""
+        fromDate.value = ""
     }
 
 

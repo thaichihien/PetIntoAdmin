@@ -114,7 +114,19 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>() {
     }
 
     private fun fillFilter() {
-
+        if(filterProduct){
+            binding.apply {
+                tvDayFrom.text = orderViewModel.fromDate.value
+                tvDayTo.text = orderViewModel.toDate
+                trackOrderSpinner.setSelection(Utils.getIndexOrderStatus(orderViewModel.statusQuery))
+            }
+        }else{
+            binding.apply {
+                tvDayFrom.text = orderViewModel.fromDatePet.value
+                tvDayTo.text = orderViewModel.toDatePet
+                trackOrderSpinner.setSelection(Utils.getIndexOrderStatus(orderViewModel.statusQueryPet))
+            }
+        }
     }
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFilterBinding

@@ -28,14 +28,14 @@ class OrderViewModel(
     private val _productOrderList : MutableLiveData<List<Product>> by lazy { MutableLiveData(listOf()) }
     val productOrderList get() = _productOrderList
 
-    private val fromDate : MutableStateFlow<String> by lazy { MutableStateFlow("") }
-    private var toDate : String = ""
-    private var statusQuery : String = ""
+     val fromDate : MutableStateFlow<String> by lazy { MutableStateFlow("") }
+     var toDate : String = ""
+     var statusQuery : String = ""
 
     //Pet order
-    private val fromDatePet : MutableStateFlow<String> by lazy { MutableStateFlow("") }
-    private var toDatePet : String = ""
-    private var statusQueryPet : String = ""
+     val fromDatePet : MutableStateFlow<String> by lazy { MutableStateFlow("") }
+     var toDatePet : String = ""
+     var statusQueryPet : String = ""
 
     //Create Order
     val selectedProduct : MutableLiveData<Product?> = MutableLiveData(null)

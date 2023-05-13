@@ -6,9 +6,11 @@ import com.mobye.petintoadmin.models.Booking
 import com.mobye.petintoadmin.network.RetrofitInstance
 
 class BookingRepository : IRepository {
-    fun getBookingSource(query : String) = Pager(
+    fun getBookingSource(
+            from : String,to : String, status : String
+                         ) = Pager(
         config = PagingConfig(pageSize = 10),
-        pagingSourceFactory = {BookingPagingSource(query)})
+        pagingSourceFactory = {BookingPagingSource(from, to, status)})
         .flow
 
     //hàm thêm
