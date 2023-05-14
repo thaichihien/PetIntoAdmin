@@ -29,6 +29,7 @@ import com.mobye.petintoadmin.views.changeToSuccess
 class PetOrderDetailsFragment : BaseFragment<FragmentPetOrderDetailsBinding>() {
 
 
+
     private val args : PetOrderDetailsFragmentArgs by navArgs()
     private val orderViewModel : OrderViewModel by activityViewModels {
         AdminViewModelFactory(OrderRepository())
@@ -49,6 +50,8 @@ class PetOrderDetailsFragment : BaseFragment<FragmentPetOrderDetailsBinding>() {
         }
         builder.create()
     }
+
+    private var currentStatus: String = ""
 
     override fun setup() {
         (requireActivity() as MainActivity).hideNav()
@@ -107,10 +110,18 @@ class PetOrderDetailsFragment : BaseFragment<FragmentPetOrderDetailsBinding>() {
                 payment = etPayment.text.toString().trim(),
                 note = etNote.text.toString().trim(),
                 status = spOrderStatus.selectedItem.toString(),
-                isdelivery = if(rbYes.isChecked) "yes" else "no"
+                isdelivery = if(rbYes.isChecked) "yes" else "no",
+                CustomerId = args.currentOrder.CustomerId
             )
 
-            orderViewModel.updatePetOrder(updatedOrder)
+            if(spOrderStatus.selectedItem.toString() == currentStatus){
+                orderViewModel.updatePetOrder(updatedOrder)
+            }else{
+                orderViewModel.updatePetOrder(updatedOrder,true)
+            }
+
+
+
             orderViewModel.response.observe(viewLifecycleOwner){
                 loadingDialog.dismiss()
                 if(it.result){
@@ -184,6 +195,7 @@ class PetOrderDetailsFragment : BaseFragment<FragmentPetOrderDetailsBinding>() {
             tvOrderDate.text = Utils.formatToLocalDate(order.orderDate)
             tvDateDelivery.text = Utils.formatToLocalDate(order.dateDelivery)
             spOrderStatus.setSelection(Utils.getIndexOrderStatus(order.status))
+            currentStatus = order.status
         }
     }
 

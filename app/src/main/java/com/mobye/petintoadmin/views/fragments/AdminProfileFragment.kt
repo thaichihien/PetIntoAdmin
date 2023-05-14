@@ -91,7 +91,7 @@ class AdminProfileFragment : BaseFragment<FragmentAdminProfileBinding>() {
             if(it.id.isNotBlank()){
                 findNavController().navigate(AdminProfileFragmentDirections.actionAdminProfileFragmentToBookingDetailsFragment(it))
             }else{
-                Toast.makeText(requireContext(),"Not found",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),it.service,Toast.LENGTH_SHORT).show()
             }
 
 

@@ -22,8 +22,8 @@ class OrderRepository : IRepository {
             = RetrofitInstance.api.createOrder(order)
 
 
-    suspend fun updateOrder(order: Order)
-            = RetrofitInstance.api.updateOrder(order)
+    suspend fun updateOrder(order: Order,notify : Boolean)
+            = RetrofitInstance.api.updateOrder(order,notify)
 
 
     suspend fun deleteOrder(order: Order)
@@ -45,8 +45,8 @@ class OrderRepository : IRepository {
             = RetrofitInstance.api.createPetOrder(order)
 
 
-    suspend fun updatePetOrder(order: Order)
-            = RetrofitInstance.api.updatePetOrder(order)
+    suspend fun updatePetOrder(order: Order,notify: Boolean)
+            = RetrofitInstance.api.updatePetOrder(order,notify)
 
 
     suspend fun deletePetOrder(order: Order)

@@ -84,7 +84,7 @@ interface AdminApi {
     @GET("/admin/booking/detail")
     suspend fun getBookingDetail(
         @Query("id") id : String
-    ) : ApiResponse<Booking>
+    ) : Response<ApiResponse<Booking>>
 
 
     //Order
@@ -108,7 +108,8 @@ interface AdminApi {
 
     @POST("/admin/order/update")
     suspend fun updateOrder(
-        @Body order: Order
+        @Body order: Order,
+        @Query("notify") notify : Boolean = false
     ) : ApiResponse<Any>
 
     @POST("/admin/order/delete")
@@ -137,7 +138,8 @@ interface AdminApi {
 
     @POST("/admin/pet-order/update")
     suspend fun updatePetOrder(
-        @Body order: Order
+        @Body order: Order,
+        @Query("notify") notify : Boolean = false
     ) : ApiResponse<Any>
 
     @POST("/admin/pet-order/delete")

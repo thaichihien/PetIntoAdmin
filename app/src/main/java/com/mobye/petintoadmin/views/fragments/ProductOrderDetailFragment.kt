@@ -50,6 +50,8 @@ class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBindin
         }
     }
 
+    private var currentStatus : String = ""
+
 
 
     override fun setup() {
@@ -93,7 +95,7 @@ class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBindin
 
 
     private fun validate(): Boolean = with(binding){
-        checkEditText(etAddress) && checkEditText(etCustomerName)
+        ((checkEditText(etAddress) && rbYes.isChecked) || rbNo.isChecked) && checkEditText(etCustomerName)
                 && checkEditText(etPayment) && checkEditText(etPhone)
                 && checkRadioGroup(rgDelievery,rbNo)
     }
@@ -113,7 +115,14 @@ class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBindin
                 CustomerId = args.currentOrder.CustomerId
             )
 
-            orderViewModel.updateOrder(updatedOrder)
+            if(spOrderStatus.selectedItem.toString() == currentStatus){
+                orderViewModel.updateOrder(updatedOrder)
+            }else{
+                orderViewModel.updateOrder(updatedOrder,true)
+            }
+
+
+
             orderViewModel.response.observe(viewLifecycleOwner){
                 loadingDialog.dismiss()
                 if(it.result){
@@ -188,6 +197,9 @@ class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBindin
             tvOrderDate.text = Utils.formatToLocalDate(order.orderDate)
             tvDateDelivery.text = Utils.formatToLocalDate(order.dateDelivery)
             spOrderStatus.setSelection(Utils.getIndexOrderStatus(order.status))
+            currentStatus = order.status
+
+
         }
     }
 

@@ -172,10 +172,10 @@ class OrderViewModel(
         }
     }
 
-    fun updateOrder(order: Order){
+    fun updateOrder(order: Order,notify : Boolean = false){
         try {
             viewModelScope.launch {
-                _response.value = repository.updateOrder(order)
+                _response.value = repository.updateOrder(order,notify)
             }
         }catch (ex : Exception){
             Log.e(TAG,ex.toString())
@@ -241,10 +241,10 @@ class OrderViewModel(
         }
     }
 
-    fun updatePetOrder(order: Order){
+    fun updatePetOrder(order: Order,notify: Boolean = false){
         try {
             viewModelScope.launch {
-                _response.value = repository.updatePetOrder(order)
+                _response.value = repository.updatePetOrder(order,notify)
             }
         }catch (ex : Exception){
             Log.e(TAG,ex.toString())

@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.mobye.petintoadmin.models.Booking
-import com.mobye.petintoadmin.models.Product
 import com.mobye.petintoadmin.models.apimodels.ApiResponse
 import com.mobye.petintoadmin.repositories.BookingRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import java.util.*
 
 class BookingViewModel(
@@ -97,10 +97,15 @@ class BookingViewModel(
         try {
             viewModelScope.launch {
                 val res = repository.getDetail(id)
-                if(res.result){
-                    scanBooking.value = res.body
+
+                if(res.isSuccessful){
+                    if(res.body()!!.result){
+                        scanBooking.value = res.body()!!.body
+                    }else{
+                        scanBooking.value = Booking(service = "Nothing Found")
+                    }
                 }else{
-                    scanBooking.value = Booking()
+                    scanBooking.value = Booking(service = "Invalid ID")
                 }
             }
         }catch (ex : Exception){
