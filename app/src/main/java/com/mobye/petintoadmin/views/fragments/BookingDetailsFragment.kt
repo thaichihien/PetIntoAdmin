@@ -24,6 +24,7 @@ import com.mobye.petintoadmin.repositories.BookingRepository
 import com.mobye.petintoadmin.repositories.ProductRepository
 import com.mobye.petintoadmin.utils.Constants
 import com.mobye.petintoadmin.utils.Utils
+import com.mobye.petintoadmin.utils.Utils.Companion.getTimeSpaFromIndex
 import com.mobye.petintoadmin.viewmodels.AdminViewModelFactory
 import com.mobye.petintoadmin.viewmodels.BookingViewModel
 import com.mobye.petintoadmin.viewmodels.ProductViewModel
@@ -245,7 +246,7 @@ class BookingDetailsFragment : BaseFragment<FragmentBookingDetailsBinding>() {
             }else{
                 updatedBooking.apply {
                     checkIn = Utils.formatStandardTimeString(bookingViewModel.checkIn,
-                        spTime.selectedItem.toString()
+                        getTimeSpaFromIndex(spTime.selectedItemPosition)
                     )
                 }
             }

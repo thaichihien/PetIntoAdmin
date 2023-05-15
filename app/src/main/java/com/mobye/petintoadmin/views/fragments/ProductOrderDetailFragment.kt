@@ -96,7 +96,7 @@ class ProductOrderDetailFragment : BaseFragment<FragmentProductOrderDetailBindin
 
     private fun validate(): Boolean = with(binding){
         ((checkEditText(etAddress) && rbYes.isChecked) || rbNo.isChecked) && checkEditText(etCustomerName)
-                && checkEditText(etPayment) && checkEditText(etPhone)
+                && checkEditText(etPayment)
                 && checkRadioGroup(rgDelievery,rbNo)
     }
 

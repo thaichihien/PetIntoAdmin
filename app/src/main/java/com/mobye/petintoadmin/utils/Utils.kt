@@ -151,11 +151,20 @@ class Utils {
 
         fun getIndexTimeSpa(time: String)
                 = when(time){
-            "08:00:00" -> 0
-            "10:00:00" -> 1
-            "15:00:00" -> 2
-            "17:00:00" -> 3
+            "01:00:00" -> 0
+            "03:00:00" -> 1
+            "08:00:00" -> 2
+            "10:00:00" -> 3
             else -> 0
+        }
+
+        fun getTimeSpaFromIndex(index : Int) : String
+                = when(index){
+             0 -> "01:00:00"
+             1 -> "03:00:00"
+             2 -> "08:00:00"
+             3 -> "10:00:00"
+            else -> "01:00:00"
         }
 
 
