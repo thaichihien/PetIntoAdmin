@@ -126,7 +126,7 @@ class PetIntoAdminMessagingService : FirebaseMessagingService() {
 
 
             builder.setContentIntent(pendingIntent)
-        }else if(type == "ORDER"){
+        }else if(type == "ORDER" || type == "PET"){
             val pendingIntent = NavDeepLinkBuilder(this)
                 .setGraph(R.navigation.nav_graph)
                 .setDestination(R.id.orderManagementFragment)
@@ -136,7 +136,6 @@ class PetIntoAdminMessagingService : FirebaseMessagingService() {
 
             builder.setContentIntent(pendingIntent)
         }
-
 
         with(NotificationManagerCompat.from(this)){
             if (ActivityCompat.checkSelfPermission(
