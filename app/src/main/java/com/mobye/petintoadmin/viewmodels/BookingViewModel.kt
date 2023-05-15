@@ -71,10 +71,10 @@ class BookingViewModel(
     }
 
     //Sửa
-    fun updateBooking(booking: Booking){
+    fun updateBooking(booking: Booking,notify : Boolean = true){
         try {
             viewModelScope.launch {
-                _response.value = repository.updateBooking(booking)
+                _response.value = repository.updateBooking(booking,notify)
             }
         }catch (ex : Exception){
             Log.e(TAG,ex.toString())

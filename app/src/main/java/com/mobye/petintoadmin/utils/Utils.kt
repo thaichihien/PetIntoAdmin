@@ -26,7 +26,7 @@ import java.util.*
 class Utils {
     companion object{
         @RequiresApi(Build.VERSION_CODES.O)
-        fun formatToLocalDate(ourDate: String,formatDate : String = "HH:mm MM-dd-yyyy") : String
+        fun formatToLocalDate(ourDate: String,formatDate : String = "HH:mm dd-MM-yyyy") : String
                 = try {
             val value: Date = Date.from(Instant.parse(ourDate))
             val dateFormatter = SimpleDateFormat(formatDate) //this format changeable

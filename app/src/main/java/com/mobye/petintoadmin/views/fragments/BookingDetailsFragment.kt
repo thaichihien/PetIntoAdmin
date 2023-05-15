@@ -40,6 +40,7 @@ class BookingDetailsFragment : BaseFragment<FragmentBookingDetailsBinding>() {
 
     private var isHotel = true
     private lateinit var typeAdapter : ArrayAdapter<String>
+    private var currentStatus : String = ""
 
     private val loadingDialog : AlertDialog by lazy {(activity as MainActivity).loadingDialog}
     private val notiDialog : Dialog by lazy { Utils.createNotificationDialog(requireContext())}
@@ -135,7 +136,7 @@ class BookingDetailsFragment : BaseFragment<FragmentBookingDetailsBinding>() {
                 etCheckIn.setText(Utils.formatToLocalDate(booking.checkIn,"dd/MM/yyyy"))
 
 
-                spTime.setSelection(Utils.getIndexTimeSpa(booking.checkIn.substringAfter('T')))
+                spTime.setSelection(Utils.getIndexTimeSpa(booking.checkIn.substringAfter('T').substring(0,8)))
             }
             else{
                 isHotel = true
@@ -154,7 +155,7 @@ class BookingDetailsFragment : BaseFragment<FragmentBookingDetailsBinding>() {
                 etCheckOut.setText(Utils.formatToLocalDate(booking.checkOut,"dd/MM/yyyy"))
             }
 
-
+            currentStatus = booking.status
 
         }
     }
@@ -250,7 +251,12 @@ class BookingDetailsFragment : BaseFragment<FragmentBookingDetailsBinding>() {
             }
 
 
-            bookingViewModel.updateBooking(updatedBooking)
+            if(statusBookingSpinner.selectedItem.toString() == currentStatus){
+                bookingViewModel.updateBooking(updatedBooking,false)
+            }else{
+                bookingViewModel.updateBooking(updatedBooking)
+            }
+
 
             bookingViewModel.response.observe(viewLifecycleOwner){
                 loadingDialog.dismiss()

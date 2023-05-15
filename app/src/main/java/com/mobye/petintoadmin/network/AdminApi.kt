@@ -73,7 +73,8 @@ interface AdminApi {
 
     @POST("/admin/booking/update")
     suspend fun updateBooking(
-        @Body booking: Booking
+        @Body booking: Booking,
+        @Query("notify") notify : Boolean = false
     ) : ApiResponse<Any>
 
     @POST("/admin/booking/delete")
@@ -149,7 +150,6 @@ interface AdminApi {
 
 
     //Profile
-
     @POST("/admin/account/get")
     suspend fun getAdmin(
         @Query("id") id : String,

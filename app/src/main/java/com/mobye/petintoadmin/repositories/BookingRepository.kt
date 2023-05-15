@@ -18,8 +18,8 @@ class BookingRepository : IRepository {
             = RetrofitInstance.api.createBooking(booking)
 
     //Hàm cập nhật
-    suspend fun updateBooking(booking: Booking)
-            = RetrofitInstance.api.updateBooking(booking)
+    suspend fun updateBooking(booking: Booking,notify : Boolean)
+            = RetrofitInstance.api.updateBooking(booking,notify)
 
     //Hàm xóa
     suspend fun deleteBooking(booking: Booking)
