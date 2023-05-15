@@ -2,6 +2,7 @@ package com.mobye.petintoadmin.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -42,11 +43,13 @@ class OrderPagingAdapter(
                 itemLayout.setOnClickListener{
                     detailListener(item)
                 }
+                if(item.petId.isNotBlank()){
+                    tvTotal.text = "1"
+                    layoutAmount.visibility = View.GONE
+                }
             }
         }
-
     }
-
 
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {

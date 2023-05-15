@@ -64,13 +64,16 @@ class PetOrderDetailsFragment : BaseFragment<FragmentPetOrderDetailsBinding>() {
 
         orderViewModel.getPetDetail(args.currentOrder.petId)
         orderViewModel.previousSelectedPet.observe(viewLifecycleOwner){
-            val pet = it!!
-            binding.apply {
-                tvPetName.text = pet.name
-                tvPetPrice.text = Utils.formatMoneyVND(pet.price)
-                tvPetGender.text = pet.gender
-                tvPetType.text = pet.type
+            val pet = it
+            pet?.let {
+                binding.apply {
+                    tvPetName.text = pet.name
+                    tvPetPrice.text = Utils.formatMoneyVND(pet.price)
+                    tvPetGender.text = pet.gender
+                    tvPetType.text = pet.type
+                }
             }
+
         }
 
         binding.apply {

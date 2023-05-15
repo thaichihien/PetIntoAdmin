@@ -61,7 +61,7 @@
         </LinearLayout>
 
         <LinearLayout
-
+            android:id="@+id/layoutAmount"
             android:layout_marginStart="20dp"
            android:layout_toEndOf="@+id/layoutTotal"
             android:layout_width="wrap_content"
