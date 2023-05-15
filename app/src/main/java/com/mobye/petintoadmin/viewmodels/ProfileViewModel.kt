@@ -62,6 +62,25 @@ class ProfileViewModel(
 
     }
 
+    fun checkAdmin(id : String) {
+        viewModelScope.launch {
+            try {
+                val res = repository.checkAdmin(id)
+                if(res.isSuccessful){
+                    _response.value = res.body()
+                }else{
+                    _response.value = ApiResponse<Any>(
+                        false,"","",null
+                    )
+                }
+
+            }  catch (e : Exception){
+                Log.e(TAG,e.toString())
+            }
+
+        }
+    }
+
     private val dumb : MutableStateFlow<String> by lazy { MutableStateFlow("") }
 
     val reportList = dumb.flatMapLatest {

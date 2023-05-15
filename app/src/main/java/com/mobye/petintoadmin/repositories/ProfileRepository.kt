@@ -12,6 +12,9 @@ class ProfileRepository : IRepository {
     suspend fun getAdmin(id : String,token : Map<String, String>)
         = RetrofitInstance.api.getAdmin(id,token)
 
+    suspend fun checkAdmin(id : String)
+        = RetrofitInstance.api.checkAdmin(id)
+
     fun getReportSource() = Pager(
         config = PagingConfig(pageSize = 10),
         pagingSourceFactory = {ReportPagingSource()})

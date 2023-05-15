@@ -11,4 +11,9 @@
     <string name="profile">Profile</string>
     <string name="success_condition">Success</string>
     <string name="clear_all"><u>Clear all</u></string>
+    <string name="missing_email">Please fill in a email</string>
+    <string name="invalid_email">Please fill in a valid email</string>
+    <string name="check_email_reset">Please check your email inbox to reset your password</string>
+    <string name="not_found_account">This account could not be found</string>
+    <string name="send_email_success">Send email to reset password successfully</string>
 </resources>

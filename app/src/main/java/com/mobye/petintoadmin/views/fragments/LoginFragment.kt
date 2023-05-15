@@ -10,10 +10,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.mobye.petintoadmin.R
 import com.mobye.petintoadmin.databinding.FragmentLoginBinding
+import com.mobye.petintoadmin.repositories.ProfileRepository
 import com.mobye.petintoadmin.utils.Utils
+import com.mobye.petintoadmin.viewmodels.AdminViewModelFactory
+import com.mobye.petintoadmin.viewmodels.ProfileViewModel
 import com.mobye.petintoadmin.views.AuthenticationActivity
 import com.mobye.petintoadmin.views.MainActivity
 import com.mobye.petintoadmin.views.changeToFail
@@ -22,7 +28,9 @@ import com.mobye.petintoadmin.views.changeToFail
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private val firebaseAuth : FirebaseAuth by lazy { FirebaseAuth.getInstance() }
-
+    private val profileViewModel : ProfileViewModel by activityViewModels {
+        AdminViewModelFactory(ProfileRepository())
+    }
     private val loadingDialog : AlertDialog by lazy {(activity as AuthenticationActivity).loadingDialog}
     private val notiDialog : Dialog by lazy { Utils.createNotificationDialog(requireContext()) }
 
@@ -33,6 +41,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 if(validate()){
                     login()
                 }
+            }
+            etForgotPassword.setOnClickListener {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToResetPasswordFragment())
             }
         }
 
@@ -47,12 +58,32 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         firebaseAuth.signInWithEmailAndPassword(email,password)
             .addOnCompleteListener(requireActivity()){task ->
-                loadingDialog.dismiss()
+
                 if(task.isSuccessful){
 
-                    goToMainActivity()
+                    profileViewModel.checkAdmin(firebaseAuth.uid!!)
+                    profileViewModel.response.observe(viewLifecycleOwner){
+                        loadingDialog.dismiss()
+                        if(it.result){
+                            goToMainActivity()
+                        }else{
+                            notiDialog.changeToFail("This account has no admin permissions")
+                            notiDialog.setOnCancelListener {
+
+                            }
+                            notiDialog.setOnDismissListener {
+
+                            }
+                            notiDialog.show()
+                            firebaseAuth.signOut()
+                        }
+
+
+                    }
+
                 }else{
                     // TODO show error
+                    loadingDialog.dismiss()
                     notiDialog.changeToFail(task.exception!!.message!!)
                     notiDialog.setOnCancelListener {
 

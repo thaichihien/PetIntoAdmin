@@ -80,9 +80,10 @@
         android:text="@string/forget_your_password"
         android:textAlignment="center"
         android:textColor="@color/main_dark"
+        android:textSize="18sp"
         android:textStyle="italic"
-        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_input" />
 

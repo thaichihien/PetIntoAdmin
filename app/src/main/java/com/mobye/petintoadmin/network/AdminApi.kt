@@ -156,6 +156,11 @@ interface AdminApi {
         @Body token : Map<String, String>
     ) : Response<ApiResponse<Admin>>
 
+    @GET("/admin/account/check")
+    suspend fun checkAdmin(
+        @Query("id") id : String,
+    ) : Response<ApiResponse<Any>>
+
     @GET("/admin/report/get")
     suspend fun getReport(
         @Query("page") page : Int
