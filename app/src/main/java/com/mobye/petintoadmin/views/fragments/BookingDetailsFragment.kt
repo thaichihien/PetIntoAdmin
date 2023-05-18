@@ -175,7 +175,7 @@ class BookingDetailsFragment : BaseFragment<FragmentBookingDetailsBinding>() {
     private fun validated(): Boolean = with(binding){
         val validatedFields = checkEditText(etCharge) &&
                 checkEditText(etCustomerName) && checkEditText(etGenre) &&
-                checkEditText(etPetName) && checkEditText(etPhone) && checkEditText(etWeight)
+                checkEditText(etPetName) && checkEditText(etWeight)
 
         val validateDate = if(isHotel){
             checkEditText(etCheckIn) && checkEditText(etCheckOut)

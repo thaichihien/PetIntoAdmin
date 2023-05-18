@@ -97,8 +97,8 @@ class PetOrderDetailsFragment : BaseFragment<FragmentPetOrderDetailsBinding>() {
 
 
     private fun validate(): Boolean = with(binding){
-        Utils.checkEditText(etAddress) && Utils.checkEditText(etCustomerName)
-                && Utils.checkEditText(etPayment) && Utils.checkEditText(etPhone)
+         Utils.checkEditText(etCustomerName)
+                && Utils.checkEditText(etPayment)
                 && Utils.checkRadioGroup(rgDelievery, rbNo)
     }
 
